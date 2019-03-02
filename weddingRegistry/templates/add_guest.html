@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Sample wedding RSVP</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="{{ url_for('static', filename='assets/css/main.css')}}" />
+		<noscript><link rel="stylesheet" href="{{ url_for('static', filename='assets/css/noscript.css')}}" /></noscript>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+  </head>
+  <body>
+    <div class="jumbotron">
+      <div class="container">
+        <h1 class="display-4">Agrega un nuevo invitado</h1>
+        <p class="lead">Ingresa email y teléfono del invitado</p>
+        <hr class="my-4">
+
+        <br>
+        <br>
+        <br>
+        <div class="container">
+          <form  method="post">
+            {# This hidden_tag is a CSRF security feature. #}
+            {{ form.hidden_tag() }}
+            {{ form.csrf_token }}
+
+            <div class="form-group">
+              {{ form.email.label (class='form-group', style="color:black") }}
+              {{ form.email (class='form-control', required="true") }}
+            </div>
+
+            <div class="form-group">
+              {{ form.phone_number.label (class='form-group', style="color:black") }}
+              {{ form.phone_number (class='form-control', required="true") }}
+            </div>
+
+            <div class="form-group">
+             {{form.submit(class='btn btn-primary btn-lg btn-block')}}
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+
+  </body>
+</html>

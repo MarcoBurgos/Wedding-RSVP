@@ -1,0 +1,343 @@
+{% from "_render_field.html" import render_field %}
+
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Sample wedding RSVP</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="{{ url_for('static', filename='assets/css/main.css')}}" />
+		<noscript><link rel="stylesheet" href="{{ url_for('static', filename='assets/css/noscript.css')}}" /></noscript>
+		<script type="text/javascript">
+		function signUp(event) {
+			event.preventDefault();
+
+			var section_signUp = document.getElementById("email_signUp");
+			var section_signIn = document.getElementById("email_signIn");
+			section_signIn.style.display = "none";
+			if (section_signUp.style.display === "none") {
+				section_signUp.style.display = "block";
+			} else {
+				section_signUp.style.display = "none";
+			}
+		}
+
+		function signIn(event) {
+			event.preventDefault();
+			var section_signIn = document.getElementById("email_signIn");
+			var section_signUp = document.getElementById("email_signUp");
+			section_signUp.style.display = "none";
+			if (section_signIn.style.display === "none") {
+				section_signIn.style.display = "block";
+			} else {
+				section_signIn.style.display = "none";
+			}
+		}
+		</script>
+	</head>
+	<body class="homepage is-preload">
+		<div id="page-wrapper">
+
+			<!-- Header -->
+				<div id="header">
+
+					<!-- Inner -->
+						<div class="inner">
+							<header>
+								<h1><a href="index.html" id="logo">Nuestra boda</a></h1>
+								<hr />
+								<p>Angie & Marco </p>
+							</header>
+							<footer>
+								<a href="#banner" class="button circled scrolly">Iniciar</a>
+							</footer>
+						</div>
+
+					<!-- Nav -->
+						<nav id="nav">
+							<ul>
+								<li>
+									<a href="#">Hotels</a>
+									<ul>
+										<li><a href="#">Quinta dorada</a></li>
+										<li><a href="#">Sol Chapala</a></li>
+										<li><a href="#">Another</a></li>
+									</ul>
+								</li>
+								<li><a href="left-sidebar.html">Mesa de regalos</a></li>
+								<li><a href="right-sidebar.html">How to get there</a></li>
+							</ul>
+						</nav>
+
+				</div>
+
+			<!-- Banner -->
+				<section id="banner">
+					<header>
+						<h2>Hi. </h2>
+						<h2>We would like to have you in <strong>our wedding</strong>.</h2>
+						<p>
+							Please  <a href="http://html5up.net">RSVP</a>.
+							And we are looking forward to seeing you on Quinta Resort on December 21st 2019!
+						</p>
+					</header>
+				</section>
+
+				<!-- Form -->
+				<section class="container-contact100">
+
+					<div class="wrap-contact100">
+						<main style="text-align: center">
+							<span class="contact100-form-title">
+								Confirma tu asistencia
+							</span>
+						</main>
+						<br>
+						<p style="text-align: center">¿No tienes tu contraseña? Solicítala <strong><a href="" onclick="signUp(event)">aquí</a></strong></p>
+						<p style="text-align: center">Ya cuento con mi contraseña, <strong><a href="" onclick="signIn(event)">quiero confirmar mi asistencia</a></strong></p>
+
+						<section id="email_signUp" style="display:none">
+							<form class="contact100-form validate-form">
+								<div class="wrap-input100 validate-input" data-validate = "Please enter your email: e@a.x">
+									<input class="input100" type="text" name="email" placeholder="E-mail">
+									<span class="focus-input100"></span>
+								</div>
+
+
+
+								<div class="container-contact100-form-btn">
+									<button class="contact100-form-btn">
+										<span>
+											<i class="fa fa-paper-plane-o m-r-6" aria-hidden="true"></i>
+											Send
+										</span>
+									</button>
+								</div>
+
+
+								<div class="wrap-input100 validate-input" data-validate = "Please enter your email: e@a.x">
+									{# This hidden_tag is a CSRF security feature. #}
+							    {{ form.hidden_tag() }}
+							    {{ render_field(form.email) }}
+							</form>
+
+							<div class="container-contact100-form-btn">
+								<button class="contact100-form-btn" data-toggle='modal' data-target="#del_modal">
+									<span>
+										<i class="fa fa-paper-plane-o m-r-6" aria-hidden="true"></i>
+										Recibir mi contraseña
+									</span>
+								</button>
+							</div>
+						</section>
+
+						<section id="email_signIn" style="display:none">
+							<form class="contact100-form validate-form">
+								<div class="wrap-input100 validate-input" data-validate = "Please enter your email: e@a.x">
+									<input class="input100" type="text" name="email" placeholder="Ingresa tu correo electrónico">
+									<br>
+									<input class="input100" type="password" name="password" placeholder="Ingresa la contaseña que recibiste por correo">
+									<span class="focus-input100"></span>
+								</div>
+							</form>
+
+							<div class="container-contact100-form-btn">
+								<button class="contact100-form-btn">
+									<span>
+										<i class="fa fa-paper-plane-o m-r-6" aria-hidden="true"></i>
+										Confirmar mi asistencia
+									</span>
+								</button>
+							</div>
+
+							<div class="modal fade" id="del_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+								<div class="modal-dialog" role="document">
+									<div class="modal-content">
+										<div class="modal-header">
+											<h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+											<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+												<span aria-hidden="true">&times;</span>
+											</button>
+										</div>
+										<div class="modal-body">
+											...
+										</div>
+										<div class="modal-footer">
+											<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+											<button type="button" class="btn btn-primary">Save changes</button>
+										</div>
+									</div>
+								</div>
+							</div>
+						</section>
+
+
+
+
+
+						<!-- <form class="contact100-form validate-form">
+							<div style="text-align: center">
+								<span class="contact100-form-title">
+									Confirm your assistance
+								</span>
+								<span class="contact100-form-title">
+									with your Email and passcode.
+								</span>
+							</div>
+
+
+							<div class="wrap-input100 validate-input" data-validate = "Please enter your email: e@a.x">
+								<input class="input100" type="text" name="email" placeholder="E-mail">
+								<span class="focus-input100"></span>
+							</div>
+
+
+
+							<div class="container-contact100-form-btn">
+								<button class="contact100-form-btn">
+									<span>
+										<i class="fa fa-paper-plane-o m-r-6" aria-hidden="true"></i>
+										Send
+									</span>
+								</button>
+							</div>
+						</form> -->
+
+					</div>
+				</section>
+
+
+			<!-- Carousel -->
+				<!-- <section class="carousel">
+					<div class="reel">
+
+						<article>
+							<a href="#" class="image featured"><img src="{{ url_for('static', filename='images/pic01.jpg')}}" alt="" /></a>
+							<header>
+								<h3><a href="#">Pulvinar sagittis congue</a></h3>
+							</header>
+							<p>Commodo id natoque malesuada sollicitudin elit suscipit magna.</p>
+						</article>
+
+						<article>
+							<a href="#" class="image featured"><img src="{{ url_for('static', filename='images/pic02.jpg')}}" alt="" /></a>
+							<header>
+								<h3><a href="#">Fermentum sagittis proin</a></h3>
+							</header>
+							<p>Commodo id natoque malesuada sollicitudin elit suscipit magna.</p>
+						</article>
+
+						<article>
+							<a href="#" class="image featured"><img src="{{ url_for('static', filename='images/pic03.jpg')}}" alt="" /></a>
+							<header>
+								<h3><a href="#">Sed quis rhoncus placerat</a></h3>
+							</header>
+							<p>Commodo id natoque malesuada sollicitudin elit suscipit magna.</p>
+						</article>
+
+						<article>
+							<a href="#" class="image featured"><img src="{{ url_for('static', filename='images/pic04.jpg')}}" alt="" /></a>
+							<header>
+								<h3><a href="#">Ultrices urna sit lobortis</a></h3>
+							</header>
+							<p>Commodo id natoque malesuada sollicitudin elit suscipit magna.</p>
+						</article>
+
+						<article>
+							<a href="#" class="image featured"><img src="{{ url_for('static', filename='images/pic05.jpg')}}" alt="" /></a>
+							<header>
+								<h3><a href="#">Varius magnis sollicitudin</a></h3>
+							</header>
+							<p>Commodo id natoque malesuada sollicitudin elit suscipit magna.</p>
+						</article>
+
+						<article>
+							<a href="#" class="image featured"><img src="{{ url_for('static', filename='images/pic01.jpg')}}" alt="" /></a>
+							<header>
+								<h3><a href="#">Pulvinar sagittis congue</a></h3>
+							</header>
+							<p>Commodo id natoque malesuada sollicitudin elit suscipit magna.</p>
+						</article>
+
+						<article>
+							<a href="#" class="image featured"><img src="{{ url_for('static', filename='images/pic02.jpg')}}" alt="" /></a>
+							<header>
+								<h3><a href="#">Fermentum sagittis proin</a></h3>
+							</header>
+							<p>Commodo id natoque malesuada sollicitudin elit suscipit magna.</p>
+						</article>
+
+						<article>
+							<a href="#" class="image featured"><img src="{{ url_for('static', filename='images/pic03.jpg')}}" alt="" /></a>
+							<header>
+								<h3><a href="#">Sed quis rhoncus placerat</a></h3>
+							</header>
+							<p>Commodo id natoque malesuada sollicitudin elit suscipit magna.</p>
+						</article>
+
+						<article>
+							<a href="#" class="image featured"><img src="{{ url_for('static', filename='images/pic04.jpg')}}" alt="" /></a>
+							<header>
+								<h3><a href="#">Ultrices urna sit lobortis</a></h3>
+							</header>
+							<p>Commodo id natoque malesuada sollicitudin elit suscipit magna.</p>
+						</article>
+
+						<article>
+							<a href="#" class="image featured"><img src="{{ url_for('static', filename='images/pic05.jpg')}}" alt="" /></a>
+							<header>
+								<h3><a href="#">Varius magnis sollicitudin</a></h3>
+							</header>
+							<p>Commodo id natoque malesuada sollicitudin elit suscipit magna.</p>
+						</article>
+
+					</div>
+				</section> -->
+
+
+
+			<!-- Footer -->
+				<div id="footer">
+					<div class="container">
+						<hr />
+						<div class="row">
+							<div class="col-12">
+								<!-- Contact -->
+									<section class="contact">
+										<header>
+											<h3>Have any question?</h3>
+										</header>
+										<p>Please feel free to ask, reach on us on social media.</p>
+										<ul class="icons">
+											<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+											<li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+											<li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
+											<li><a href="#" class="icon fa-linkedin"><span class="label">Linkedin</span></a></li>
+										</ul>
+									</section>
+
+								<!-- Copyright -->
+									<div class="copyright">
+										<ul class="menu">
+											<li>&copy; Untitled. All rights reserved.</li><li>Design: <a href="https://twitter.com/MarcoBurgos">Marco Burgos</a></li>
+										</ul>
+									</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+		</div>
+
+		<!-- Scripts -->
+			<script src="{{ url_for('static', filename='assets/js/jquery.min.js')}}"></script>
+			<script src="{{ url_for('static', filename='assets/js/jquery.dropotron.min.js')}}"></script>
+			<script src="{{ url_for('static', filename='assets/js/jquery.scrolly.min.js')}}"></script>
+			<script src="{{ url_for('static', filename='assets/js/jquery.scrollex.min.js')}}"></script>
+			<script src="{{ url_for('static', filename='assets/js/browser.min.js')}}"></script>
+			<script src="{{ url_for('static', filename='assets/js/breakpoints.min.js')}}"></script>
+			<script src="{{ url_for('static', filename='assets/js/util.js')}}"></script>
+			<script src="{{ url_for('static', filename='assets/js/main.js')}}"></script>
+
+	</body>
+</html>

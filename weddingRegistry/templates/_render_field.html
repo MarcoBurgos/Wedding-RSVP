@@ -1,0 +1,11 @@
+{% macro render_field(field) %}
+<div class="wrap-input100 validate-input">
+  {{ field(class_ = 'input100', **kwargs)|safe  }}
+  <span class="focus-input100"></span>
+  <ul>
+    {% for error in field.errors %}
+    <li style="color:red"> {{error}} </li>
+    {% endfor %}
+  </ul>
+</div>
+{% endmacro %}
