@@ -1,0 +1,161 @@
+{% extends "base_sections.html"%}
+{% block content %}
+
+<!-- Main -->
+				<div class="wrapper style1">
+
+					<div class="container">
+						<div class="row gtr-200">
+							<div class="col-8 col-12-mobile" id="content">
+								<article id="main">
+									<header>
+										<h2><a href="#">Hotel sede</a></h2>
+										<p>
+											Acompáñanos en hotel Quinta San Carlos
+										</p>
+									</header>
+									<a href="#" class="image featured"><img src="{{ url_for('static', filename='images/hotel.jpg')}}" alt="foto Quinta San Carlos" /></a>
+									<p>
+										Elegimos casarnos en Quinta San Carlos porque tenía todo lo que buscábamos:
+										un escenario espectácular al aire libre y además con todo lo necesario para la unión,
+										el hotel cuenta con una capilla para la ceremonia religiosa, un jardín con vista al
+										Lago de Chapala para el civil y por supuesto una terraza para la fiesta.
+										Todo en un mismo lugar, para que tu mayor desplazamiento sea en la pista de baile.
+									</p>
+									<section>
+										<header>
+											<h3>Todo en un lugar</h3>
+										</header>
+										<p>
+											Queremos que nuestros invitados disfruten al máximo con nosotros este día especial y por eso
+											los invitamos a que se hospeden con nosotros en Quinta San Carlos, en una de sus 26 habitaciones.
+											Para la boda, nuestros huéspedes contarán con un precio especial: $1,800 pesos para las habitaciones con
+											vista al jardín y $1,900 con vista al lago.
+										</p>
+										<p>
+											Quinta San Carlos se encuentra en la Ribera del Lago de Chapala, en el pueblo de San Pedro Tesistán, a aproximádamente
+											una hora de Guadalajara; es el lugar perfecto para escapar de la rutina de la ciudad y celebrar nuestra unión rodeados
+											de la naturaleza y vegetación.
+										</p>
+										<p>
+											Si gustas acompañarnos a la boda y deseas hospedarte en Quinta San Carlos, te recomendamos reserves tu habitación con tiempo,
+											marca al número <strong>+52(387) 763 50 23</strong> y diles que vas a la Boda de Angie & Marco para hacer válida la promoción.
+										</p>
+										<p>
+											La tarifa es con base en ocupación doble, algunos cuartos tienen una mayor capacidad, pregunta al hotel por esos; por persona extra
+											cobran 500 pesos y Quinta San Carlos también pondrá a disposición camerinos con dos camas individuales o una king con un costo de mil pesos,
+											para habilitar esta opción, tres personas, por lo menos, tiene que solicitarla. Estos camerinos cuentan con baños compartidos, uno para hombres y otra mujeres.
+											Nuestro objetivo es que la mayoría de los invitados se queden a disfrutar la fiesta y que nadie tenga que cortarla para manejar en carretera.
+											Por favor, si tomas ¡no manejes! Mejor hospédate en Quinta San Carlos y festejemos hasta la madrugada.
+										</p>
+										<header>
+											<h3>Información importante</h3>
+										</header>
+										<p>
+											Debido a la alta demanda en esas fechas, un día antes hay otra boda, te pedimos, como cortesía a esa pareja, que no reserves habitación para el sábado
+											o el viernes, para que ellos puedan utilizarlas para sus invitados, en lugar checa las <a href="#">otras opciones de hospedaje</a> que hemos investigado para sábado o viernes,
+											para los que gusten acompañarnos desde días antes..
+										</p>
+									</section>
+									<section>
+										<header>
+											<h3>Información de Quinta San Carlos</h3>
+										</header>
+										<ul>
+											<li><strong>Ubicación: </strong>Calle Pino Suárez 1A, San Pedro Tesistán, Jocotepec. </li>
+											<li><strong>Reservaciones: </strong>+52(387) 763 50 23</li>
+											<li><strong>Check in: </strong> 3:00 PM</li>
+											<li><strong>Check out: </strong> 12:00 PM</li>
+											<li><strong>Calificación: </strong> 4/5 TripAdvisor</li>
+										</ul>
+									</section>
+								</article>
+							</div>
+							<div class="col-4 col-12-mobile" id="sidebar">
+								<hr class="first" />
+								<section>
+									<header>
+										<h3><a href="#">¿Buscas más información?</a></h3>
+									</header>
+									<p>
+										Visita el sitio web de Quinta San Carlos y enamórate de este lugar como lo hicimos
+										nosotros; si quieres conocer con más detalles las habitaciones o amenidades del lugar,
+										haz click en el botón para ir a la página del hotel.
+									</p>
+									<footer>
+										<a href="http://quintasancarlos.com/" class="button">Conocer más</a>
+									</footer>
+								</section>
+								<hr />
+								<section>
+									<header>
+										<h3 style="text-align:center">Otras secciones <br>que pueden interesarte</h3>
+										<br>
+									</header>
+									<div class="row gtr-50">
+										<div class="col-4">
+											<a href="{{ url_for('core.how_to_get_there')}}" class="image fit"><img src="{{ url_for('static', filename='images/getthere.jpg')}}" alt="" /></a>
+										</div>
+										<div class="col-8">
+											<h4>¿Cómo llegar?</h4>
+											<p>
+												Te dejamos indicaciones para llegar en tiempo a la boda.
+											</p>
+										</div>
+										<div class="col-4">
+											<a href="{{ url_for('core.quinta_san_carlos')}}" class="image fit"><img src="{{ url_for('static', filename='images/others.jpg')}}" alt="" /></a>
+										</div>
+										<div class="col-8">
+											<h4>Otras opciones de hospedaje</h4>
+											<p>
+												Explora otras ofertas de alojamiento en el pueblo.
+											</p>
+										</div>
+										<div class="col-4">
+											<a href="{{ url_for('core.quinta_san_carlos')}}" class="image fit"><img src="{{ url_for('static', filename='images/gift.jpg')}}" alt="" /></a>
+										</div>
+										<div class="col-8">
+											<h4>Mesa de regalos</h4>
+											<p>
+												Explora las opciones en la mesa que hemos establecido en Amazon.
+											</p>
+										</div>
+										<div class="col-4">
+											<a href="{{ url_for('core.quinta_san_carlos')}}" class="image fit"><img src="{{ url_for('static', filename='images/plane.jpg')}}" alt="" /></a>
+										</div>
+										<div class="col-8">
+											<h4>¿Vuelas a la boda?</h4>
+											<p>
+												Revisa estas herramientas para encontrar el mejor vuelo.
+											</p>
+										</div>
+										<div class="col-4">
+											<a href="{{ url_for('core.quinta_san_carlos')}}" class="image fit"><img src="{{ url_for('static', filename='images/DJ.jpg')}}" alt="" /></a>
+										</div>
+										<div class="col-8">
+											<h4>¡Que la música no pare!</h4>
+											<p>
+												Sugiérenos canciones para que suenen en la fiesta.
+											</p>
+										</div>
+										<div class="col-4">
+											<a href="{{ url_for('core.quinta_san_carlos')}}" class="image fit"><img src="{{ url_for('static', filename='images/pic02.jpg')}}" alt="" /></a>
+										</div>
+										<div class="col-8">
+											<h4>FAQ</h4>
+											<p>
+												Encuentra respuestas a tus dudas sobre la boda.
+											</p>
+										</div>
+									</div>
+									<footer>
+										<a href="{{ url_for('core.index')}}" class="button">Ir al Home</a>
+									</footer>
+								</section>
+							</div>
+						</div>
+
+					</div>
+
+				</div>
+{% endblock %}
