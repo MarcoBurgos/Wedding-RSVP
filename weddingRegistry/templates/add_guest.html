@@ -8,14 +8,36 @@
 		<link rel="stylesheet" href="{{ url_for('static', filename='assets/css/main.css')}}" />
 		<noscript><link rel="stylesheet" href="{{ url_for('static', filename='assets/css/noscript.css')}}" /></noscript>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+    <script type="text/javascript">
+      function deleteFlash(btn) {
+        document.getElementById("div_flashAlert").remove()
+      }
+    </script>
+
   </head>
   <body>
+
+
     <div class="jumbotron">
       <div class="container">
         <h1 class="display-4">Agrega un nuevo invitado</h1>
-        <p class="lead">Ingresa email y teléfono del invitado</p>
+        <p class="lead">Ingresa nombre, email, teléfono, número de pases y nombre de los invitados</p>
         <hr class="my-4">
-
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <ul class=flashes>
+        {% for message in messages %}
+        <div id="div_flashAlert" class="alert alert-success alert-dismissible fade show" role="alert">
+          <button onclick="deleteFlash(this)" type="button" class="close" data-dismiss="alert" aria-label="Close" class="fade close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          {{message}}
+        </div>
+        {% endfor %}
+        </ul>
+        {% endif %}
+        {% endwith %}
         <br>
         <br>
         <br>
@@ -24,6 +46,12 @@
             {# This hidden_tag is a CSRF security feature. #}
             {{ form.hidden_tag() }}
             {{ form.csrf_token }}
+
+
+            <div class="form-group">
+              {{ form.name.label (class='form-group', style="color:black") }}
+              {{ form.name (class='form-control', required="true") }}
+            </div>
 
             <div class="form-group">
               {{ form.email.label (class='form-group', style="color:black") }}
@@ -36,8 +64,25 @@
             </div>
 
             <div class="form-group">
+              {{ form.guests.label (class='form-group', style="color:black") }}
+              {{ form.guests (class='form-control', required="true") }}
+            </div>
+
+            <div class="form-group">
+              {{ form.guests_names.label (class='form-group', style="color:black") }}
+              {{ form.guests_names (class='form-control', required="true") }}
+            </div>
+
+            <div class="form-group">
              {{form.submit(class='btn btn-primary btn-lg btn-block')}}
             </div>
+
+            <ul>
+    					{% for error in form.errors %}
+    					<li style="color:red"> {{ error }} </li>
+    					{% endfor %}
+    				</ul>
+
           </form>
         </div>
       </div>
