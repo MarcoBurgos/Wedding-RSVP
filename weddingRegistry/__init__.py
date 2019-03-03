@@ -4,6 +4,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_dance.contrib.google import make_google_blueprint, google
 from flask_login import LoginManager
+from flask_mail import Mail
 
 #flask db init
 #flask db migrate  -m "message"
@@ -16,6 +17,18 @@ from flask_login import LoginManager
 
 
 app = Flask(__name__)
+
+app.config.update(
+	DEBUG=True,
+	#EMAIL SETTINGS
+	MAIL_SERVER='smtp.gmail.com',
+	MAIL_PORT=465,
+	MAIL_USE_SSL=True,
+	MAIL_USERNAME = os.environ.get('MAIL_USERNAME'),
+	MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD'),
+    MAIL_DEFAULT_SENDER = os.environ.get('MAIL_DEFAULT_SENDER')
+	)
+mail = Mail(app)
 
 
 app.config['SECRET_KEY'] = 'WR20190205'
@@ -40,7 +53,7 @@ login_manager = LoginManager()
 
 login_manager.init_app(app)
 
-login_manager.login_view = "users.login"
+login_manager.login_view = "core.not_auth"
 
 ################################################################################################
 
