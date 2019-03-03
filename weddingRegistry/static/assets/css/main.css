@@ -67,7 +67,7 @@ input::-moz-focus-inner {
 
 input, select, textarea {
 	-moz-appearance: none;
-	-webkit-appearance: none;
+	/*-webkit-appearance: none;*/
 	-ms-appearance: none;
 	appearance: none;
 }
@@ -1947,6 +1947,13 @@ input, select, textarea {
 		margin: 0 0 1em 0;
 	}
 
+	.form-label-confirmation {
+		display: inline-block !important;
+		font-weight: 400;
+		color: #483949;
+		margin: 0 0 1em 0;
+	}
+
 	form input[type="text"],
 	form input[type="email"],
 	form input[type="password"],
@@ -2010,7 +2017,14 @@ input, select, textarea {
 
 	table {
 		width: 100%;
+		border: 1px solid black;
 	}
+
+	.table-confirmation table, tr, th, td {
+		border: 1px solid black;
+		padding: 10px;
+	}
+
 
 		table.default {
 			width: 100%;
@@ -3288,3 +3302,73 @@ input, select, textarea {
 	  background-color: #403866;
 	  width: calc(100% + 20px);
 	}
+
+
+/*flash*/
+	.flash {
+  position: relative;
+  background-color:#de3d3d;
+  color:white;
+  padding:10px;
+  border-radius: 2px;
+
+}
+
+
+.flash button {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+}
+
+.flash p{
+
+}
+
+.flash-container {
+	background-color: #dc3545;
+	border-radius: 10px;
+	box-shadow: 0 5px 40px 5px rgba(0,0,0,.2);
+	margin-bottom: 30px;
+
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+}
+
+.flash-message {
+	color: white;
+	padding: 5px 15px;
+}
+
+.flash-message p {
+	text-align: center;
+	line-height: 1.4;
+}
+
+.flash-button {
+	padding: 5px 15px;
+	align-items: center;
+	margin-bottom: 20px;
+	display: flex;
+	flex-direction: column;
+	width: 100%
+
+
+
+
+}
+
+.flash-button a:link {
+	background-color: white;
+	color: #dc3545;
+	padding: 5px 30px;
+	border-radius: 8px;
+	margin-bottom: : 20px;
+	align-self: center;
+
+}
+
+.flash-button a:hover {
+	color: #403866;
+}
