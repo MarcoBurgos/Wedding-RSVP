@@ -1,4 +1,4 @@
-#!/Users/marcoburgos/Desktop/website/Wedding_Registry/WR-env/bin/python3
+#!/Users/marcoburgos/Desktop/website/Wedding_RSVP/WR-env/bin/python3
 # EASY-INSTALL-ENTRY-SCRIPT: 'alembic==0.9.9','console_scripts','alembic'
 __requires__ = 'alembic==0.9.9'
 import re
