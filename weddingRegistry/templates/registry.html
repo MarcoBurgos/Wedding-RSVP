@@ -1,0 +1,125 @@
+{% extends "base_sections.html"%}
+{% block content %}
+<!-- Main -->
+				<div class="wrapper style1">
+
+					<div class="container">
+						<div class="row gtr-200">
+							<div class="col-8 col-12-mobile" id="content">
+								<article id="main">
+									<header>
+										<h2><a href="#">Mesa de regalos</a></h2>
+										<p>
+											El regalo perfecto, a un click de distancia
+										</p>
+									</header>
+									<a href="#" class="image featured"><img src="{{ url_for('static', filename='images/gift.jpg')}}" alt="gift" /></a>
+									<p>
+										Después de la boda, iniciaremos juntos nuesta vida juntos en Reston, Virginia (¡visítenos!), por lo cual
+                    buscamos la mejor opción para registrar una mesa de regalos que le permitiera a nuestros invitados elegir
+                    entre una gran cantidad de opciones y que la entrega no fuera un obstáculo; por ello elegimos Amazon.
+									</p>
+                  <p>
+                    Visita nuestra mesa de regalo y usa tu cuenta de Amazon para elegir uno de los regalos que hemos seleccionado.
+                    Por el envío no te preocupes, Amazon lo entregará en nuestra nueva casa, en Virginia.
+                  </p>
+                  <p>
+                    Si no tienes cuenta en Amazon, es muy fácil abrir, una, sigue este <a href="https://www.amazon.com.mx/ap/register?_encoding=UTF8&openid.assoc_handle=mxflex&openid.claimed_id=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0%2Fidentifier_select&openid.identity=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0%2Fidentifier_select&openid.mode=checkid_setup&openid.ns=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0&openid.ns.pape=http%3A%2F%2Fspecs.openid.net%2Fextensions%2Fpape%2F1.0&openid.pape.max_auth_age=0&openid.return_to=https%3A%2F%2Fwww.amazon.com.mx%2Fgp%2Fyourstore%2Fhome%3Fie%3DUTF8%26ref_%3Dnav_newcust">link</a> y en menos de 5 minutos puedes configurar la tuya.
+                  </p>
+                  <p>
+                    De antemano, ¡te agradecemos tus muestras de aprecio!
+                  </p>
+                  <br>
+                  <a href="https://www.amazon.com/wedding/angie-orozco-marco-burgos-guadalajara-november-2019/registry/EJ5SUDSKRN62" class="button">Ir a Mesa de Regalos en Amazon</a>
+
+
+								</article>
+							</div>
+							<div class="col-4 col-12-mobile" id="sidebar">
+								<hr class="first" />
+								<section>
+									<header>
+										<h3><a href="#">¿Buscas más información?</a></h3>
+									</header>
+									<p>
+										Visita el sitio web de Quinta San Carlos y enamórate de este lugar como lo hicimos
+										nosotros; si quieres conocer con más detalles las habitaciones o amenidades del lugar,
+										haz click en el botón para ir a la página del hotel.
+									</p>
+									<footer>
+										<a href="http://quintasancarlos.com/" class="button">Conocer más</a>
+									</footer>
+								</section>
+								<hr />
+								<section>
+									<header>
+										<h3 style="text-align:center">Otras secciones <br>que pueden interesarte</h3>
+										<br>
+									</header>
+									<div class="row gtr-50">
+										<div class="col-4">
+											<a href="{{ url_for('core.quinta_san_carlos')}}" class="image fit"><img src="{{ url_for('static', filename='images/hotel.jpg')}}" alt="" /></a>
+										</div>
+										<div class="col-8">
+											<h4>Hotel sede</h4>
+											<p>
+												Conoce el recinto que albergará la boda.
+											</p>
+										</div>
+                    <div class="col-4">
+											<a href="{{ url_for('core.how_to_get_there')}}" class="image fit"><img src="{{ url_for('static', filename='images/getthere.jpg')}}" alt="" /></a>
+										</div>
+										<div class="col-8">
+											<h4>¿Cómo llegar?</h4>
+											<p>
+												Te dejamos indicaciones para llegar en tiempo a la boda.
+											</p>
+										</div>
+										<div class="col-4">
+											<a href="{{ url_for('core.quinta_san_carlos')}}" class="image fit"><img src="{{ url_for('static', filename='images/others.jpg')}}" alt="" /></a>
+										</div>
+										<div class="col-8">
+											<h4>Otras opciones de hospedaje</h4>
+											<p>
+												Explora otras ofertas de alojamiento en el pueblo.
+											</p>
+										</div>
+										<div class="col-4">
+											<a href="{{ url_for('core.quinta_san_carlos')}}" class="image fit"><img src="{{ url_for('static', filename='images/plane.jpg')}}" alt="" /></a>
+										</div>
+										<div class="col-8">
+											<h4>¿Vuelas a la boda?</h4>
+											<p>
+												Revisa estas herramientas para encontrar el mejor vuelo.
+											</p>
+										</div>
+										<div class="col-4">
+											<a href="{{ url_for('core.quinta_san_carlos')}}" class="image fit"><img src="{{ url_for('static', filename='images/DJ.jpg')}}" alt="" /></a>
+										</div>
+										<div class="col-8">
+											<h4>¡Que la música no pare!</h4>
+											<p>
+												Sugiérenos canciones para que suenen en la fiesta.
+											</p>
+										</div>
+										<div class="col-4">
+											<a href="{{ url_for('core.quinta_san_carlos')}}" class="image fit"><img src="{{ url_for('static', filename='images/pic02.jpg')}}" alt="" /></a>
+										</div>
+										<div class="col-8">
+											<h4>FAQ</h4>
+											<p>
+												Encuentra respuestas a tus dudas sobre la boda.
+											</p>
+										</div>
+									</div>
+									<footer>
+										<a href="{{ url_for('core.index')}}" class="button">Ir al Home</a>
+									</footer>
+								</section>
+							</div>
+						</div>
+
+					</div>
+
+				</div>
+{% endblock %}

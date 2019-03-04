@@ -1,0 +1,159 @@
+{% extends "base_sections.html"%}
+{% block content %}
+<!-- Main -->
+				<div class="wrapper style1">
+
+					<div class="container">
+						<div class="row gtr-200">
+							<div class="col-8 col-12-mobile" id="content">
+								<article id="main">
+									<header>
+										<h2><a href="#">¿Cómo llegar?</a></h2>
+										<p>
+											Sigue estas instrucciones para no perderte en el camino
+										</p>
+									</header>
+									<a href="#" class="image featured"><img src="{{ url_for('static', filename='images/map.jpg')}}" alt="foto Quinta San Carlos" /></a>
+									<p>
+										Si eres de Guadalajara probablemente sabes de memoria el camino para llegar a Jocotepec,
+                    pues Quinta San Carlos está siguiendo esa ruta.
+                    Si eres de fuera o eres de los que batalla con la orientación y las direcciones, no te preocupes,
+                    nosotros te ayudamos a llegar sin problemas a la boda y si la explicación te hizo más bolas, checa la imagen
+                    o utiliza el Google Maps.
+									</p>
+									<section>
+										<header>
+											<h3>Primera opción</h3>
+										</header>
+										<p>
+											La opción más rápida es vía López Mateos-Carretera México 15: tomar la avenida López Mateos por los carriles centrales con dirección hacia el Sur,
+                      una vez que pases el Periférico, continúa derecho por aproximadamente 24 kilómetros, toma la salida con dirección a Tizapán/Tuxcueca y
+                      continúa derecho por 20 kilómetos, llegarás al entronque para entrar a Jocotepec, San Pedro Tesistán está a 7 kilómetros más.
+                      Puedes entrar al pueblo por dos calles: Pino Suárez y Allende, en ese orden.
+										</p>
+										<p>
+											Pino Suárez la encontrarás pasando un local de llantas que verás a mano derecha a unos 50 metros está un señalamiento que indica vuelta a la izquierda
+                      para llegar incorporarse a dicha vialidad. Una vez son cuatro cuadras derecho y ¡listo! Ya puedes entar al estacionamiento.
+										</p>
+										<p>
+											Si te pasaste y no pudiste dar vuelta, no te preocupes, la siguiente calle que veas a la izquierda es Hidalgo, sigue Guerrero, Ramón Corona y la cuarta es Allende,
+                      das vuelta ahí y dos cuadras derecho llegarás a Quinta San Carlos.
+										</p>
+										<header>
+											<h3>Segunda opción</h3>
+										</header>
+										<p>
+											Si acabas de aterrizar en Guadalajara o vienes del Oriente de la Ciudad, quizá te convenga utilizar la Carretera a Chapala.
+                      Ya sea tomar Lázaro Cárdenas y después tomar la vía hacia Carretera a Chapala.
+										</p>
+                    <p>
+											Al pasar el Aeropuerto, puedes tomar el Macrolibramiento hacia la derecha, seguir derecho por 34 kilómetros y tomar la salida a la Carretera México 15.
+                      O puedes seguir derecho hasta llegar a Chapala, dar vuelta a la derecha y pasar por Ajijic, San Juan Cosalá
+                      hasta pasar Jocotepec, en el crucero das vuelta a la izquierda y en 7 kilómetros
+                      estarás en tu destino.
+										</p>
+									</section>
+									<section>
+										<header>
+											<h3>Google Maps</h3>
+										</header>
+                    <h4><strong>Ubicación: </strong>Calle Pino Suárez 1A, San Pedro Tesistán, Jocotepec. </h4>
+
+                    <div style="height:501px">
+                      <div class="mapouter">
+                        <div class="gmap_canvas">
+                          <iframe width="100%" height="100%" id="gmap_canvas" src="https://maps.google.com/maps?q=Quinta%20San%20Carlos&t=&z=9&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe><a href="https://www.jetzt-drucken-lassen.de"></a>
+                        </div><style>.mapouter{text-align:right;height:100%;width:100%;}.gmap_canvas {overflow:hidden;background:none!important;height:100%;width:100%;}</style>
+                      </div>
+                    </div>
+									</section>
+								</article>
+							</div>
+							<div class="col-4 col-12-mobile" id="sidebar">
+								<hr class="first" />
+								<section>
+									<header>
+										<h3><a href="#">¿Buscas más información?</a></h3>
+									</header>
+									<p>
+										Visita el sitio web de Quinta San Carlos y enamórate de este lugar como lo hicimos
+										nosotros; si quieres conocer con más detalles las habitaciones o amenidades del lugar,
+										haz click en el botón para ir a la página del hotel.
+									</p>
+									<footer>
+										<a href="http://quintasancarlos.com/" class="button">Conocer más</a>
+									</footer>
+								</section>
+								<hr />
+								<section>
+									<header>
+										<h3 style="text-align:center">Otras secciones <br>que pueden interesarte</h3>
+										<br>
+									</header>
+									<div class="row gtr-50">
+										<div class="col-4">
+											<a href="{{ url_for('core.quinta_san_carlos')}}" class="image fit"><img src="{{ url_for('static', filename='images/hotel.jpg')}}" alt="" /></a>
+										</div>
+										<div class="col-8">
+											<h4>Hotel sede</h4>
+											<p>
+												Conoce el recinto que albergará la boda.
+											</p>
+										</div>
+										<div class="col-4">
+											<a href="{{ url_for('core.quinta_san_carlos')}}" class="image fit"><img src="{{ url_for('static', filename='images/others.jpg')}}" alt="" /></a>
+										</div>
+										<div class="col-8">
+											<h4>Otras opciones de hospedaje</h4>
+											<p>
+												Explora otras ofertas de alojamiento en el pueblo.
+											</p>
+										</div>
+										<div class="col-4">
+											<a href="{{ url_for('core.registry')}}" class="image fit"><img src="{{ url_for('static', filename='images/gift.jpg')}}" alt="" /></a>
+										</div>
+										<div class="col-8">
+											<h4>Mesa de regalos</h4>
+											<p>
+												Explora las opciones en la mesa que hemos establecido en Amazon.
+											</p>
+										</div>
+										<div class="col-4">
+											<a href="{{ url_for('core.quinta_san_carlos')}}" class="image fit"><img src="{{ url_for('static', filename='images/plane.jpg')}}" alt="" /></a>
+										</div>
+										<div class="col-8">
+											<h4>¿Vuelas a la boda?</h4>
+											<p>
+												Revisa estas herramientas para encontrar el mejor vuelo.
+											</p>
+										</div>
+										<div class="col-4">
+											<a href="{{ url_for('core.quinta_san_carlos')}}" class="image fit"><img src="{{ url_for('static', filename='images/DJ.jpg')}}" alt="" /></a>
+										</div>
+										<div class="col-8">
+											<h4>¡Que la música no pare!</h4>
+											<p>
+												Sugiérenos canciones para que suenen en la fiesta.
+											</p>
+										</div>
+										<div class="col-4">
+											<a href="{{ url_for('core.quinta_san_carlos')}}" class="image fit"><img src="{{ url_for('static', filename='images/pic02.jpg')}}" alt="" /></a>
+										</div>
+										<div class="col-8">
+											<h4>FAQ</h4>
+											<p>
+												Encuentra respuestas a tus dudas sobre la boda.
+											</p>
+										</div>
+									</div>
+									<footer>
+										<a href="{{ url_for('core.index')}}" class="button">Ir al Home</a>
+									</footer>
+								</section>
+							</div>
+						</div>
+
+					</div>
+
+				</div>
+{% endblock %}

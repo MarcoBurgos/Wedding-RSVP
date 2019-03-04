@@ -95,11 +95,18 @@ def quinta_san_carlos():
     return render_template('quinta-san-carlos.html')
 
 
-@core.route('/user_confirmed/como_llegar', methods=['GET'])
+@core.route('/user_confirmed/como-llegar', methods=['GET'])
 @login_required
 def how_to_get_there():
 
-    return render_template('how-to-get-there.html')
+    return render_template('how_to_get_there.html')
+
+
+@core.route('/user_confirmed/mesa-regalos', methods=['GET'])
+@login_required
+def registry():
+
+    return render_template('registry.html')
 
 
 
