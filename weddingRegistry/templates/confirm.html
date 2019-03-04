@@ -38,9 +38,9 @@
       </article>
 
       <article>
-        <a href="#" class="image featured"><img src="{{ url_for('static', filename='images/plane.jpg')}}" alt="" /></a>
+        <a href="{{ url_for('core.flights')}}" class="image featured"><img src="{{ url_for('static', filename='images/plane.jpg')}}" alt="" /></a>
         <header>
-          <h3><a href="#">¿Vuelas a la boda?</a></h3>
+          <h3><a href="{{ url_for('core.flights')}}">¿Vuelas a la boda?</a></h3>
         </header>
         <p>Usa estas herramientas para encontrar la mejor opción para llegar a Guadalajara.</p>
       </article>

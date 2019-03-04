@@ -108,6 +108,12 @@ def registry():
 
     return render_template('registry.html')
 
+@core.route('/user_confirmed/vuelos', methods=['GET'])
+@login_required
+def flights():
+
+    return render_template('flights.html')
+
 
 
 
