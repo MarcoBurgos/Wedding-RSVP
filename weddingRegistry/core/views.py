@@ -121,6 +121,12 @@ def faq():
     return render_template('faq.html')
 
 
+@core.route('/user_confirmed/counter', methods=['GET'])
+@login_required
+def counter():
+
+    return render_template('counter.html')
+
 
 
 @core.route("/logout", methods=['GET'])

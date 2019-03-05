@@ -78,7 +78,7 @@ var Countdown = {
             hour = minute * 60,
             day = hour * 24;
 
-            let countDown = new Date('Nov 17, 2019 17:00:00').getTime()
+            let countDown = new Date('Nov 17, 2019 17:00:00').getTime();
             let now = new Date().getTime();
             var distance = countDown - now;
 
