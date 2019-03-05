@@ -114,6 +114,12 @@ def flights():
 
     return render_template('flights.html')
 
+@core.route('/user_confirmed/preguntas-frecuentes', methods=['GET'])
+@login_required
+def faq():
+
+    return render_template('faq.html')
+
 
 
 

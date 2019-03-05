@@ -3372,3 +3372,9 @@ input, select, textarea {
 .flash-button a:hover {
 	color: #403866;
 }
+
+.question-faq {
+	font-weight: bold;
+	color: #ef8376;
+	margin-bottom: 0px;
+}

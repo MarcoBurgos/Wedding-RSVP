@@ -54,9 +54,9 @@
       </article>
 
       <article>
-        <a href="#" class="image featured"><img src="{{ url_for('static', filename='images/pic02.jpg')}}" alt="" /></a>
+        <a href="{{ url_for('core.faq')}}" class="image featured"><img src="{{ url_for('static', filename='images/pic02.jpg')}}" alt="" /></a>
         <header>
-          <h3><a href="#">FAQ</a></h3>
+          <h3><a href="{{ url_for('core.faq')}}">FAQ</a></h3>
         </header>
         <p>Todas tus dudas sobre la boda, misa, fiesta y demás, aquí tienen una respuesta.</p>
       </article>
