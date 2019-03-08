@@ -120,6 +120,12 @@ def faq():
 
     return render_template('faq.html')
 
+@core.route('/user_confirmed/otros-hospedaje', methods=['GET'])
+@login_required
+def others():
+
+    return render_template('others.html')
+
 
 @core.route('/user_confirmed/counter', methods=['GET'])
 @login_required

@@ -22,9 +22,9 @@
       </article>
 
       <article>
-        <a href="#" class="image featured"><img src="{{ url_for('static', filename='images/others.jpg')}}" alt="" /></a>
+        <a href="{{ url_for('core.others')}}" class="image featured"><img src="{{ url_for('static', filename='images/others.jpg')}}" alt="" /></a>
         <header>
-          <h3><a href="#">Otras opciones de hospedaje</a></h3>
+          <h3><a href="{{ url_for('core.others')}}">Otras opciones de hospedaje</a></h3>
         </header>
         <p>¡Que la fiesta no termine temprano! Explora otros lugares para quedarte a dormir en el pueblo</p>
       </article>

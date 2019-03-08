@@ -3378,3 +3378,83 @@ input, select, textarea {
 	color: #ef8376;
 	margin-bottom: 0px;
 }
+
+
+/*table confirmation*/
+
+@media screen and (max-width: 580px) {
+  body {
+    font-size: 16px;
+    line-height: 22px;
+  }
+}
+
+.wrapper-table {
+  margin: 0 auto;
+  padding: 40px;
+  max-width: 800px;
+}
+
+.table-confirmation2 {
+  margin: 0 0 40px 0;
+  width: 100%;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  display: table;
+}
+@media screen and (max-width: 580px) {
+  .table {
+    display: block;
+  }
+}
+
+.row-table2 {
+  display: table-row;
+  background: #f6f6f6;
+}
+.row-table2:nth-of-type(odd) {
+  background: #e9e9e9;
+}
+.row-table2.header {
+  font-weight: 900;
+  color: #ffffff;
+  background: #e17262;
+}
+
+@media screen and (max-width: 580px) {
+  .row-table2 {
+    padding: 14px 0 7px;
+    display: block;
+  }
+  .row-table2.header {
+    padding: 0;
+    height: auto;
+  }
+  .row-table2.header .cell {
+    display: none;
+  }
+  .row-table2 .cell {
+    margin-bottom: 10px;
+  }
+  .row-table2 .cell:before {
+    margin-bottom: 3px;
+    content: attr(data-title);
+    min-width: 98px;
+    font-size: 10px;
+    line-height: 10px;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #969696;
+    display: block;
+  }
+}
+
+.cell-table2 {
+  padding: 6px 12px;
+  display: table-cell;
+}
+@media screen and (max-width: 580px) {
+  .cell-table2  {
+    padding: 2px 16px;
+    display: block;
+  }
+}
