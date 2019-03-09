@@ -13,52 +13,49 @@
 				Confirma a los asistentes
 			</span>
 		</header>
-		<br>
 
 
 		<section>
 			<form class="contact100-form validate-form" method="post" action="{{ url_for('core.confirm') }}">
 				{# This hidden_tag is a CSRF security feature. #}
 				{{ form.hidden_tag() }}
-				<table class="table-confirmation">
-					<thead>
-						<tr>
-							<th>Invitado</th>
-							<th>Confirmar</th>
-						</tr>
-					</thead>
-					<tbody>
-						{% for guest in guests %}
-						<tr>
-							<td><label class="form-label-confirmation" for="id_{{guest}}">{{guest}}</label></td>
-							<td><input type="checkbox" id="id_{{guest}}" name="guests" checked="yes" value="{{guest}}"></td>
-						</tr>
+					<div class="wrapper-table">
+						<div class="table-confirmation2">
+
+							<div style="text-align:center" class="row-table2  header">
+								<div class="cell-table2 ">
+									Invitado
+								</div>
+								<div  style="text-align:center" class="cell-table2 ">
+									Marca la casilla para confirmar
+								</div>
+							</div>
+							{% for guest in guests %}
+							<div class="row-table2 ">
+								<div style="text-align:center" class="cell-table2 " data-title="Name">
+									<td><label  class="form-label-confirmation" for="id_{{guest}}">{{guest}}</label></td>
+								</div>
+								<div style="text-align:center" class="cell-table2 " data-title="Age">
+									<td><input type="checkbox" id="id_{{guest}}" name="guests" checked="yes" value="{{guest}}"></td>
+								</div>
+							</div>
+							{% endfor %}
+						</div>
+					</div>
+
+					<ul>
+						{% for error in form.errors %}
+						<li style="color:red"> {{ error }} </li>
 						{% endfor %}
-					</tbody>
-				</table>
-
-
-
-				<!-- {% for guest in guests %}
-				<div class="">
-					<span>{{ guest }}</span>
-					  {{form.isAttending }}
-				</div>
-				{% endfor %} -->
-				<ul>
-					{% for error in form.errors %}
-					<li style="color:red"> {{ error }} </li>
-					{% endfor %}
-				</ul>
-
-				<div class="container-contact100-form-btn">
-					<button class="contact100-form-btn" type="submit">
-						<span>
-							<i class="fa fa-paper-plane-o m-r-6" aria-hidden="true"></i>
-							Confirmar mi asistencia
-						</span>
-					</button>
-				</div>
+					</ul>
+					<div class="container-contact100-form-btn">
+						<button class="contact100-form-btn" type="submit">
+							<span>
+								<i class="fa fa-paper-plane-o m-r-6" aria-hidden="true"></i>
+								  Confirmar mi asistencia
+							</span>
+						</button>
+					</div>
 			</form>
 		</section>
 

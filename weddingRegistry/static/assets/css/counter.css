@@ -3,7 +3,7 @@ body {
 }
 
 .wrap {
-  position: absolute;
+  padding: 4.5em 0 4.5em 0;
   bottom: 0;
   top: 0;
   left: 0;
@@ -12,30 +12,8 @@ body {
   height: 310px;
 }
 
-a {
-  text-decoration: none;
-  color: #1a1a1a;
-}
-
-h1 {
-  margin-bottom: 60px;
-  text-align: center;
-  font: 300 2.25em "Lato";
-  text-transform: uppercase;
-}
-h1 strong {
-  font-weight: 400;
-  color: #ea4c4c;
-}
-
-h2 {
-  margin-bottom: 80px;
-  text-align: center;
-  font: 300 0.7em "Lato";
-  text-transform: uppercase;
-}
-h2 strong {
-  font-weight: 400;
+.title-countdown {
+  margin-bottom: 50px;
 }
 
 .countdown {
@@ -53,8 +31,7 @@ h2 strong {
 .countdown .count-title {
   display: block;
   margin-bottom: 15px;
-  font: normal 0.94em "Lato";
-  color: #1a1a1a;
+  color: #483949;
   text-transform: uppercase;
 }
 .countdown .figure {
@@ -93,7 +70,7 @@ h2 strong {
 }
 .countdown .figure .top {
   z-index: 3;
-  background-color: #f7f7f7;
+  background-color: #fff;
   transform-origin: 50% 100%;
   -webkit-transform-origin: 50% 100%;
   -moz-border-radius-topleft: 10px;
@@ -125,7 +102,7 @@ h2 strong {
   top: 0;
   height: 50%;
   overflow: hidden;
-  background-color: #f7f7f7;
+  background-color: #fff;
   -moz-border-radius-topleft: 10px;
   -webkit-border-top-left-radius: 10px;
   border-top-left-radius: 10px;

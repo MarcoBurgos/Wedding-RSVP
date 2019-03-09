@@ -2,146 +2,274 @@
 
 <!DOCTYPE HTML>
 <html>
-	<head>
-		<title>Sample wedding RSVP</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="{{ url_for('static', filename='assets/css/main.css')}}" />
-		<noscript><link rel="stylesheet" href="{{ url_for('static', filename='assets/css/noscript.css')}}" /></noscript>
 
-	</head>
-	<body class="homepage is-preload">
-		<div id="page-wrapper">
+<head>
+	<title>Nuestra Boda A &amp M</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	<link rel="stylesheet" href="{{ url_for('static', filename='assets/css/main.css')}}" />
+	<link rel="stylesheet" href="{{ url_for('static', filename='assets/css/counter.css')}}" />
+	<noscript><link rel="stylesheet" href="{{ url_for('static', filename='assets/css/noscript.css')}}" /></noscript>
 
-			<!-- Header -->
-				<div id="header">
+</head>
 
-					<!-- Inner -->
-						<div class="inner">
-							<header>
-								<h1><a href="index.html" id="logo">Nuestra boda</a></h1>
-								<hr />
-								<p>Angie & Marco </p>
-							</header>
-							<footer>
-								<a href="#banner" class="button circled scrolly">Iniciar</a>
-							</footer>
+<body class="homepage is-preload">
+	<div id="page-wrapper">
+
+		<!-- Header -->
+		<div id="header">
+
+			<!-- Inner -->
+			<div class="inner">
+				<header>
+					<h1><a href="index.html" id="logo">Nuestra boda</a></h1>
+					<hr />
+					<p>Angie &amp Marco </p>
+				</header>
+				<footer>
+					<a href="#banner" class="button circled scrolly">Iniciar</a>
+				</footer>
+			</div>
+
+			<!-- Nav -->
+			<nav style="background: rgba(0, 0, 0, 0.1); margin-top: 10px" id="nav">
+				<ul>
+					<li><a href="index.html">Home</a></li>
+					<li>
+						<a href="#">Hoteles</a>
+						<ul>
+							<li><a href="{{ url_for('core.quinta_san_carlos')}}">Quinta San Carlos</a></li>
+							<li><a href="{{ url_for('core.others')}}">Otras opciones</a></li>
+						</ul>
+					</li>
+					<li><a href="{{ url_for('core.how_to_get_there')}}">¿Cómo llegar?</a></li>
+					<li><a href="{{ url_for('core.registry')}}">Mesa de regalos</a></li>
+					<li><a href="{{ url_for('core.faq')}}">FAQ</a></li>
+				</ul>
+			</nav>
+
+		</div>
+
+		<!-- Banner -->
+		<section id="banner">
+			<header>
+				<h2>¡Hola!</h2>
+				<h2>Queremos invitarte a <strong>nuestra boda</strong></h2>
+				<p>
+					Por favor confirma tu asistencia antes del 1 de octubre a las 12:00 tiempo del Centro de México <br>
+					¡Queremos que nos acompañes y esperamos verte para celebrar nuestra unión este 17 de Noviembre de 2019!
+				</p>
+				<!--  new-->
+
+				<div class="wrap">
+					<h3 class="title-countdown">Falta para <strong>nuestra boda</strong></h3>
+
+					<div class="countdown">
+
+
+						<div class="bloc-time days" data-init-value="00">
+							<span class="count-title">Días</span>
+
+							<div class="figure days days-1">
+								<span class="top">0</span>
+								<span class="top-back">
+					<span>0</span>
+								</span>
+								<span class="bottom">0</span>
+								<span class="bottom-back">
+					<span>0</span>
+								</span>
+							</div>
+
+							<div class="figure days days-2">
+								<span class="top">0</span>
+								<span class="top-back">
+					<span>0</span>
+								</span>
+								<span class="bottom">0</span>
+								<span class="bottom-back">
+					<span>0</span>
+								</span>
+							</div>
+
+							<div class="figure days days-3">
+								<span class="top">0</span>
+								<span class="top-back">
+					<span>0</span>
+								</span>
+								<span class="bottom">0</span>
+								<span class="bottom-back">
+					<span>0</span>
+								</span>
+							</div>
+
 						</div>
 
-					<!-- Nav -->
-						<nav id="nav">
-							<ul>
-								<li>
-									<a href="#">Hotels</a>
-									<ul>
-										<li><a href="#">Quinta dorada</a></li>
-										<li><a href="#">Sol Chapala</a></li>
-										<li><a href="#">Another</a></li>
-									</ul>
-								</li>
-								<li><a href="left-sidebar.html">Mesa de regalos</a></li>
-								<li><a href="right-sidebar.html">How to get there</a></li>
-							</ul>
-						</nav>
-
-				</div>
-
-			<!-- Banner -->
-				<section id="banner">
-					<header>
-						<h2>Hi. </h2>
-						<h2>We would like to have you in <strong>our wedding</strong>.</h2>
-						<p>
-							Please  <a href="http://html5up.net">RSVP</a>.
-							And we are looking forward to seeing you on Quinta San Carlos on November 17th 2019!
-						</p>
-					</header>
-				</section>
-
-				<!-- Form -->
-				<main id="confirmation" class="container-contact100">
-					<div class="wrap-contact100">
-						<header style="text-align: center">
-							<span class="contact100-form-title">
-								Confirma tu asistencia
-							</span>
-
-              <section id="email_signIn" >
-  							<form class="contact100-form validate-form" method="post">
-                  {# This hidden_tag is a CSRF security feature. #}
-							    {{ form.hidden_tag() }}
-							    {{ render_field(form.email, placeholder=form.email.label.text) }}
-                  {{ render_field(form.password, placeholder=form.password.label.text) }}
-
-									{% with messages = get_flashed_messages() %}
-					        {% if messages %}
-					        {% for message in messages %}
-					        <p style="color:red">{{message}}</p>
-					        {% endfor %}
-					        {% endif %}
-					        {% endwith %}
-
-                  <div class="container-contact100-form-btn">
-    								<button class="contact100-form-btn" type="submit">
-    									<span>
-    										<i class="fa fa-paper-plane-o m-r-6" aria-hidden="true"></i>
-    										  Ingresar a mi cuenta
-    									</span>
-    								</button>
-    							</div>
-  							</form>
-  						</section>
-						</header>
-						<br>
-
-						<p style="text-align: center">¿No tienes tu contraseña? Solicítala <strong><a href="{{ url_for('users.register') }}">aquí</a></strong></p>
-
-					</div>
-				</main>
 
 
-			<!-- Footer -->
-				<div id="footer">
-					<div class="container">
-						<hr />
-						<div class="row">
-							<div class="col-12">
-								<!-- Contact -->
-									<section class="contact">
-										<header>
-											<h3>Have any question?</h3>
-										</header>
-										<p>Please feel free to ask, reach on us on social media.</p>
-										<ul class="icons">
-											<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
-											<li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
-											<li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
-											<li><a href="#" class="icon fa-linkedin"><span class="label">Linkedin</span></a></li>
-										</ul>
-									</section>
+						<div class="bloc-time hours" data-init-value="24">
+							<span class="count-title">Horas</span>
 
-								<!-- Copyright -->
-									<div class="copyright">
-										<ul class="menu">
-											<li>&copy; Untitled. All rights reserved.</li><li>Design: <a href="https://twitter.com/MarcoBurgos">Marco Burgos</a></li>
-										</ul>
-									</div>
+							<div class="figure hours hours-1">
+								<span class="top">0</span>
+								<span class="top-back">
+					<span>0</span>
+								</span>
+								<span class="bottom">0</span>
+								<span class="bottom-back">
+					<span>0</span>
+								</span>
+							</div>
+
+							<div class="figure hours hours-2">
+								<span class="top">0</span>
+								<span class="top-back">
+					<span>0</span>
+								</span>
+								<span class="bottom">0</span>
+								<span class="bottom-back">
+					<span>0</span>
+								</span>
+							</div>
+						</div>
+
+						<div class="bloc-time min" data-init-value="0">
+							<span class="count-title">Minutos</span>
+
+							<div class="figure min min-1">
+								<span class="top">0</span>
+								<span class="top-back">
+					<span>0</span>
+								</span>
+								<span class="bottom">0</span>
+								<span class="bottom-back">
+					<span>0</span>
+								</span>
+							</div>
+
+							<div class="figure min min-2">
+								<span class="top">0</span>
+								<span class="top-back">
+					<span>0</span>
+								</span>
+								<span class="bottom">0</span>
+								<span class="bottom-back">
+					<span>0</span>
+								</span>
+							</div>
+						</div>
+
+						<div class="bloc-time sec" data-init-value="0">
+							<span class="count-title">Segundos</span>
+
+							<div class="figure sec sec-1">
+								<span class="top">0</span>
+								<span class="top-back">
+					<span>0</span>
+								</span>
+								<span class="bottom">0</span>
+								<span class="bottom-back">
+					<span>0</span>
+								</span>
+							</div>
+
+							<div class="figure sec sec-2">
+								<span class="top">0</span>
+								<span class="top-back">
+					<span>0</span>
+								</span>
+								<span class="bottom">0</span>
+								<span class="bottom-back">
+					<span>0</span>
+								</span>
 							</div>
 						</div>
 					</div>
 				</div>
 
+				<!--  counter-->
+
+			</header>
+		</section>
+
+		<!-- Form -->
+		<main id="confirmation" class="container-contact100">
+			<div class="wrap-contact100">
+				<header style="text-align: center">
+					<span class="contact100-form-title">
+								Inicia sesión
+							</span>
+					<section id="email_signIn">
+						<form class="contact100-form validate-form" method="post">
+							{# This hidden_tag is a CSRF security feature. #} {{ form.hidden_tag() }} {{ render_field(form.email, placeholder=form.email.label.text) }} {{ render_field(form.password, placeholder=form.password.label.text) }} {% with messages = get_flashed_messages()
+							%} {% if messages %} {% for message in messages %}
+							<p style="color:red">{{message}}</p>
+							{% endfor %} {% endif %} {% endwith %}
+
+							<div class="container-contact100-form-btn">
+								<button class="contact100-form-btn" type="submit">
+    									<span>
+    										<i class="fa fa-paper-plane-o m-r-6" aria-hidden="true"></i>
+    										  Ingresar a mi cuenta
+    									</span>
+    								</button>
+							</div>
+						</form>
+					</section>
+				</header>
+				<br>
+
+				<p style="text-align: center">¿No tienes tu contraseña? Solicítala <strong><a href="{{ url_for('users.register') }}">aquí</a></strong></p>
+
+			</div>
+		</main>
+
+
+		<!-- Footer -->
+		<div id="footer">
+			<div class="container">
+				<div class="row">
+					<div class="col-12">
+						<!-- Contact -->
+						<section class="contact">
+							<header>
+								<h3>¿Tienes una pregunta?</h3>
+							</header>
+							<p>Por favor, contácanos en una de nuestras redes sociales y con gusto te ayudarémos</p>
+							<ul class="icons">
+								<li><a href="https://twitter.com/MarcoBurgos" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+								<li><a href="https://www.facebook.com/profile.php?id=555107398" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+								<li><a href="https://www.instagram.com/angiezcoln/" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
+								<li><a href="https://www.linkedin.com/in/marco-burgos-2b006670/" class="icon fa-linkedin"><span class="label">Linkedin</span></a></li>
+							</ul>
+						</section>
+
+						<!-- Copyright -->
+						<div class="copyright">
+							<ul class="menu">
+								<li>&copy; Todos los Derechos Reservados.</li>
+								<li>Diseño y desarrollo: <a href="https://twitter.com/MarcoBurgos">Marco Burgos</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 
-		<!-- Scripts -->
-			<script src="{{ url_for('static', filename='assets/js/jquery.min.js')}}"></script>
-			<script src="{{ url_for('static', filename='assets/js/jquery.dropotron.min.js')}}"></script>
-			<script src="{{ url_for('static', filename='assets/js/jquery.scrolly.min.js')}}"></script>
-			<script src="{{ url_for('static', filename='assets/js/jquery.scrollex.min.js')}}"></script>
-			<script src="{{ url_for('static', filename='assets/js/browser.min.js')}}"></script>
-			<script src="{{ url_for('static', filename='assets/js/breakpoints.min.js')}}"></script>
-			<script src="{{ url_for('static', filename='assets/js/util.js')}}"></script>
-			<script src="{{ url_for('static', filename='assets/js/main.js')}}"></script>
+	</div>
 
-	</body>
+	<!-- Scripts -->
+	<script src="{{ url_for('static', filename='assets/js/jquery.min.js')}}"></script>
+	<script src="{{ url_for('static', filename='assets/js/jquery.dropotron.min.js')}}"></script>
+	<script src="{{ url_for('static', filename='assets/js/jquery.scrolly.min.js')}}"></script>
+	<script src="{{ url_for('static', filename='assets/js/jquery.scrollex.min.js')}}"></script>
+	<script src="{{ url_for('static', filename='assets/js/browser.min.js')}}"></script>
+	<script src="{{ url_for('static', filename='assets/js/breakpoints.min.js')}}"></script>
+	<script src="{{ url_for('static', filename='assets/js/util.js')}}"></script>
+	<script src="{{ url_for('static', filename='assets/js/main.js')}}"></script>
+	<script src="{{ url_for('static', filename='assets/js/counter.js')}}"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.2/TweenMax.min.js"></script>
+
+</body>
+
 </html>
