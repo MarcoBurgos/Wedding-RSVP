@@ -34,7 +34,7 @@
 			<!-- Nav -->
 			<nav style="background: rgba(0, 0, 0, 0.1); margin-top: 10px" id="nav">
 				<ul>
-					<li><a href="index.html">Home</a></li>
+					<li><a href="{{ url_for('core.index')}}">Inicio</a></li>
 					<li>
 						<a href="#">Hoteles</a>
 						<ul>
@@ -65,7 +65,6 @@
 					<h3 class="title-countdown">Falta para <strong>nuestra boda</strong></h3>
 
 					<div class="countdown">
-
 
 						<div class="bloc-time days" data-init-value="00">
 							<span class="count-title">Días</span>
@@ -187,6 +186,9 @@
 					</div>
 				</div>
 
+
+
+
 				<!--  counter-->
 
 			</header>
@@ -194,13 +196,13 @@
 
 		<!-- Form -->
 		<main id="confirmation" class="container-contact100">
-			<div class="wrap-contact100">
+			<div class="wrap-contact100" style="padding: 50px 0px 50px 0px;">
 				<header style="text-align: center">
 					<span class="contact100-form-title">
 								Inicia sesión
 							</span>
 					<section id="email_signIn">
-						<form class="contact100-form validate-form" method="post">
+						<form class="contact100-form validate-form" method="post" style="margin-top:30px">
 							{# This hidden_tag is a CSRF security feature. #} {{ form.hidden_tag() }} {{ render_field(form.email, placeholder=form.email.label.text) }} {{ render_field(form.password, placeholder=form.password.label.text) }} {% with messages = get_flashed_messages()
 							%} {% if messages %} {% for message in messages %}
 							<p style="color:red">{{message}}</p>
@@ -217,8 +219,6 @@
 						</form>
 					</section>
 				</header>
-				<br>
-
 				<p style="text-align: center">¿No tienes tu contraseña? Solicítala <strong><a href="{{ url_for('users.register') }}">aquí</a></strong></p>
 
 			</div>
@@ -235,7 +235,7 @@
 							<header>
 								<h3>¿Tienes una pregunta?</h3>
 							</header>
-							<p>Por favor, contácanos en una de nuestras redes sociales y con gusto te ayudarémos</p>
+							<p>Por favor, contáctanos en una de nuestras redes sociales y con gusto te ayudarémos</p>
 							<ul class="icons">
 								<li><a href="https://twitter.com/MarcoBurgos" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
 								<li><a href="https://www.facebook.com/profile.php?id=555107398" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
