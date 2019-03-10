@@ -51,13 +51,15 @@ def auth():
         return redirect(url_for('core.user_confirmed'))
     else:
         form = UserSignUpForm()
-        guests = {'Marco','Ramón','Emmanuel','Martha','Emma Luz'}
+        guests = current_user.guests_names.split(",")
+        name = current_user.name
+        tickets = current_user.guests
 
         if form.validate_on_submit():
 
             return redirect(url_for('core.confirm'))
 
-        return render_template('auth.html', form=form, guests=guests)
+        return render_template('auth.html', form=form, guests=guests, name=name, tickets=tickets)
 
 
 
@@ -84,8 +86,9 @@ def confirm():
 @core.route('/user_confirmed', methods=['GET'])
 @login_required
 def user_confirmed():
+    name = current_user.name
 
-    return render_template('confirm.html')
+    return render_template('confirm.html', name=name)
 
 
 @core.route('/user_confirmed/quinta_san_carlos', methods=['GET'])

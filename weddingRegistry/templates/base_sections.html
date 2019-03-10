@@ -93,6 +93,9 @@
 			<script src="{{ url_for('static', filename='assets/js/breakpoints.min.js')}}"></script>
 			<script src="{{ url_for('static', filename='assets/js/util.js')}}"></script>
 			<script src="{{ url_for('static', filename='assets/js/main.js')}}"></script>
+			{% block tailscripts %}
+
+			{% endblock %}
 
 	</body>
 </html>

@@ -1,12 +1,28 @@
-{% extends "base.html"%}
+{% extends "base_sections.html"%}
 {% block content %}
+
+
+<section id="banner">
+	<header>
+    <div class="background-body">
+      <div class="textcontainer">
+        <h2 style="display:inline" class="particletext confetti">¡Listo, <strong>estás confirmado!</strong></h2>
+      </div>
+    </div>
+    <p>
+      <strong>¡Nos da gusto que nos acompañes este 17 de noviembre de 2019, <br>
+        gracias por celebrar esta unión con nosotros!</strong>
+    </p>
+
+	</header>
+</section>
 
 <!-- Carousel -->
   <section class="carousel">
     <div class="reel">
 
       <article>
-        <a href="{{ url_for('core.quinta_san_carlos')}}" class="image featured"><img src="{{ url_for('static', filename='images/hotel.jpg')}}" alt="" /></a>
+        <a href="{{ url_for('core.quinta_san_carlos')}}" class="image featured"><img src="{{ url_for('static', filename='images/hotel.jpg')}}" style="max-height: 206px;" alt="Quinta San Carlos" /></a>
         <header>
           <h3><a href="{{ url_for('core.quinta_san_carlos')}}">Hotel sede de la boda</a></h3>
         </header>
@@ -14,7 +30,7 @@
       </article>
 
       <article>
-        <a href="{{ url_for('core.how_to_get_there')}}" class="image featured"><img src="{{ url_for('static', filename='images/getthere.jpg')}}" alt="" /></a>
+        <a href="{{ url_for('core.how_to_get_there')}}" class="image featured"><img src="{{ url_for('static', filename='images/getthere.jpg')}}" style="max-height: 206px;" alt="Cómo llegar a Quinta San Carlos" /></a>
         <header>
           <h3><a href="{{ url_for('core.how_to_get_there')}}">¿Cómo llegar?</a></h3>
         </header>
@@ -22,7 +38,7 @@
       </article>
 
       <article>
-        <a href="{{ url_for('core.others')}}" class="image featured"><img src="{{ url_for('static', filename='images/others.jpg')}}" alt="" /></a>
+        <a href="{{ url_for('core.others')}}" class="image featured"><img src="{{ url_for('static', filename='images/others.jpg')}}" style="max-height: 206px;" alt="Otros sitios de hospedaje" /></a>
         <header>
           <h3><a href="{{ url_for('core.others')}}">Otras opciones de hospedaje</a></h3>
         </header>
@@ -30,7 +46,7 @@
       </article>
 
       <article>
-        <a href="{{ url_for('core.registry')}}" class="image featured"><img src="{{ url_for('static', filename='images/gift.jpg')}}" alt="" /></a>
+        <a href="{{ url_for('core.registry')}}" class="image featured"><img src="{{ url_for('static', filename='images/gift.jpg')}}" style="max-height: 206px;" alt="Mesa de regalos" /></a>
         <header>
           <h3><a href="{{ url_for('core.registry')}}">Mesa de regalos</a></h3>
         </header>
@@ -38,7 +54,7 @@
       </article>
 
       <article>
-        <a href="{{ url_for('core.flights')}}" class="image featured"><img src="{{ url_for('static', filename='images/plane.jpg')}}" alt="" /></a>
+        <a href="{{ url_for('core.flights')}}" class="image featured"><img src="{{ url_for('static', filename='images/plane.jpg')}}" style="max-height: 206px;" alt="Vuelos hacia Guadalajara" /></a>
         <header>
           <h3><a href="{{ url_for('core.flights')}}">¿Vuelas a la boda?</a></h3>
         </header>
@@ -46,7 +62,7 @@
       </article>
 
       <article>
-        <a href="#" class="image featured"><img src="{{ url_for('static', filename='images/DJ.jpg')}}" alt="" /></a>
+        <a href="#" class="image featured"><img src="{{ url_for('static', filename='images/DJ.jpg')}}" style="max-height: 206px;"  alt="Música para la fiesta" /></a>
         <header>
           <h3><a href="#">¡Que la música no pare!</a></h3>
         </header>
@@ -54,7 +70,7 @@
       </article>
 
       <article>
-        <a href="{{ url_for('core.faq')}}" class="image featured"><img src="{{ url_for('static', filename='images/pic02.jpg')}}" alt="" /></a>
+        <a href="{{ url_for('core.faq')}}" class="image featured"><img src="{{ url_for('static', filename='images/pic02.jpg')}}" style="max-height: 206px;"  alt="Preguntas frecuentes" /></a>
         <header>
           <h3><a href="{{ url_for('core.faq')}}">FAQ</a></h3>
         </header>
@@ -65,4 +81,8 @@
   </section>
 
 
+{% endblock %}
+
+{% block tailscripts %}
+  <script src="{{ url_for('static', filename='assets/js/confeti.js')}}"></script>
 {% endblock %}
