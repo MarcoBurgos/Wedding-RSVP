@@ -1,5 +1,13 @@
 {% from "_render_field.html" import render_field %}
 {% extends "base_sections.html"%}
+{% block scripts %}
+
+		<script type="text/javascript">
+      function deleteFlash(btn) {
+        document.getElementById("flash-alert").remove();
+      }
+    </script>
+{% endblock %}
 {% block content %}
 
 
@@ -47,7 +55,7 @@
 
 									</div>
 									<div class="flash-button">
-										<a href="">Cerrar</a>
+										<button onclick="deleteFlash(this)" href="#">Cerrar</button>
 									</div>
 								</div>
 
