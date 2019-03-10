@@ -26,7 +26,7 @@
 						</span>
 
 						<section id="email_signIn" >
-							<form class="contact100-form validate-form" method="post">
+							<form class="contact100-form validate-form" method="post" style="margin-top:30px">
 								{# This hidden_tag is a CSRF security feature. #}
 								{{ form.hidden_tag() }}
 								{{ render_field(form.email, placeholder=form.email.label.text) }}
@@ -41,23 +41,16 @@
 								{% for category, message in messages %}
 
 
-								<div class="flash-container">
+								<div id="flash-alert" class="flash-container {{category}}">
 									<div class="flash-message">
-										<p>El correo que ingresaste no existe en la base de datos. <br>
-											Intenta con otro o contacta al administrador: marko.burgos@gmail.com</p>
+										<p> {{message}} </p>
 
 									</div>
 									<div class="flash-button">
-										<a href="#">Cerrar</a>
+										<a href="">Cerrar</a>
 									</div>
 								</div>
-								<!-- <div id="div_flashAlert" class=flash>
-									<button onclick="deleteFlash(this)">X
-									</button>
-									<br>
-  								<br>
-									<p> {{message}}</p>
-								</div> -->
+
 
 								{% endfor %}
 								{% endwith %}
@@ -83,6 +76,8 @@
 
 				</div>
 			</main>
+
+
 
 
 {% endblock %}

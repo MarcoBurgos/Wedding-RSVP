@@ -3148,7 +3148,7 @@ input, select, textarea {
 	.wrap-contact100 {
 	  width: 550px;
 	  background: transparent;
-	  padding: 50px 0px 160px 0px;
+	  padding: 50px 0px 50px 0px;
 	}
 
 
@@ -3326,7 +3326,6 @@ input, select, textarea {
 }
 
 .flash-container {
-	background-color: #dc3545;
 	border-radius: 10px;
 	box-shadow: 0 5px 40px 5px rgba(0,0,0,.2);
 	margin-bottom: 30px;
@@ -3334,6 +3333,14 @@ input, select, textarea {
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
+}
+
+.flash-error {
+	background-color: #dc3545;
+}
+
+.flash-success {
+	background-color: #27d025;
 }
 
 .flash-message {
@@ -3359,7 +3366,7 @@ input, select, textarea {
 
 }
 
-.flash-button a:link {
+.flash-button a {
 	background-color: white;
 	color: #dc3545;
 	padding: 5px 30px;

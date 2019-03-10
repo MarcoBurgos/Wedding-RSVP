@@ -5,6 +5,7 @@ from flask_migrate import Migrate
 from flask_dance.contrib.google import make_google_blueprint, google
 from flask_login import LoginManager
 from flask_mail import Mail
+from flask_bootstrap import Bootstrap
 
 #flask db init
 #flask db migrate  -m "message"
@@ -29,6 +30,7 @@ app.config.update(
     MAIL_DEFAULT_SENDER = os.environ.get('MAIL_DEFAULT_SENDER')
 	)
 mail = Mail(app)
+bootstrap = Bootstrap(app)
 
 
 app.config['SECRET_KEY'] = 'WR20190205'
