@@ -20,7 +20,7 @@
 					<!-- Inner -->
 					<div style="background: rgba(0, 0, 0, 0.05); padding:30px; border-radius: 25px;" class="inner">
 						<header>
-							<h1><a href="index.html" id="logo">Nuestra Boda</a></h1>
+							<h1><a href="{{ url_for('core.index')}}" id="logo">Nuestra Boda</a></h1>
 							<hr />
 							<p>Angie &amp Marco </p>
 						</header>
@@ -29,17 +29,17 @@
 					<!-- Nav -->
 					<nav style="background: rgba(0, 0, 0, 0.1); margin-top: 10px" id="nav">
 						<ul>
-							<li><a href="index.html">Home</a></li>
+							<li><a href="{{ url_for('core.index')}}">Inicio</a></li>
 							<li>
 								<a href="#">Hoteles</a>
 								<ul>
-									<li><a href="#">Quinta San Carlos</a></li>
-									<li><a href="#">Otras opciones</a></li>
+									<li><a href="{{ url_for('core.quinta_san_carlos')}}">Quinta San Carlos</a></li>
+									<li><a href="{{ url_for('core.others')}}">Otras opciones</a></li>
 								</ul>
 							</li>
-							<li><a href="#">¿Cómo llegar?</a></li>
-							<li><a href="#">Mesa de regalos</a></li>
-							<li><a href="#">FAQ</a></li>
+							<li><a href="{{ url_for('core.how_to_get_there')}}">¿Cómo llegar?</a></li>
+							<li><a href="{{ url_for('core.registry')}}">Mesa de regalos</a></li>
+							<li><a href="{{ url_for('core.faq')}}">FAQ</a></li>
 						</ul>
 					</nav>
 
