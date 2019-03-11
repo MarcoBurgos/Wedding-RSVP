@@ -1,19 +1,21 @@
-{% extends "base.html"%}
+{% extends "base_sections.html"%}
+
 {% block content %}
 
-    <div class="container-table-dashboard">
-      <div class="jumbotron">
-        <div class="card">
-          <div class="card-header">
-            Boda Angie &amp Marco
-          </div>
-          <div class="card-body">
-            <h5 class="card-title">Ooops</h5>
-            <p class="card-text">El contenido que estabas buscando no existe</p>
-            <p class="card-text">Navega de regreso al home para iniciar sesión.</p>
-              <a href="{{ url_for('core.index') }}" class="btn btn-primary">Volver al Home</a>
-          </div>
-        </div>
-      </div>
 
-  {% endblock %}
+
+<main id="confirmation" class="container-contact100">
+	<div class="wrap-contact100">
+		<header style="text-align: center">
+			<span class="contact100-form-title">
+				Oops no pudimos encontrar lo que buscanas
+			</span>
+      <p>Pero no te preocupes, aún tenemos más inforamción que puede ser de utilidad para ti, regresa al inicio y navega desde ahí</p>
+      <p style="text-align: center"><strong><a href="{{ url_for('core.index') }}">Volver al Home</a></strong></p>
+		</header>
+		<br>
+
+</main>
+
+
+{% endblock %}

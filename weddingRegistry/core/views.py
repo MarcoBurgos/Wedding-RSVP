@@ -154,4 +154,4 @@ def login():
 @core.route('/not_auth', methods=['GET'])
 def not_auth():
 
-    return render_template('not_auth.html')
+    return render_template('error_pages/403.html')

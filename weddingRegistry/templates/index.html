@@ -31,6 +31,7 @@
 			</div>
 
 			<!-- Nav -->
+			{% if current_user.is_authenticated %}
 			<nav style="background: rgba(0, 0, 0, 0.1); margin-top: 10px" id="nav">
 				<ul>
 					<li><a href="{{ url_for('core.index')}}">Inicio</a></li>
@@ -46,6 +47,17 @@
 					<li><a href="{{ url_for('core.faq')}}">FAQ</a></li>
 				</ul>
 			</nav>
+			{% else %}
+			<nav style="background: rgba(0, 0, 0, 0.1); margin-top: 10px" id="nav">
+				<ul>
+					<li><a href="{{ url_for('core.index')}}">Inicio</a></li>
+					<li><a href="#confirmation" class="scrolly">Iniciar sesión</a></li>
+					<li><a href="{{ url_for('users.register')}}">Registrarse</a></li>
+				</ul>
+			</nav>
+			{% endif %}
+
+
 
 		</div>
 
