@@ -1,39 +1,29 @@
 import os
+from dotenv import load_dotenv
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_dance.contrib.google import make_google_blueprint, google
 from flask_login import LoginManager
 from flask_mail import Mail
-from flask_bootstrap import Bootstrap
-
-#flask db init
-#flask db migrate  -m "message"
-#flask db upgrade
-# os.environ["OAUTHLIB_RELAX_TOKEN_SCOPE"] = '1'
-#
-# #export OAUTHLIB_INSECURE_TRANSPORT=1
-# export FLASK_ENV=development
-#python app.py
 
 
+load_dotenv()
 app = Flask(__name__)
 
 app.config.update(
-	DEBUG=True,
+	FLASK_ENV=os.environ.get('FLASK_ENV'),
+	DEBUG=os.environ.get('DEBUG'),
+	SECRET_KEY=os.environ.get('SECRET_KEY'),
 	#EMAIL SETTINGS
-	MAIL_SERVER='smtp.gmail.com',
-	MAIL_PORT=465,
-	MAIL_USE_SSL=True,
-	MAIL_USERNAME = os.environ.get('MAIL_USERNAME'),
-	MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD'),
-    MAIL_DEFAULT_SENDER = os.environ.get('MAIL_DEFAULT_SENDER')
+	MAIL_SERVER=os.environ.get('MAIL_SERVER'),
+	MAIL_PORT=os.environ.get('MAIL_PORT'),
+	MAIL_USE_SSL=os.environ.get('MAIL_USE_SSL'),
+	MAIL_USERNAME=os.environ.get('MAIL_USERNAME'),
+	MAIL_PASSWORD=os.environ.get('MAIL_PASSWORD'),
+    MAIL_DEFAULT_SENDER=os.environ.get('MAIL_DEFAULT_SENDER')
 	)
 mail = Mail(app)
-bootstrap = Bootstrap(app)
-
-
-app.config['SECRET_KEY'] = 'WR20190205'
 
 
 ################################################
