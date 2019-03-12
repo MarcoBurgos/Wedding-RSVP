@@ -13,13 +13,14 @@
 
     $(document).ready(function() {
        $('form').submit(function (e) {
-           var url = "{{ url_for('users.background_process') }}"; // send the form data here.
+				 	 $("#process_input").text("Validando...")
+           var url = "{{ url_for('users.background_process') }}";
            $.ajax({
                type: "POST",
                url: url,
                data: {
 				             email:$('#email_register_form').val()
-			                }, // serializes the form's elements.
+			                },
                success: function (data) {
                    console.log(data)
                    if(data.result == 'success') {
@@ -38,11 +39,12 @@
                      $("#flash-send").hide()
                      $("#flash-repeated").hide()
                    }
+
                }
            });
-           e.preventDefault(); // block the traditional submission of the form.
+           e.preventDefault();
        });
-       // Inject our CSRF token into our AJAX request.
+       // Inject CSRF token into our AJAX request.
        $.ajaxSetup({
            beforeSend: function(xhr, settings) {
                if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type) && !this.crossDomain) {
@@ -101,7 +103,7 @@
 									</div>
 								</div>
 
-                <div id="flash-repeated" class="flash-container flash-error" style="display: none;">
+                <div id="flash-repeated" class="flash-container flash-warning" style="display: none;">
 									<div class="flash-message">
 										<p>Este correo {form.email.data} ya cuanta con una contraseña asignada. Para evitar spam, solo se genera una vez, <br>
                       contacta a marko.burgos@gmail.com para generar otra, en caso de que no cuentes con tu contaseña.</p>
