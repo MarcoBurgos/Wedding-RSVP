@@ -4,9 +4,54 @@
 
 		<script type="text/javascript">
       function deleteFlash(btn) {
-        document.getElementById("flash-alert").remove();
+        $('.flash-container').remove();
       }
     </script>
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+		<script type=text/javascript>
+
+    $(document).ready(function() {
+       $('form').submit(function (e) {
+           var url = "{{ url_for('users.background_process') }}"; // send the form data here.
+           $.ajax({
+               type: "POST",
+               url: url,
+               data: {
+				             email:$('#email_register_form').val()
+			                }, // serializes the form's elements.
+               success: function (data) {
+                   console.log(data)
+                   if(data.result == 'success') {
+                     console.log('flashsend')
+                     $("#flash-send").show()
+                     $("#flash-repeated").hide()
+                     $("#flash-notfound").hide()
+                   } else if (data.result == 'repeated') {
+                     console.log('repeated')
+                     $("#flash-repeated").show()
+                     $("#flash-send").hide()
+                     $("#flash-notfound").hide()
+                   } else if (data.result == 'not-found') {
+                     console.log('notfound')
+                     $("#flash-notfound").show()
+                     $("#flash-send").hide()
+                     $("#flash-repeated").hide()
+                   }
+               }
+           });
+           e.preventDefault(); // block the traditional submission of the form.
+       });
+       // Inject our CSRF token into our AJAX request.
+       $.ajaxSetup({
+           beforeSend: function(xhr, settings) {
+               if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type) && !this.crossDomain) {
+                   xhr.setRequestHeader("X-CSRFToken", "{{ form.csrf_token._value() }}")
+               }
+           }
+       })
+   });
+		</script>
 {% endblock %}
 {% block content %}
 
@@ -37,7 +82,7 @@
 							<form class="contact100-form validate-form" method="post" style="margin-top:30px">
 								{# This hidden_tag is a CSRF security feature. #}
 								{{ form.hidden_tag() }}
-								{{ render_field(form.email, placeholder=form.email.label.text) }}
+								{{ render_field(form.email, placeholder=form.email.label.text, id="email_register_form") }}
 
 								<ul>
 									{% for error in form.errors %}
@@ -45,14 +90,31 @@
 									{% endfor %}
 								</ul>
 
-								{% with messages = get_flashed_messages(with_categories=true) %}
-								{% for category, message in messages %}
 
-
-								<div id="flash-alert" class="flash-container {{category}}">
+								<div id="flash-notfound" class="flash-container flash-error" style="display: none;">
 									<div class="flash-message">
-										<p> {{message}} </p>
+										<p>El correo {form.email.data} que ingresaste no existe en la base de datos. <br>
+                      Intenta con otro o contacta al administrador: marko.burgos@gmail.com</p>
+									</div>
+									<div class="flash-button">
+										<button onclick="deleteFlash(this)" href="#">Cerrar</button>
+									</div>
+								</div>
 
+                <div id="flash-repeated" class="flash-container flash-error" style="display: none;">
+									<div class="flash-message">
+										<p>Este correo {form.email.data} ya cuanta con una contraseña asignada. Para evitar spam, solo se genera una vez, <br>
+                      contacta a marko.burgos@gmail.com para generar otra, en caso de que no cuentes con tu contaseña.</p>
+									</div>
+									<div class="flash-button">
+										<button onclick="deleteFlash(this)" href="#">Cerrar</button>
+									</div>
+								</div>
+
+                <div id="flash-send" class="flash-container flash-success" style="display: none;">
+									<div class="flash-message">
+										<p>Enviamos un correo al mail {form.email.data} con la contraseña. Si no lo recibiste, <br>
+                      checa la carpeta de spam o contacta a marko.burgos@gmail.com".</p>
 									</div>
 									<div class="flash-button">
 										<button onclick="deleteFlash(this)" href="#">Cerrar</button>
@@ -60,11 +122,8 @@
 								</div>
 
 
-								{% endfor %}
-								{% endwith %}
-
 								<div class="container-contact100-form-btn">
-									<button class="contact100-form-btn" type="submit">
+									<button href="#" id="process_input" class="contact100-form-btn" type="submit">
 										<span>
 											<i class="fa fa-paper-plane-o m-r-6" aria-hidden="true"></i>
 											Enviar
