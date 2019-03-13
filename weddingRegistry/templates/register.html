@@ -13,7 +13,9 @@
 
     $(document).ready(function() {
        $('form').submit(function (e) {
-				 	 $("#process_input").text("Validando...")
+				 console.log("submiting")
+				 	let req_success = false;
+				 	 $("button[type=submit]").attr("data-state", "sending");
            var url = "{{ url_for('users.background_process') }}";
            $.ajax({
                type: "POST",
@@ -24,22 +26,41 @@
                success: function (data) {
                    console.log(data)
                    if(data.result == 'success') {
-                     console.log('flashsend')
+										 let req_success = true;
+										  console.log(req_success)
                      $("#flash-send").show()
                      $("#flash-repeated").hide()
                      $("#flash-notfound").hide()
                    } else if (data.result == 'repeated') {
-                     console.log('repeated')
+                     let req_success = false;
+										 console.log(req_success)
                      $("#flash-repeated").show()
                      $("#flash-send").hide()
                      $("#flash-notfound").hide()
                    } else if (data.result == 'not-found') {
-                     console.log('notfound')
+                     let req_success = false;
+										  console.log(req_success)
                      $("#flash-notfound").show()
                      $("#flash-send").hide()
                      $("#flash-repeated").hide()
                    }
-
+									 if (req_success) {
+								    setTimeout(function() {
+								      // if successful
+								      $("button[type=submit]").attr("data-state", "success");
+								      setTimeout(function() {
+								        $("button[type=submit]").attr("data-state", "inactive");
+								      }, 2500);
+								    }, 1);
+								  }else {
+								    setTimeout(function() {
+								      // if successful
+								      $("button[type=submit]").attr("data-state", "fail");
+								      setTimeout(function() {
+								        $("button[type=submit]").attr("data-state", "inactive");
+								      }, 2500);
+								    }, 1);
+								  }
                }
            });
            e.preventDefault();
@@ -81,7 +102,7 @@
 						</span>
 
 						<section id="email_signIn" >
-							<form class="contact100-form validate-form" method="post" style="margin-top:30px">
+							<form class="contact100-form validate-form" method="post" style="margin-top:30px" id="form-register">
 								{# This hidden_tag is a CSRF security feature. #}
 								{{ form.hidden_tag() }}
 								{{ render_field(form.email, placeholder=form.email.label.text, id="email_register_form") }}
@@ -95,7 +116,7 @@
 
 								<div id="flash-notfound" class="flash-container flash-error" style="display: none;">
 									<div class="flash-message">
-										<p>El correo {form.email.data} que ingresaste no existe en la base de datos. <br>
+										<p>El correo que ingresaste no existe en la base de datos. <br>
                       Intenta con otro o contacta al administrador: marko.burgos@gmail.com</p>
 									</div>
 									<div class="flash-button">
@@ -105,8 +126,9 @@
 
                 <div id="flash-repeated" class="flash-container flash-warning" style="display: none;">
 									<div class="flash-message">
-										<p>Este correo {form.email.data} ya cuanta con una contraseña asignada. Para evitar spam, solo se genera una vez, <br>
-                      contacta a marko.burgos@gmail.com para generar otra, en caso de que no cuentes con tu contaseña.</p>
+										<p>Este correo ya cuanta con una contraseña asignada. <br>
+											Para evitar spam, solo se genera una vez, contacta a marko.burgos@gmail.com <br>
+											para generar otra, en caso de que no cuentes con tu contaseña</p>
 									</div>
 									<div class="flash-button">
 										<button onclick="deleteFlash(this)" href="#">Cerrar</button>
@@ -115,8 +137,9 @@
 
                 <div id="flash-send" class="flash-container flash-success" style="display: none;">
 									<div class="flash-message">
-										<p>Enviamos un correo al mail {form.email.data} con la contraseña. Si no lo recibiste, <br>
-                      checa la carpeta de spam o contacta a marko.burgos@gmail.com".</p>
+										<p>Enviamos un correo al mail que ingresaste con la contraseña. <br>
+											Si no lo recibiste, checa la carpeta de spam o <br>
+											contacta a marko.burgos@gmail.com</p>
 									</div>
 									<div class="flash-button">
 										<button onclick="deleteFlash(this)" href="#">Cerrar</button>
@@ -125,7 +148,7 @@
 
 
 								<div class="container-contact100-form-btn">
-									<button href="#" id="process_input" class="contact100-form-btn" type="submit">
+									<button href="#" id="process_input" class="btn-register" type="submit" data-state="inactive">
 										<span>
 											<i class="fa fa-paper-plane-o m-r-6" aria-hidden="true"></i>
 											Enviar
