@@ -4,7 +4,7 @@
 
 		<script type="text/javascript">
       function deleteFlash(btn) {
-        $('.flash-container').remove();
+        $('.flash-container').hide();
       }
     </script>
 
@@ -13,7 +13,6 @@
 
     $(document).ready(function() {
        $('form').submit(function (e) {
-				 console.log("submiting")
 				 	let req_success = false;
 				 	 $("button[type=submit]").attr("data-state", "sending");
            var url = "{{ url_for('users.background_process') }}";
@@ -24,22 +23,18 @@
 				             email:$('#email_register_form').val()
 			                },
                success: function (data) {
-                   console.log(data)
                    if(data.result == 'success') {
 										 let req_success = true;
-										  console.log(req_success)
                      $("#flash-send").show()
                      $("#flash-repeated").hide()
                      $("#flash-notfound").hide()
                    } else if (data.result == 'repeated') {
                      let req_success = false;
-										 console.log(req_success)
                      $("#flash-repeated").show()
                      $("#flash-send").hide()
                      $("#flash-notfound").hide()
                    } else if (data.result == 'not-found') {
                      let req_success = false;
-										  console.log(req_success)
                      $("#flash-notfound").show()
                      $("#flash-send").hide()
                      $("#flash-repeated").hide()
@@ -120,18 +115,18 @@
                       Intenta con otro o contacta al administrador: marko.burgos@gmail.com</p>
 									</div>
 									<div class="flash-button">
-										<button onclick="deleteFlash(this)" href="#">Cerrar</button>
+										<button type="button" onclick="deleteFlash(this)" href="#">Cerrar</button>
 									</div>
 								</div>
 
                 <div id="flash-repeated" class="flash-container flash-warning" style="display: none;">
 									<div class="flash-message">
 										<p>Este correo ya cuanta con una contraseña asignada. <br>
-											Para evitar spam, solo se genera una vez, contacta a marko.burgos@gmail.com <br>
-											para generar otra, en caso de que no cuentes con tu contaseña</p>
+											Para evitar spam, solo se genera una vez, contacta a marko.burgos@gmail.com para generar otra, <br>
+											en caso de que no cuentes con tu contaseña</p>
 									</div>
 									<div class="flash-button">
-										<button onclick="deleteFlash(this)" href="#">Cerrar</button>
+										<button type="button" onclick="deleteFlash(this)" href="#">Cerrar</button>
 									</div>
 								</div>
 
@@ -142,7 +137,7 @@
 											contacta a marko.burgos@gmail.com</p>
 									</div>
 									<div class="flash-button">
-										<button onclick="deleteFlash(this)" href="#">Cerrar</button>
+										<button type="button" onclick="deleteFlash(this)" href="#">Cerrar</button>
 									</div>
 								</div>
 
