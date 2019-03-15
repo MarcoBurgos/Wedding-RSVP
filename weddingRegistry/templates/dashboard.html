@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Nuestra Boda A &amp M</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <script>
+    function toggleAllUsers(btn) {
+      var x = document.getElementById("table_Div");
+      console.log("click and is:" +x.style.display)
+      if (x.style.display === "none") {
+        x.style.display = "block";
+      }else {
+        x.style.display = "none";
+      }
+      console.log("changed to:" +x.style.display)
+      }
+
+    </script>
+
+    <script>
+      function deleteFlash(btn) {
+        document.getElementById("div_flashAlert").remove()
+      }
+    </script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/font-awesome.min.css')}}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+<div class="outer-container">
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <ul class=flashes>
+    {% for message in messages %}
+    <div id="div_flashAlert" class="alert alert-warning alert-dismissible fade show" role="alert">
+      <button onclick="deleteFlash(this)" type="button" class="close" data-dismiss="alert" aria-label="Close" class="fade close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      {{message}}
+    </div>
+    {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
+
+    <div class="container-table-dashboard">
+      <div class="jumbotron">
+        <div class="card">
+          <div class="card-header">
+            Nuestra boda
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">Panel de administración</h5>
+            <p class="card-text">Hola, {{ name }}! Bienvenido/a a tu panel de control, ¿qué deseas hacer hoy?</p>
+            <a href="#" class="btn btn-primary" style="margin-right: 20px; margin-bottom: 20px" onclick="toggleAllUsers(this)">Ver todos los invitados</a>
+            <a href="#" class="btn btn-dark" style="margin-right: 20px; margin-bottom: 20px" onclick="togglePosts(this)">Ver confirmados</a>
+            <a href="#" class="btn btn-warning" style="margin-right: 20px; margin-bottom: 20px" onclick="togglePosts(this)">Ver pendientes</a>
+            <a href="{{ url_for('users.add_guest') }}" class="btn btn-success"  style="margin-right: 20px; margin-bottom: 20px" >Crear un nuevo invitado</a>
+            <a href="{{ url_for('core.index') }}" class="btn btn-info" style="margin-right: 20px; margin-bottom: 20px" >Volver al home</a>
+          </div>
+        </div>
+      </div>
+      <br>
+      <br>
+      <div class="">
+        <div style="display:none; padding-right:20px; padding-left:20px;" id="table_Div">
+            <div style="display: flex;">
+              <h1 style="align-self:center;">Lista de invitados</h1>
+            </div>
+
+          <table class="table table-bordered table-responsive" style="background-color: #ffffff">
+            <thead>
+              <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">email</th>
+                <th scope="col">Password</th>
+                <th scope="col">Teléfono</th>
+                <th scope="col">Pases</th>
+                <th scope="col">Invitados</th>
+                <th scope="col">¿Confirmó?</th>
+                <th scope="col">Fecha de RSVP</th>
+                <th scope="col" colspan="2">Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for user in users %}
+              <tr>
+                <th scope="row">{{ user.id }}</th>
+                <td scope="row">{{ user.name }}</td>
+                <td scope="row">{{ user.email }}</td>
+                {% if user.password_hash %}
+                  <td scope="row">Generado</td>
+                {% else %}
+                  <td scope="row">No Generado</td>
+                {% endif %}
+                <td scope="row">{{ user.phone_number }}</td>
+                <td scope="row">{{ user.guests }}</td>
+                <td scope="row">{{ user.guests_names }}</td>
+                <td scope="row">{{ user.is_RSVP }}</td>
+                {% if user.date_RSVP %}
+                  <td scope="row">{{ user.date_RSVP.strftime('%d/%B %H:%M:%S') }}</td>
+                {% else %}
+                  <td scope="row">{{ user.date_RSVP }}</td>
+                {% endif %}
+
+                <td scope="row"><a href="{{ url_for('users.update_user', user_id=user.id) }}" class="btn btn-primary"><i class="fa fa-pencil-square-o"></i></a></td>
+                <td scope="row"><button href="{{ url_for('users.delete_user', user_id=user.id) }}" class="btn btn-danger" data-toggle='modal' data-target="#del_modal"><i class="fa fa-trash-o"></i></button>
+              </tr>
+
+              <div class="modal" tabindex="-1" role="dialog" id="del_modal">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title">¿Borrar Invitado?</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <p>Estás segura de que deseas eliminar al invitado {{user.id}}?</p>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                      <form action="{{url_for('users.delete_user', user_id=user.id)}}" method="post">
+                        <input class="btn btn-danger" type="submit" value="Borrar">
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+</body>
+</html>

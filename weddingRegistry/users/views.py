@@ -1,4 +1,5 @@
-from flask import render_template,request,Blueprint, redirect, url_for, flash, jsonify
+import os
+from flask import render_template,request,Blueprint, redirect, url_for, flash, jsonify, abort
 from flask_mail import Mail
 from weddingRegistry import db
 from flask_login import login_required, current_user
@@ -10,6 +11,19 @@ import random, string
 from weddingRegistry import app
 
 users = Blueprint('users',__name__)
+
+
+@users.route('/admin', methods=['GET','POST'])
+@login_required
+def admin():
+    if current_user.is_authenticated and current_user.email in os.environ.get('ADMINS'):
+        users = User.query.order_by(User.id.asc()).all()
+
+        return render_template('dashboard.html', users=users, name=current_user.name)
+    else:
+        return redirect(url_for('core.not_auth'))
+
+
 
 @users.route('/add_guest', methods=['GET','POST'])
 @login_required
@@ -33,6 +47,66 @@ def add_guest():
         return redirect(url_for('users.add_guest'))
 
     return render_template('add_guest.html', form=form)
+
+
+@users.route('/<int:user_id>/delete', methods=['GET', 'POST'])
+@login_required
+def delete_user(user_id):
+    print(f"id del usario a deletear {user_id}")
+    user = User.query.get_or_404(user_id)
+
+    if current_user.is_authenticated and current_user.email in os.environ.get('ADMINS'):
+        if user.email not in os.environ.get('ADMINS'):
+            flash(f"Eliminaste al invitado: {user.id}, {user.name}")
+            db.session.delete(user)
+            db.session.commit()
+        else:
+            flash(f"Nice try! No puedes eliminar a los Administradores, sucker!")
+            return redirect(url_for('users.admin'))
+    else:
+        return redirect(url_for('core.not_auth'))
+
+    return redirect(url_for("users.admin"))
+
+
+@users.route('/<int:user_id>/update', methods=['GET', 'POST'])
+@login_required
+def update_user(user_id):
+
+    user = User.query.get_or_404(user_id)
+
+    if current_user.is_authenticated and current_user.email in os.environ.get('ADMINS'):
+        if user.email not in os.environ.get('ADMINS'):
+            form = addUserForm()
+
+            if form.validate_on_submit():
+
+                user.name = form.name.data
+                user.email = form.email.data
+                user.phone_number = form.phone_number.data
+                user.guests = form.guests.data
+                user.guests_names = form.guests_names.data
+
+
+                db.session.commit()
+                flash(f"Editaste invitado id: {user.id}, {user.name}")
+
+                return redirect(url_for('users.admin'))
+
+            elif request.method == 'GET':
+                form.name.data = user.name
+                form.email.data = user.email
+                form.phone_number.data = user.phone_number
+                form.guests.data = user.guests
+                form.guests_names.data = user.guests_names
+
+            return render_template('add_guest.html', user=user, form=form)
+        else:
+            flash(f"Nice try! No puedes eliminar a los Administradores, sucker!")
+            return redirect(url_for('users.admin'))
+
+    else:
+        return redirect(url_for('core.not_auth'))
 
 
 
