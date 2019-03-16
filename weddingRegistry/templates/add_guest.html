@@ -1,93 +1,107 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title>Sample wedding RSVP</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="{{ url_for('static', filename='assets/css/main.css')}}" />
-		<noscript><link rel="stylesheet" href="{{ url_for('static', filename='assets/css/noscript.css')}}" /></noscript>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+<html lang="en">
 
-    <script type="text/javascript">
-      function deleteFlash(btn) {
-        document.getElementById("div_flashAlert").remove()
-      }
-    </script>
+<head>
+  <title>Nuestra Boda A &amp M</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/font-awesome.min.css')}}">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-  </head>
-  <body>
+  <script type="text/javascript">
+    function deleteFlash(btn) {
+      document.getElementById("div_flashAlert").remove()
+    }
+  </script>
 
+</head>
 
-    <div class="jumbotron">
-      <div class="container">
-        <h1 class="display-4">Agrega un nuevo invitado</h1>
-        <p class="lead">Ingresa nombre, email, teléfono, número de pases y nombre de los invitados</p>
-        <hr class="my-4">
-        {% with messages = get_flashed_messages() %}
-        {% if messages %}
-        <ul class=flashes>
-        {% for message in messages %}
-        <div id="div_flashAlert" class="alert alert-success alert-dismissible fade show" role="alert">
-          <button onclick="deleteFlash(this)" type="button" class="close" data-dismiss="alert" aria-label="Close" class="fade close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-          {{message}}
-        </div>
-        {% endfor %}
-        </ul>
-        {% endif %}
-        {% endwith %}
-        <br>
-        <br>
-        <br>
-        <div class="container">
-          <form  method="post">
-            {# This hidden_tag is a CSRF security feature. #}
-            {{ form.hidden_tag() }}
-            {{ form.csrf_token }}
-
-
-            <div class="form-group">
-              {{ form.name.label (class='form-group', style="color:black") }}
-              {{ form.name (class='form-control', required="true") }}
-            </div>
-
-            <div class="form-group">
-              {{ form.email.label (class='form-group', style="color:black") }}
-              {{ form.email (class='form-control', required="true") }}
-            </div>
-
-            <div class="form-group">
-              {{ form.phone_number.label (class='form-group', style="color:black") }}
-              {{ form.phone_number (class='form-control', required="true") }}
-            </div>
-
-            <div class="form-group">
-              {{ form.guests.label (class='form-group', style="color:black") }}
-              {{ form.guests (class='form-control', required="true") }}
-            </div>
-
-            <div class="form-group">
-              {{ form.guests_names.label (class='form-group', style="color:black") }}
-              {{ form.guests_names (class='form-control', required="true") }}
-            </div>
-
-            <div class="form-group">
-             {{form.submit(class='btn btn-primary btn-lg btn-block')}}
-            </div>
-
-            <ul>
-    					{% for error in form.errors %}
-    					<li style="color:red"> {{ error }} </li>
-    					{% endfor %}
-    				</ul>
-
-          </form>
-        </div>
+<body>
+  <div class="outer-container">
+    {% with messages = get_flashed_messages() %} {% if messages %}
+    <ul class=flashes>
+      {% for message in messages %}
+      <div id="div_flashAlert" class="alert alert-warning alert-dismissible fade show" role="alert">
+        <button onclick="deleteFlash(this)" type="button" class="close" data-dismiss="alert" aria-label="Close" class="fade close">
+        <span aria-hidden="true">&times;</span>
+      </button> {{message}}
       </div>
+      {% endfor %}
+    </ul>
+    {% endif %} {% endwith %}
+
+    <div class="container-table-dashboard">
+      <div class="jumbotron">
+        <div class="card">
+          <div class="card-header">
+            Nuestra boda
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">Agregar un invitado</h5>
+            <p class="card-text">Ingresa nombre, email, teléfono, número de pases y nombre de los invitados</p></p>
+            <a href="{{ url_for('users.admin') }}" class="btn btn-primary" style="margin-right: 20px; margin-bottom: 20px">Volver al Panel de Control</a>
+            <a href="{{ url_for('core.index') }}" class="btn btn-info" style="margin-right: 20px; margin-bottom: 20px">Volver al home</a>
+          </div>
+        </div>
+        <div class="container">
+          <br>
+          <hr>
+          <h1>Datos del invitado</h1>
+          <br
+          <div class="container">
+            <form method="post">
+              {# This hidden_tag is a CSRF security feature. #} {{ form.hidden_tag() }} {{ form.csrf_token }}
+
+
+              <div class="form-group">
+                {{ form.name.label (class='form-group', style="color:black") }} {{ form.name (class='form-control', required="true") }}
+              </div>
+
+              <div class="form-group">
+                {{ form.email.label (class='form-group', style="color:black") }} {{ form.email (class='form-control', required="true") }}
+              </div>
+
+              <div class="form-group">
+                {{ form.phone_number.label (class='form-group', style="color:black") }} {{ form.phone_number (class='form-control', required="true") }}
+              </div>
+
+              <div class="form-group">
+                {{ form.guests.label (class='form-group', style="color:black") }} {{ form.guests (class='form-control', required="true") }}
+              </div>
+
+              <div class="form-group">
+                {{ form.guests_names.label (class='form-group', style="color:black") }} {{ form.guests_names (class='form-control', required="true") }}
+              </div>
+
+              <div class="form-group">
+                {{form.submit(class='btn btn-primary btn-lg btn-block')}}
+              </div>
+
+
+              <ul>
+                {% for error in form.errors %}
+                <li style="color:red"> {{ error }} </li>
+                {% endfor %}
+              </ul>
+
+            </form>
+
+            <div >
+              <a href="{{ url_for('users.admin') }}"><button  class="btn btn-warning btn-lg btn-block">Cancelar</button></a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+
     </div>
+  </div>
 
 
-  </body>
+
+
+
+</body>
+
 </html>

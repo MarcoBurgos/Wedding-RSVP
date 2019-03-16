@@ -1,135 +1,131 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <title>Nuestra Boda A &amp M</title>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-    <script>
+  <script>
     function toggleAllUsers(btn) {
       var pending = document.getElementById("tablePending_Div");
       var confirmed = document.getElementById("tableConfirmed_Div");
       var allUsers = document.getElementById("table_Div");
       if (allUsers.style.display === "none") {
-        allUsers.style.display = "inline-table";
+        allUsers.style.display = "table";
         confirmed.style.display = "none";
         pending.style.display = "none";
-        }else {
-          allUsers.style.display = "none";
-          confirmed.style.display = "none";
-          pending.style.display = "none";
-        }
+      } else {
+        allUsers.style.display = "none";
+        confirmed.style.display = "none";
+        pending.style.display = "none";
+      }
+    }
+
+
+    function toggleConfirm(btn) {
+      var pending = document.getElementById("tablePending_Div");
+      var confirmed = document.getElementById("tableConfirmed_Div");
+      var allUsers = document.getElementById("table_Div");
+      if (confirmed.style.display === "none") {
+        allUsers.style.display = "none";
+        confirmed.style.display = "table";
+        pending.style.display = "none";
+      } else {
+        allUsers.style.display = "none";
+        confirmed.style.display = "none";
+        pending.style.display = "none";
       }
 
+    }
 
-      function toggleConfirm(btn) {
-        var pending = document.getElementById("tablePending_Div");
-        var confirmed = document.getElementById("tableConfirmed_Div");
-        var allUsers = document.getElementById("table_Div");
-        if (confirmed.style.display === "none") {
-            allUsers.style.display = "none";
-            confirmed.style.display = "inline-table";
-            pending.style.display = "none";
-          }else {
-            allUsers.style.display = "none";
-            confirmed.style.display = "none";
-            pending.style.display = "none";
-          }
+    function togglePending(btn) {
+      var pending = document.getElementById("tablePending_Div");
+      var confirmed = document.getElementById("tableConfirmed_Div");
+      var allUsers = document.getElementById("table_Div");
+      if (pending.style.display === "none") {
+        allUsers.style.display = "none";
+        confirmed.style.display = "none";
+        pending.style.display = "table";
+      } else {
+        allUsers.style.display = "none";
+        confirmed.style.display = "none";
+        pending.style.display = "none";
+      }
+    }
+  </script>
 
-        }
+  <script>
+    function deleteFlash(btn) {
+      document.getElementById("div_flashAlert").remove()
+    }
+  </script>
+  <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/main.css')}}" />
 
-        function togglePending(btn) {
-          var pending = document.getElementById("tablePending_Div");
-          var confirmed = document.getElementById("tableConfirmed_Div");
-          var allUsers = document.getElementById("table_Div");
-          if (pending.style.display === "none") {
-              allUsers.style.display = "none";
-              confirmed.style.display = "none";
-              pending.style.display = "inline-table";
-            }else {
-              allUsers.style.display = "none";
-              confirmed.style.display = "none";
-              pending.style.display = "none";
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script type=text/javascript>
+    $(document).ready(function() {
+      $("#reminder_button").on("click", function(e) {
+        let req_success = false;
+        $("#reminder_button").attr("data-state", "sending");
+        var url = "{{ url_for('users.reminders') }}";
+        $.ajax({
+          type: "POST",
+          url: url,
+          data: {},
+          success: function(data) {
+            console.log(data.total_mails)
+            if (data.total_mails == true) {
+              let req_success = true;
+              console.log("success")
+              //  $("#flash-send").show()
+              //  $("#flash-repeated").hide()
+            } else {
+              let req_success = false;
+              console.log("fail")
+              //  $("#flash-notfound").show()
+
+            }
+            if (req_success) {
+              setTimeout(function() {
+                // if successful
+                $("#reminder_button").attr("data-state", "success");
+                setTimeout(function() {
+                  $("#reminder_button").attr("data-state", "inactive");
+                }, 2500);
+              }, 1);
+            } else {
+              setTimeout(function() {
+                // if successful
+                $("#reminder_button").attr("data-state", "fail");
+                setTimeout(function() {
+                  $("#reminder_button").attr("data-state", "inactive");
+                }, 2500);
+              }, 1);
             }
           }
+        });
+        e.preventDefault();
+      });
+    });
+  </script>
 
-    </script>
-
-    <script>
-      function deleteFlash(btn) {
-        document.getElementById("div_flashAlert").remove()
-      }
-    </script>
-    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/main.css')}}" />
-
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-		<script type=text/javascript>
-
-    $(document).ready(function() {
-       $("#reminder_button").on("click",function (e) {
-				 	let req_success = false;
-				 	 $("#reminder_button").attr("data-state", "sending");
-           var url = "{{ url_for('users.reminders') }}";
-           $.ajax({
-               type: "POST",
-               url: url,
-               data: {
-			                },
-               success: function (data) {
-                 console.log(data.total_mails)
-                   if(data.total_mails == true) {
-										 let req_success = true;
-                     console.log("success")
-                    //  $("#flash-send").show()
-                    //  $("#flash-repeated").hide()
-                   } else  {
-                     let req_success = false;
-                      console.log("fail")
-                    //  $("#flash-notfound").show()
-
-                   }
-									 if (req_success) {
-								    setTimeout(function() {
-								      // if successful
-								      $("#reminder_button").attr("data-state", "success");
-								      setTimeout(function() {
-								        $("#reminder_button").attr("data-state", "inactive");
-								      }, 2500);
-								    }, 1);
-								  }else {
-								    setTimeout(function() {
-								      // if successful
-								      $("#reminder_button").attr("data-state", "fail");
-								      setTimeout(function() {
-								        $("#reminder_button").attr("data-state", "inactive");
-								      }, 2500);
-								    }, 1);
-								  }
-               }
-           });
-           e.preventDefault();
-       });
-   });
-		</script>
-
-    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/font-awesome.min.css')}}">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/font-awesome.min.css')}}">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
+
 <body>
-<div class="outer-container">
-    {% with messages = get_flashed_messages() %}
-    {% if messages %}
+  <div class="outer-container">
+    {% with messages = get_flashed_messages() %} {% if messages %}
     <ul class=flashes>
-    {% for message in messages %}
-    <div id="div_flashAlert" class="alert alert-warning alert-dismissible fade show" role="alert">
-      <button onclick="deleteFlash(this)" type="button" class="close" data-dismiss="alert" aria-label="Close" class="fade close">
+      {% for message in messages %}
+      <div id="div_flashAlert" class="alert alert-warning alert-dismissible fade show" role="alert">
+        <button onclick="deleteFlash(this)" type="button" class="close" data-dismiss="alert" aria-label="Close" class="fade close">
         <span aria-hidden="true">&times;</span>
-      </button>
-      {{message}}
-    </div>
-    {% endfor %}
+      </button> {{message}}
+      </div>
+      {% endfor %}
     </ul>
-  {% endif %}
-{% endwith %}
+    {% endif %} {% endwith %}
 
     <div class="container-table-dashboard">
       <div class="jumbotron">
@@ -143,138 +139,138 @@
             <a href="#" class="btn btn-primary" style="margin-right: 20px; margin-bottom: 20px" onclick="toggleAllUsers(this)">Ver todos los invitados</a>
             <a href="#" class="btn btn-dark" style="margin-right: 20px; margin-bottom: 20px" onclick="toggleConfirm(this)">Ver confirmados</a>
             <a href="#" class="btn btn-warning" style="margin-right: 20px; margin-bottom: 20px" onclick="togglePending(this)">Ver pendientes</a>
-            <a href="{{ url_for('users.add_guest') }}" class="btn btn-success"  style="margin-right: 20px; margin-bottom: 20px" >Crear un nuevo invitado</a>
-            <a href="{{ url_for('core.index') }}" class="btn btn-info" style="margin-right: 20px; margin-bottom: 20px" >Volver al home</a>
+            <a href="{{ url_for('users.add_guest') }}" class="btn btn-success" style="margin-right: 20px; margin-bottom: 20px">Crear un nuevo invitado</a>
+            <a href="{{ url_for('core.index') }}" class="btn btn-info" style="margin-right: 20px; margin-bottom: 20px">Volver al home</a>
           </div>
         </div>
       </div>
       <br>
       <br>
-        <div style="display:none; padding-right:20px; padding-left:20px;" id="table_Div">
-            <div style="display: flex;">
-              <h1 style="align-self:center;">Lista de todos los invitados</h1>
-            </div>
-
-          <table class="table table-bordered" style="background-color: #ffffff">
-            <thead>
-              <tr>
-                <th scope="col">ID</th>
-                <th scope="col">Nombre</th>
-                <th scope="col">email</th>
-                <th scope="col">Password</th>
-                <th scope="col">Teléfono</th>
-                <th scope="col">Pases</th>
-                <th scope="col">Invitados</th>
-                <th scope="col">¿Confirmó?</th>
-                <th scope="col">Fecha de RSVP</th>
-                <th scope="col" colspan="2">Acciones</th>
-              </tr>
-            </thead>
-            <tbody>
-              {% for user in users %}
-              <tr>
-                <th scope="row">{{ user.id }}</th>
-                <td scope="row">{{ user.name }}</td>
-                <td scope="row">{{ user.email }}</td>
-                {% if user.password_hash %}
-                  <td scope="row">Generado</td>
-                {% else %}
-                  <td scope="row">No Generado</td>
-                {% endif %}
-                <td scope="row">{{ user.phone_number }}</td>
-                <td scope="row">{{ user.guests }}</td>
-                <td scope="row">{{ user.guests_names }}</td>
-                <td scope="row">{{ user.is_RSVP }}</td>
-                {% if user.date_RSVP %}
-                  <td scope="row">{{ user.date_RSVP.strftime('%d/%B %H:%M:%S') }}</td>
-                {% else %}
-                  <td scope="row">{{ user.date_RSVP }}</td>
-                {% endif %}
-
-                <td scope="row"><a href="{{ url_for('users.update_user', user_id=user.id) }}" class="btn btn-primary"><i class="fa fa-pencil-square-o"></i></a></td>
-                <td scope="row"><a href="{{ url_for('users.delete_user', user_id=user.id) }}" class="btn btn-danger open-deleteGuestDialog" data-toggle='modal' data-target="#del_modal"><i class="fa fa-trash-o"></i></a></td>
-              </tr>
-              {% endfor %}
-            </tbody>
-          </table>
-        </div>
-
-
-        <div style="display:none; padding-right:20px; padding-left:20px;" id="tableConfirmed_Div">
-            <div style="display: flex;">
-              <h1 style="align-self:center;">Lista los invitados confirmados</h1>
-            </div>
-
-          <table class="table table-bordered" style="background-color: #ffffff">
-            <thead>
-              <tr>
-                <th scope="col">ID</th>
-                <th scope="col">Nombre</th>
-                <th scope="col">Pases</th>
-                <th scope="col">Invitados</th>
-                <th scope="col">Fecha de RSVP</th>
-              </tr>
-            </thead>
-            <tbody>
-              {% for confirm in confirms %}
-              <tr>
-                <th scope="row">{{ confirm.id }}</th>
-                <td scope="row">{{ confirm.name }}</td>
-                <td scope="row">{{ confirm.guests }}</td>
-                <td scope="row">{{ confirm.guests_names }}</td>
-                <td scope="row">{{ confirm.date_RSVP.strftime('%d/%B %H:%M:%S') }}</td>
-              </tr>
-              {% endfor %}
-            </tbody>
-          </table>
-        </div>
-
-
-        <div style="display:none; padding-right:20px; padding-left:20px;" id="tablePending_Div">
-            <div style="display: flex;">
-              <h1 style="align-self:center;">Lista los invitados pendientes por confirmar</h1>
-            </div>
-
-          <table class="table table-bordered" style="background-color: #ffffff">
-            <thead>
-              <tr>
-                <th scope="col">ID</th>
-                <th scope="col">Nombre</th>
-                <th scope="col">Email</th>
-                <th scope="col">Teléfono</th>
-                <th scope="col">Pases</th>
-                <th scope="col">Invitados</th>
-              </tr>
-            </thead>
-            <tbody>
-              {% for pending in pendings %}
-              <tr>
-                <th scope="row">{{ pending.id }}</th>
-                <td scope="row">{{ pending.name }}</td>
-                <td scope="row">{{ pending.email }}</td>
-                <td scope="row">{{ pending.phone_number }}</td>
-                <td scope="row">{{ pending.guests }}</td>
-                <td scope="row">{{ pending.guests_names }}</td>
-              </tr>
-              {% endfor %}
-            </tbody>
-          </table>
-          <button href="#" id="reminder_button" class="btn-register" style="margin:30px;" data-state="inactive">
-            <span>
-              <i class="fa fa-paper-plane-o m-r-6" aria-hidden="true"></i>
-              Envíar recordatorios
-            </span>
-          </button>
-
-        </div>
-
-
     </div>
+  </div>
+
+  <div style="display:none; padding-right:20px; padding-left:20px; margin-left:auto; margin-right:auto" id="table_Div">
+    <div style="display: flex;">
+      <h1 style="align-self:center;">Lista de todos los invitados</h1>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <table class="table table-bordered" style="background-color: #ffffff">
+      <thead>
+        <tr>
+          <th scope="col" style="font-weight: bold;">ID</th>
+          <th scope="col" style="font-weight: bold;">Nombre</th>
+          <th scope="col" style="font-weight: bold;">Email</th>
+          <th scope="col" style="font-weight: bold;">Activo</th>
+          <th scope="col" style="font-weight: bold;">Teléfono</th>
+          <th scope="col" style="font-weight: bold;">Pases</th>
+          <th scope="col" style="font-weight: bold;">Invitados</th>
+          <th scope="col" style="font-weight: bold;">¿Confirmó?</th>
+          <th scope="col" style="font-weight: bold;">Fecha de RSVP</th>
+          <th scope="col" colspan="2" style="font-weight: bold;">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for user in users %}
+        <tr>
+          <th scope="row">{{ user.id }}</th>
+          <td>{{ user.name }}</td>
+          <td>{{ user.email }}</td>
+          {% if user.password_hash %}
+          <td>Sí</td>
+          {% else %}
+          <td>No</td>
+          {% endif %}
+          <td>{{ user.phone_number }}</td>
+          <td>{{ user.guests }}</td>
+          <td>{{ user.guests_names }}</td>
+          <td>{{ user.is_RSVP }}</td>
+          {% if user.date_RSVP %}
+          <td>{{ user.date_RSVP.strftime('%d/%B %H:%M:%S') }}</td>
+          {% else %}
+          <td>N/A</td>
+          {% endif %}
+
+          <td><a href="{{ url_for('users.update_user', user_id=user.id) }}" class="btn btn-primary"><i class="fa fa-pencil-square-o"></i></a></td>
+          <td><a href="{{ url_for('users.delete_user', user_id=user.id) }}" class="btn btn-danger open-deleteGuestDialog" data-toggle='modal' data-target="#del_modal"><i class="fa fa-trash-o"></i></a></td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+
+  <div style="display:none; padding-right:20px; padding-left:20px; margin-left:auto; margin-right:auto" id="tableConfirmed_Div">
+    <div style="display: flex;">
+      <h1 style="align-self:center;">Lista los invitados confirmados</h1>
+    </div>
+
+    <table class="table table-bordered" style="background-color: #ffffff">
+      <thead>
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">Nombre</th>
+          <th scope="col">Pases</th>
+          <th scope="col">Invitados</th>
+          <th scope="col">Fecha de RSVP</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for confirm in confirms %}
+        <tr>
+          <th scope="row">{{ confirm.id }}</th>
+          <td>{{ confirm.name }}</td>
+          <td>{{ confirm.guests }}</td>
+          <td>{{ confirm.guests_names }}</td>
+          <td>{{ confirm.date_RSVP.strftime('%d/%B %H:%M:%S') }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+
+  <div style="display:none; padding-right:20px; padding-left:20px; margin-left:auto; margin-right:auto" id="tablePending_Div">
+    <div style="display: flex;">
+      <h1 style="align-self:center;">Lista los invitados pendientes por confirmar</h1>
+    </div>
+
+    <table class="table table-bordered" style="background-color: #ffffff">
+      <thead >
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">Nombre</th>
+          <th scope="col">Email</th>
+          <th scope="col">Teléfono</th>
+          <th scope="col">Pases</th>
+          <th scope="col">Invitados</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for pending in pendings %}
+        <tr>
+          <th scope="row">{{ pending.id }}</th>
+          <td>{{ pending.name }}</td>
+          <td>{{ pending.email }}</td>
+          <td>{{ pending.phone_number }}</td>
+          <td>{{ pending.guests }}</td>
+          <td>{{ pending.guests_names }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <button href="#" id="reminder_button" class="btn-register" style="margin:30px;" data-state="inactive">
+        <span>
+          <i class="fa fa-paper-plane-o m-r-6" aria-hidden="true"></i>
+          Envíar recordatorios
+        </span>
+      </button>
+
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
 </body>
+
 </html>
