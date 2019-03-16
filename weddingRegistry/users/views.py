@@ -18,8 +18,10 @@ users = Blueprint('users',__name__)
 def admin():
     if current_user.is_authenticated and current_user.email in os.environ.get('ADMINS'):
         users = User.query.order_by(User.id.asc()).all()
+        confirmed_users = User.query.filter_by(is_RSVP=1).order_by(User.id.asc()).all()
+        pending_users = User.query.filter_by(is_RSVP=0).order_by(User.id.asc()).all()
 
-        return render_template('dashboard.html', users=users, name=current_user.name)
+        return render_template('dashboard.html', users=users, name=current_user.name, pendings=pending_users, confirms=confirmed_users)
     else:
         return redirect(url_for('core.not_auth'))
 
@@ -141,7 +143,6 @@ def background_process():
         <br>
         <p>¡Gracias y nos vemos el 17 de noviembre!</p>
         """
-        print(f"user.email is {user.email}")
         send_email(user.email, "Contraseña para Boda Angie & Marco", mail_body)
 
         db.session.commit()
@@ -151,3 +152,24 @@ def background_process():
         return jsonify(result='repeated')
     else:
         return jsonify(result='not-found')
+
+@users.route('/reminders-background', methods=['POST'])
+@login_required
+def reminders():
+    if current_user.is_authenticated and current_user.email in os.environ.get('ADMINS'):
+        pending_users = User.query.filter_by(is_RSVP=0).order_by(User.id.asc()).all()
+
+        mail_sent = 0
+        for user in pending_users:
+            mail_body = """
+            <p>¡Estás invitado a Nuestra Boda Angie & Marco!</p>
+            <p>Por favor confirma tu presencia antes del 31 de octubre</p>
+            <p>Si ya tienes tu contraseña, <a href="http://127.0.0.1:5000/">navega hacia el home</a> para inciar sesión y completar el registro</p>
+            <p>Si aún no cuentras con una contraseña, <a href="http://127.0.0.1:5000/register">solicítala aqui</a></p>
+            <br>
+            <p>¡Gracias y nos vemos el 17 de noviembre!</p>
+            """
+            send_email(user.email, "Contraseña para Boda Angie & Marco", mail_body)
+            mail_sent += 1
+
+        return jsonify(total_mails=True)

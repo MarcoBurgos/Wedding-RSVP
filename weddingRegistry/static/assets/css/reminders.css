@@ -1,0 +1,169 @@
+/*-----REGISTER ANIMATION------*/
+
+@-webkit-keyframes spin {
+  from {
+    -webkit-transform: translate(-50%, -50%) rotate(0deg);
+            transform: translate(-50%, -50%) rotate(0deg);
+  }
+  to {
+    -webkit-transform: translate(-50%, -50%) rotate(360deg);
+            transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+@keyframes spin {
+  from {
+    -webkit-transform: translate(-50%, -50%) rotate(0deg);
+            transform: translate(-50%, -50%) rotate(0deg);
+  }
+  to {
+    -webkit-transform: translate(-50%, -50%) rotate(360deg);
+            transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+@-webkit-keyframes shake {
+  from,
+  to {
+    -webkit-transform: translate3d(0, 0, 0);
+            transform: translate3d(0, 0, 0);
+  }
+  10%,
+  30%,
+  50%,
+  70%,
+  90% {
+    -webkit-transform: translate3d(-3px, 0, 0) scale(0.95);
+            transform: translate3d(-3px, 0, 0) scale(0.95);
+  }
+  20%,
+  40%,
+  60%,
+  80% {
+    -webkit-transform: translate3d(3px, 0, 0) scale(0.95);
+            transform: translate3d(3px, 0, 0) scale(0.95);
+  }
+}
+@keyframes shake {
+  from,
+  to {
+    -webkit-transform: translate3d(0, 0, 0);
+            transform: translate3d(0, 0, 0);
+  }
+  10%,
+  30%,
+  50%,
+  70%,
+  90% {
+    -webkit-transform: translate3d(-3px, 0, 0) scale(0.95);
+            transform: translate3d(-3px, 0, 0) scale(0.95);
+  }
+  20%,
+  40%,
+  60%,
+  80% {
+    -webkit-transform: translate3d(3px, 0, 0) scale(0.95);
+            transform: translate3d(3px, 0, 0) scale(0.95);
+  }
+}
+.btn-register {
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -moz-box;
+	display: -ms-flexbox;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 0 20px;
+	min-width: 150px;
+	height: 62px;
+	border-radius: 31px;
+	font-size: 16px;
+	color: #fff;
+	line-height: 1.2;
+	text-transform: uppercase;
+	position: relative;
+	z-index: 1;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  transition: background-color 0.25s ease, opacity 0.125s ease, box-shadow 1s ease;
+  overflow: hidden;
+}
+.btn-register:hover {
+	background-color: #403866;
+	width: calc(170px);
+  box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.2);
+}
+.btn-register:before, .btn-register:after {
+  position: absolute;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  transition: all 0.125s ease-out;
+  display: block;
+  left: 50%;
+}
+.btn-register:before {
+	display: block;
+	  position: absolute;
+	  z-index: -1;
+	  width: 100%;
+	  height: 100%;
+	  top: 0;
+	  left: 50%;
+		border-radius: 31px;
+	  background-color: #df7366;
+	  pointer-events: none;
+
+  -webkit-animation: spin 0.75s ease-in-out infinite;
+          animation: spin 0.75s ease-in-out infinite;
+}
+.btn-register:after {
+  content: "";
+  top: 125%;
+}
+.btn-register span {
+  transition: opacity 0.25s ease-out;
+}
+.btn-register:not([data-state="inactive"]) {
+  pointer-events: none;
+}
+.btn-register[data-state="sending"] {
+  opacity: 0.75;
+}
+.btn-register[data-state="sending"]:before {
+  top: 50%;
+}
+.btn-register[data-state="sending"] span {
+  opacity: 0;
+}
+.btn-register[data-state="success"] {
+	color: #3c763d;
+	background-color: #dff0d8;
+	border-color: #d6e9c6;
+}
+.btn-register[data-state="success"]:before {
+  opacity: 0;
+}
+.btn-register[data-state="success"]:after {
+  content: "✓";
+  top: 50%;
+}
+.btn-register[data-state="success"] span {
+  opacity: 0;
+}
+.btn-register[data-state="fail"] {
+  -webkit-animation: shake .75s ease-out 1;
+          animation: shake .75s ease-out 1;
+				color: #a94442;
+		    background-color: #f2dede;
+		    border-color: #ebccd1
+}
+.btn-register[data-state="fail"]:before {
+  opacity: 0;
+}
+.btn-register[data-state="fail"]:after {
+  content: "×";
+  top: 47%;
+}
+.btn-register[data-state="fail"] span {
+  opacity: 0;
+}
