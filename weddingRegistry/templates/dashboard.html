@@ -59,55 +59,9 @@
       document.getElementById("div_flashAlert").remove()
     }
   </script>
-  <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/main.css')}}" />
 
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-  <script type=text/javascript>
-    $(document).ready(function() {
-      $("#reminder_button").on("click", function(e) {
-        let req_success = false;
-        $("#reminder_button").attr("data-state", "sending");
-        var url = "{{ url_for('users.reminders') }}";
-        $.ajax({
-          type: "POST",
-          url: url,
-          data: {},
-          success: function(data) {
-            console.log(data.total_mails)
-            if (data.total_mails == true) {
-              let req_success = true;
-              console.log("success")
-              //  $("#flash-send").show()
-              //  $("#flash-repeated").hide()
-            } else {
-              let req_success = false;
-              console.log("fail")
-              //  $("#flash-notfound").show()
 
-            }
-            if (req_success) {
-              setTimeout(function() {
-                // if successful
-                $("#reminder_button").attr("data-state", "success");
-                setTimeout(function() {
-                  $("#reminder_button").attr("data-state", "inactive");
-                }, 2500);
-              }, 1);
-            } else {
-              setTimeout(function() {
-                // if successful
-                $("#reminder_button").attr("data-state", "fail");
-                setTimeout(function() {
-                  $("#reminder_button").attr("data-state", "inactive");
-                }, 2500);
-              }, 1);
-            }
-          }
-        });
-        e.preventDefault();
-      });
-    });
-  </script>
 
   <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/font-awesome.min.css')}}">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -134,7 +88,7 @@
             Nuestra boda
           </div>
           <div class="card-body">
-            <h5 class="card-title">Panel de administración</h5>
+            <h5 class="card-title">Panel de Control</h5>
             <p class="card-text">Hola, {{ name }}! Bienvenido/a a tu panel de control, ¿qué deseas hacer hoy?</p>
             <a href="#" class="btn btn-primary" style="margin-right: 20px; margin-bottom: 20px" onclick="toggleAllUsers(this)">Ver todos los invitados</a>
             <a href="#" class="btn btn-dark" style="margin-right: 20px; margin-bottom: 20px" onclick="toggleConfirm(this)">Ver confirmados</a>
@@ -155,7 +109,7 @@
     </div>
 
     <table class="table table-bordered" style="background-color: #ffffff">
-      <thead>
+      <thead class="thead-dark">
         <tr>
           <th scope="col" style="font-weight: bold;">ID</th>
           <th scope="col" style="font-weight: bold;">Nombre</th>
@@ -201,17 +155,17 @@
 
   <div style="display:none; padding-right:20px; padding-left:20px; margin-left:auto; margin-right:auto" id="tableConfirmed_Div">
     <div style="display: flex;">
-      <h1 style="align-self:center;">Lista los invitados confirmados</h1>
+      <h1 style="align-self:center;">Lista de los invitados confirmados</h1>
     </div>
 
     <table class="table table-bordered" style="background-color: #ffffff">
-      <thead>
+      <thead class="thead-dark">
         <tr>
-          <th scope="col">ID</th>
-          <th scope="col">Nombre</th>
-          <th scope="col">Pases</th>
-          <th scope="col">Invitados</th>
-          <th scope="col">Fecha de RSVP</th>
+          <th scope="col" style="font-weight: bold;">ID</th>
+          <th scope="col" style="font-weight: bold;">Nombre</th>
+          <th scope="col" style="font-weight: bold;">Pases</th>
+          <th scope="col" style="font-weight: bold;">Invitados</th>
+          <th scope="col" style="font-weight: bold;">Fecha de RSVP</th>
         </tr>
       </thead>
       <tbody>
@@ -231,18 +185,18 @@
 
   <div style="display:none; padding-right:20px; padding-left:20px; margin-left:auto; margin-right:auto" id="tablePending_Div">
     <div style="display: flex;">
-      <h1 style="align-self:center;">Lista los invitados pendientes por confirmar</h1>
+      <h1 style="align-self:center;">Lista de los invitados pendientes</h1>
     </div>
 
     <table class="table table-bordered" style="background-color: #ffffff">
-      <thead >
+      <thead class="thead-dark">
         <tr>
-          <th scope="col">ID</th>
-          <th scope="col">Nombre</th>
-          <th scope="col">Email</th>
-          <th scope="col">Teléfono</th>
-          <th scope="col">Pases</th>
-          <th scope="col">Invitados</th>
+          <th scope="col" style="font-weight: bold;">ID</th>
+          <th scope="col" style="font-weight: bold;">Nombre</th>
+          <th scope="col" style="font-weight: bold;">Email</th>
+          <th scope="col" style="font-weight: bold;">Teléfono</th>
+          <th scope="col" style="font-weight: bold;">Pases</th>
+          <th scope="col" style="font-weight: bold;">Invitados</th>
         </tr>
       </thead>
       <tbody>
@@ -258,13 +212,7 @@
         {% endfor %}
       </tbody>
     </table>
-    <button href="#" id="reminder_button" class="btn-register" style="margin:30px;" data-state="inactive">
-        <span>
-          <i class="fa fa-paper-plane-o m-r-6" aria-hidden="true"></i>
-          Envíar recordatorios
-        </span>
-      </button>
-
+    <a href="{{ url_for('users.reminders') }}"><button type="button" class="btn btn-outline-primary btn-lg btn-block" style="margin-bottom:50px;">Ir a mandar recordatorios</button></a>
   </div>
 
   <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>

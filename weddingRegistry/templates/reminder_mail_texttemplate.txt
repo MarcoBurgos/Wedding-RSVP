@@ -1,0 +1,5 @@
+¡Estás invitado a Nuestra Boda Angie & Marco!
+Por favor confirma tu presencia antes del 31 de octubre
+Si ya tienes tu contraseña, navega hacia el home http://127.0.0.1:5000/ para iniciar sesión y completar el registro
+Si aún no cuentras con una contraseña, http://127.0.0.1:5000/register
+¡Gracias y nos vemos el 17 de noviembre!

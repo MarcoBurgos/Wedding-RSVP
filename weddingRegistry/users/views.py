@@ -41,7 +41,6 @@ def add_guest():
                        guests_names = form.guests_names.data,
                        is_RSVP = 0,
                        date_RSVP = None)
-#''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(8))
         db.session.add(user)
         db.session.commit()
         flash(f"Invitado registrado {user.email}")
@@ -135,15 +134,7 @@ def background_process():
         pass_string = ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(8))
         user.password_hash = generate_password_hash(pass_string)
 
-        mail_body = f"""
-        <p>¡Bienvenido! Gracias por registrarte, por favor usa esta contraseña para iniciar sesión y confirmar tu asistencia a la boda:</p>
-        <p>Tu contraseña es <strong> {pass_string} </strong></p>
-        <p>Sigue esta liga y completa tu confirmación</p>
-        <p><a href="http://127.0.0.1:5000/">Boda Angie & Marco </a></p>
-        <br>
-        <p>¡Gracias y nos vemos el 17 de noviembre!</p>
-        """
-        send_email(user.email, "Contraseña para Boda Angie & Marco", mail_body)
+        send_email(user.email, "Contraseña para Boda Angie & Marco", render_template('password_register_template.html', pass_string=pass_string), render_template('password_register_texttemplate.txt', pass_string=pass_string) )
 
         db.session.commit()
         return jsonify(result='success')
@@ -153,23 +144,27 @@ def background_process():
     else:
         return jsonify(result='not-found')
 
-@users.route('/reminders-background', methods=['POST'])
+
+@users.route('/recordatorios', methods=['GET','POST'])
 @login_required
 def reminders():
     if current_user.is_authenticated and current_user.email in os.environ.get('ADMINS'):
         pending_users = User.query.filter_by(is_RSVP=0).order_by(User.id.asc()).all()
 
+        return render_template('send_reminders.html', pendings=pending_users, amount_pendings=len(pending_users))
+    else:
+        return redirect(url_for('core.not_auth'))
+
+
+@users.route('/reminders-background', methods=['POST'])
+@login_required
+def reminders_bgprocess():
+    if current_user.is_authenticated and current_user.email in os.environ.get('ADMINS'):
+        pending_users = User.query.filter_by(is_RSVP=0).order_by(User.id.asc()).all()
+
         mail_sent = 0
         for user in pending_users:
-            mail_body = """
-            <p>¡Estás invitado a Nuestra Boda Angie & Marco!</p>
-            <p>Por favor confirma tu presencia antes del 31 de octubre</p>
-            <p>Si ya tienes tu contraseña, <a href="http://127.0.0.1:5000/">navega hacia el home</a> para inciar sesión y completar el registro</p>
-            <p>Si aún no cuentras con una contraseña, <a href="http://127.0.0.1:5000/register">solicítala aqui</a></p>
-            <br>
-            <p>¡Gracias y nos vemos el 17 de noviembre!</p>
-            """
-            send_email(user.email, "Contraseña para Boda Angie & Marco", mail_body)
+            send_email(user.email, "Recordatorio confirmación para Boda Angie & Marco", render_template('template_example.html'))
             mail_sent += 1
 
         return jsonify(total_mails=True)

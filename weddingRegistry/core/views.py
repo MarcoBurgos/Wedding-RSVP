@@ -4,6 +4,7 @@ from weddingRegistry.models import User
 from weddingRegistry import db
 from weddingRegistry.core.forms import UserSignUpForm
 import datetime
+import os
 
 core = Blueprint('core',__name__)
 
@@ -87,8 +88,9 @@ def confirm():
 @login_required
 def user_confirmed():
     name = current_user.name
+    admins = os.environ.get('ADMINS')
 
-    return render_template('confirm.html', name=name)
+    return render_template('confirm.html', name=name, admins=admins)
 
 
 @core.route('/user_confirmed/quinta_san_carlos', methods=['GET'])
