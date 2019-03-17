@@ -6,6 +6,8 @@
 	<title>Nuestra Boda A &amp M</title>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	<link href="https://fonts.googleapis.com/css?family=Playball%7CBitter" rel="stylesheet">
+	<link rel="stylesheet" href="{{ url_for('static', filename='assets/css/font-icon.css')}}" />
 	<link rel="stylesheet" href="{{ url_for('static', filename='assets/css/main.css')}}" />
 	<link rel="stylesheet" href="{{ url_for('static', filename='assets/css/counter.css')}}" />
 	<noscript><link rel="stylesheet" href="{{ url_for('static', filename='assets/css/noscript.css')}}" /></noscript>
@@ -21,9 +23,10 @@
 			<!-- Inner -->
 			<div class="inner">
 				<header>
-					<h1><a href="{{ url_for('core.index')}}" id="logo">Nuestra boda</a></h1>
+					<h1 style="font-family: 'Playball', cursive;"><a href="{{ url_for('core.index')}}" id="logo">Nuestra Boda</a></h1>
 					<hr />
-					<p>Angie &amp Marco </p>
+					<h2 style="font-family: 'Playball', cursive; color:white;">Angie <i style="transform: translateY(10px);font-size: .8em; color: #E45F74;"class="icon icon-heart"></i> Marco </h2>
+					<h4 style="font-family: 'Playball', cursive; color:white;"> 17 de noviembre 2019</h4>
 				</header>
 				<footer>
 					<a href="#banner" class="button circled scrolly">Iniciar</a>
