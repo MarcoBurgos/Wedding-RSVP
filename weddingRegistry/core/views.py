@@ -23,7 +23,7 @@ def index():
             password = form.password.data
 
             user_submited = User.query.filter_by(email=email).first()
-            print(str(user_submited))
+
 
             if user_submited is None:
                 flash(f"Correo no registrado")

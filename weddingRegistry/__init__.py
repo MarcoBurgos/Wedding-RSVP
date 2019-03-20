@@ -6,32 +6,26 @@ from flask_migrate import Migrate
 from flask_dance.contrib.google import make_google_blueprint, google
 from flask_login import LoginManager
 from flask_mail import Mail
+from config import Config
 
 
 load_dotenv()
 app = Flask(__name__)
 
-app.config.update(
-	FLASK_ENV=os.environ.get('FLASK_ENV'),
-	DEBUG=os.environ.get('DEBUG'),
-	SECRET_KEY=os.environ.get('SECRET_KEY'),
-	#EMAIL SETTINGS
-	MAIL_SERVER=os.environ.get('MAIL_SERVER'),
-	MAIL_PORT=os.environ.get('MAIL_PORT'),
-	MAIL_USE_SSL=os.environ.get('MAIL_USE_SSL'),
-	MAIL_USERNAME=os.environ.get('MAIL_USERNAME'),
-	MAIL_PASSWORD=os.environ.get('MAIL_PASSWORD'),
-    MAIL_DEFAULT_SENDER=os.environ.get('MAIL_DEFAULT_SENDER')
-	)
+
+app.config.from_object(os.environ.get('APP_SETTINGS'))
+
+
+
 mail = Mail(app)
 
 
 ################################################
 #################Database setup#################
 ################################################
-basedir = os.path.abspath(os.path.dirname(__file__ ))
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'users.db')
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+
+
 
 db = SQLAlchemy(app)
 Migrate(app, db)
