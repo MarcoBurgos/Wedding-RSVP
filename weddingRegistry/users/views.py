@@ -134,7 +134,7 @@ def background_process():
         pass_string = ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(8))
         user.password_hash = generate_password_hash(pass_string)
 
-        send_email(user.email, "Contraseña para Boda Angie & Marco", render_template('password_register_template.html', pass_string=pass_string), render_template('password_register_texttemplate.txt', pass_string=pass_string) )
+        send_email(user.email, "Contraseña para Boda Angie & Marco", render_template('password_register_template.html', pass_string=pass_string) )
 
         db.session.commit()
         return jsonify(result='success')

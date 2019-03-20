@@ -203,3 +203,19 @@ body {
 @keyframes love {
   0%{top:110%}
 }
+
+
+@media only screen and (max-width:735px) {
+
+  .bloc-time {
+    width: 100%;
+    margin:20px;
+    display:flex;
+  }
+
+  .count-title {
+    display: flex;
+    margin:20px;
+    align-self: center;
+  }
+}
