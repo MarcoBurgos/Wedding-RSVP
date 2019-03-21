@@ -35,7 +35,6 @@ class DevelopmentConfig(Config):
     DEBUG = True
     SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'users.db')
     FLASK_ENV = 'development'
-    print(f"inside {FLASK_ENV}")
 
 
 class TestingConfig(Config):
