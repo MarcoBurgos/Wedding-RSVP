@@ -18,8 +18,8 @@ users = Blueprint('users',__name__)
 def admin():
     if current_user.is_authenticated and current_user.email in os.environ.get('ADMINS'):
         users = User.query.order_by(User.id.asc()).all()
-        confirmed_users = User.query.filter_by(is_RSVP=1).order_by(User.id.asc()).all()
-        pending_users = User.query.filter_by(is_RSVP=0).order_by(User.id.asc()).all()
+        confirmed_users = User.query.filter_by(is_RSVP=True).order_by(User.id.asc()).all()
+        pending_users = User.query.filter_by(is_RSVP=False).order_by(User.id.asc()).all()
 
         return render_template('dashboard.html', users=users, name=current_user.name, pendings=pending_users, confirms=confirmed_users)
     else:
