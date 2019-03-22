@@ -3357,6 +3357,8 @@ input, select, textarea {
 	padding: 15px;
   border: 1px solid transparent;
   border-radius: 4px;
+	margin-left: auto;
+	margin-right: auto;
 }
 
 .flash-message p {
