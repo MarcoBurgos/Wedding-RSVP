@@ -24,18 +24,28 @@
 			                },
                success: function (data) {
                    if(data.result == 'success') {
-										 let req_success = true;
+										 req_success = true;
                      $("#flash-send").show()
                      $("#flash-repeated").hide()
                      $("#flash-notfound").hide()
+										 $("#flash-server-error").hide()
                    } else if (data.result == 'repeated') {
-                     let req_success = false;
+                     req_success = false;
                      $("#flash-repeated").show()
                      $("#flash-send").hide()
                      $("#flash-notfound").hide()
+										 $("#flash-server-error").hide()
                    } else if (data.result == 'not-found') {
-                     let req_success = false;
+                     req_success = false;
                      $("#flash-notfound").show()
+                     $("#flash-send").hide()
+                     $("#flash-repeated").hide()
+										 $("#flash-server-error").hide()
+                   }
+									 else if (data.result == 'error') {
+                     req_success = false;
+										 $("#flash-server-error").show()
+                     $("#flash-notfound").hide()
                      $("#flash-send").hide()
                      $("#flash-repeated").hide()
                    }
@@ -60,7 +70,6 @@
            });
            e.preventDefault();
        });
-       // Inject CSRF token into our AJAX request.
        $.ajaxSetup({
            beforeSend: function(xhr, settings) {
                if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type) && !this.crossDomain) {
@@ -131,6 +140,18 @@
 								</div>
 
                 <div id="flash-send" class="flash-container flash-success" style="display: none;">
+									<div class="flash-message">
+										<p>Enviamos un correo al mail que ingresaste con la contraseña. <br>
+											Si no lo recibiste, checa la carpeta de spam o <br>
+											contacta a marko.burgos@gmail.com</p>
+									</div>
+									<div class="flash-button">
+										<button type="button" onclick="deleteFlash(this)" href="#">Cerrar</button>
+									</div>
+								</div>
+
+
+								<div id="flash-server-error" class="flash-container flash-success" style="display: none;">
 									<div class="flash-message">
 										<p>Enviamos un correo al mail que ingresaste con la contraseña. <br>
 											Si no lo recibiste, checa la carpeta de spam o <br>
