@@ -2,6 +2,7 @@ from flask import render_template,request,Blueprint, redirect, url_for, flash
 from flask_login import login_user, login_required, logout_user, current_user
 from weddingRegistry.models import User
 from weddingRegistry import db
+from weddingRegistry.fetch_playlist import get_tracks
 from weddingRegistry.core.forms import UserSignUpForm
 import datetime
 import os
@@ -119,6 +120,15 @@ def flights():
 
     return render_template('flights.html')
 
+
+@core.route('/user_confirmed/playlist', methods=['GET'])
+@login_required
+def playlist():
+
+    tracks = get_tracks()
+
+    return render_template('music.html', tracks=tracks)
+
 @core.route('/user_confirmed/preguntas-frecuentes', methods=['GET'])
 @login_required
 def faq():
@@ -130,14 +140,6 @@ def faq():
 def others():
 
     return render_template('others.html')
-
-
-@core.route('/user_confirmed/counter', methods=['GET'])
-@login_required
-def counter():
-
-    return render_template('counter.html')
-
 
 
 @core.route("/logout", methods=['GET'])

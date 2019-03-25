@@ -8,30 +8,49 @@
 							<div class="col-8 col-12-mobile" id="content">
 								<article id="main">
 									<header>
-										<h2><a href="#">Mesa de regalos</a></h2>
+										<h2><a href="#">¡Que la música no pare!</a></h2>
 										<p>
-											El regalo perfecto, a un click de distancia
+											Ayúdanos a armar el mejor playlist para la fiesta
 										</p>
 									</header>
-									<a href="#" class="image featured"><img src="{{ url_for('static', filename='images/gift.jpg')}}" alt="gift" /></a>
-									<p>
-										Después de la boda, iniciaremos juntos nuesta vida juntos en Reston, Virginia (¡visítenos!), por lo cual
-                    buscamos la mejor opción para registrar una mesa de regalos que le permitiera a nuestros invitados elegir
-                    entre una gran cantidad de opciones y que la entrega no fuera un obstáculo; por ello elegimos Amazon.
-									</p>
+									<a href="#" class="image featured"><img src="{{ url_for('static', filename='images/DJ.jpg')}}" alt="Música para la fiesta" /></a>
                   <p>
-                    Visita nuestra mesa de regalo y usa tu cuenta de Amazon para elegir uno de los regalos que hemos seleccionado.
-                    Por el envío no te preocupes, Amazon lo entregará en nuestra nueva casa, en Virginia.
+                    No hay fiesta sin música y por eso queremos que nuestros invitados nos ayuden a crear el playlist perfecto.
                   </p>
                   <p>
-                    Si no tienes cuenta en Amazon, es muy fácil abrir, una, sigue este <a href="https://www.amazon.com.mx/ap/register?_encoding=UTF8&openid.assoc_handle=mxflex&openid.claimed_id=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0%2Fidentifier_select&openid.identity=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0%2Fidentifier_select&openid.mode=checkid_setup&openid.ns=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0&openid.ns.pape=http%3A%2F%2Fspecs.openid.net%2Fextensions%2Fpape%2F1.0&openid.pape.max_auth_age=0&openid.return_to=https%3A%2F%2Fwww.amazon.com.mx%2Fgp%2Fyourstore%2Fhome%3Fie%3DUTF8%26ref_%3Dnav_newcust">link</a> y en menos de 5 minutos puedes configurar la tuya.
+                    Para eso hemos creado un playlist en Spotify y si tienes una cuenta, puedes ayudarnos a agregar canciones a la lista y
+                    contribuir al ambiente de la fiesta; lo que tienes que hacer es dar click en el botón para iniciar sesión en tu cuenta
+                    (si ya has usado Spotify Web en tu navegador antes automáticamente habrás iniciado sesión) y después tienes que autorizar
+                    a este web app para que pueda ver tu perfil (tu id de usuario) y darle permiso para agregar canciones a playlists públicas
+                    bajo tu usuario y ¡listo! Agrega todas las canciones que quieras, introduciendo el nombre del artista y la canción y al enviar
+                    la forma, el sistema validará esos datos y agregará el track a el playlist.
                   </p>
-                  <p>
-                    De antemano, ¡te agradecemos tus muestras de aprecio!
-                  </p>
-                  <br>
-                  <a href="https://www.amazon.com/wedding/share/AngieyMarco2019" class="button">Ir a Mesa de Regalos en Amazon</a>
+                  <h2>Canciones actualmente <br>
+                    en el playlist</h2>
+                    <br>
+                    
+                  {% for track in tracks %}
+                    <div class="panel">
+                      <div class="panel-element">
+                        <div class="element-content">
+                          <div class="content-post">
+                            <div class="post-avatar">
+                              <img src="{{ track.album_img }}" alt="">
+                            </div>
+                            <div class="post-content">
+                              <p class="post-title">{{ track.song_name }} - {{ track.artist_name }}</p>
 
+                              <div>
+                                <audio controls>
+                                  <source src="{{ track.track_preview }}" type="audio/mpeg">
+                                  </audio>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  {% endfor %}
 
 								</article>
 							</div>
@@ -84,22 +103,22 @@
 												Explora otras ofertas de alojamiento en el pueblo.
 											</p>
 										</div>
-										<div class="col-4">
+                    <div class="col-4">
+											<a href="{{ url_for('core.registry')}}" class="image fit"><img src="{{ url_for('static', filename='images/gift.jpg')}}" alt="" /></a>
+										</div>
+										<div class="col-8">
+											<h4>Mesa de regalos</h4>
+											<p>
+												Explora las opciones en la mesa que hemos establecido en Amazon.
+											</p>
+										</div>
+                    <div class="col-4">
 											<a href="{{ url_for('core.flights')}}" class="image fit"><img src="{{ url_for('static', filename='images/plane.jpg')}}" alt="" /></a>
 										</div>
 										<div class="col-8">
 											<h4>¿Vuelas a la boda?</h4>
 											<p>
 												Revisa estas herramientas para encontrar el mejor vuelo.
-											</p>
-										</div>
-										<div class="col-4">
-											<a href="{{ url_for('core.playlist')}}" class="image fit"><img src="{{ url_for('static', filename='images/DJ.jpg')}}" alt="" /></a>
-										</div>
-										<div class="col-8">
-											<h4>¡Que la música no pare!</h4>
-											<p>
-												Sugiérenos canciones para que suenen en la fiesta.
 											</p>
 										</div>
 										<div class="col-4">

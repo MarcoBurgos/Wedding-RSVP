@@ -65,9 +65,9 @@
       </article>
 
       <article>
-        <a href="#" class="image featured"><img src="{{ url_for('static', filename='images/DJ.jpg')}}" style="max-height: 206px;"  alt="Música para la fiesta" /></a>
+        <a href="{{ url_for('core.playlist')}}" class="image featured"><img src="{{ url_for('static', filename='images/DJ.jpg')}}" style="max-height: 206px;"  alt="Música para la fiesta" /></a>
         <header>
-          <h3><a href="#">¡Que la música no pare!</a></h3>
+          <h3><a href="{{ url_for('core.playlist')}}">¡Que la música no pare!</a></h3>
         </header>
         <p>No hay fiesta sin música, ¡ayúdanos a armar un playlist prendido para pasárselo al DJ!</p>
       </article>
