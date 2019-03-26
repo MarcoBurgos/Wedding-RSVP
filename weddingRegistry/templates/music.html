@@ -13,23 +13,31 @@
 											Ayúdanos a armar el mejor playlist para la fiesta
 										</p>
 									</header>
-									<a href="#" class="image featured"><img src="{{ url_for('static', filename='images/DJ.jpg')}}" alt="Música para la fiesta" /></a>
+									<a href="#" class="image featured"><img src="{{ url_for('static', filename='images/music.jpg')}}" alt="Música para la fiesta" /></a>
                   <p>
                     No hay fiesta sin música y por eso queremos que nuestros invitados nos ayuden a crear el playlist perfecto.
                   </p>
                   <p>
-                    Para eso hemos creado un playlist en Spotify y si tienes una cuenta, puedes ayudarnos a agregar canciones a la lista y
-                    contribuir al ambiente de la fiesta; lo que tienes que hacer es dar click en el botón para iniciar sesión en tu cuenta
-                    (si ya has usado Spotify Web en tu navegador antes automáticamente habrás iniciado sesión) y después tienes que autorizar
-                    a este web app para que pueda ver tu perfil (tu id de usuario) y darle permiso para agregar canciones a playlists públicas
-                    bajo tu usuario y ¡listo! Agrega todas las canciones que quieras, introduciendo el nombre del artista y la canción y al enviar
-                    la forma, el sistema validará esos datos y agregará el track a el playlist.
-                  </p>
+                    Para eso hemos creado un playlist en Spotify en el cual puedes ayudarnos a agregar canciones a la lista y
+                    contribuir al ambiente de la fiesta.
+									</p>
+									<p>
+										Para empezar tienes que contar con una cuenta de Spotify, si aún no tienes una, puedes abrir una gratis en este link y
+										crear tu perfil. Una vez que estés registado tienes dos opciones, seguir la lista e ir agregando canciones que escuches en el día a día
+										o conectar tu Spotify con esta webapp, el sistema te pedirá que inicies sesión en tu cuenta y después que autorices el uso de la plataforma en tu cuenta
+										y con ello podrás agregar tracks mediante la forma. ¡Tú eliges!
+									</p>
+
+									<a href="https://open.spotify.com/user/marcoburgos/playlist/0hDMbPox24ra5hgXwvCnGR?si=5_3oKPFUSmaStWzSSQjJbA" class="button">Abrir el playlist en Spotify</a>
+									<br>
+
                   <h2>Canciones actualmente <br>
                     en el playlist</h2>
                     <br>
-                    
-                  {% for track in tracks %}
+
+										<iframe src="https://open.spotify.com/embed/user/marcoburgos/playlist/0hDMbPox24ra5hgXwvCnGR" width="774" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+
+                  <!-- {% for track in tracks %}
                     <div class="panel">
                       <div class="panel-element">
                         <div class="element-content">
@@ -50,7 +58,7 @@
                         </div>
                       </div>
                     </div>
-                  {% endfor %}
+                  {% endfor %} -->
 
 								</article>
 							</div>
