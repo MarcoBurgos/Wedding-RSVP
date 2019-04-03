@@ -54,7 +54,7 @@ body {
   left: 0;
   right: 0;
   margin: auto;
-  font: normal 5.94em/107px "Lato";
+  font: normal 5.94em/107px sans-serif;
   font-weight: 700;
   color: #ef8376;
 }
@@ -241,7 +241,7 @@ body {
    font-stretch: normal;
    font-size: 2.94em;
    line-height: 60px;
-   font-family: 'Lato';
+   font-family: sans-serif;
   }
 
   .countdown .bloc-time {
@@ -250,7 +250,7 @@ body {
   }
 
   .countdown .count-title {
-    font: normal 0.74em "lato";
+    font: normal 0.74em sans-serif;
     margin-bottom: 0px;
     display:flex;
     margin-left: 10px;

@@ -1,4 +1,4 @@
-from flask import render_template,request,Blueprint, redirect, url_for, flash
+from flask import render_template,request,Blueprint, redirect, url_for, flash, abort
 from flask_login import login_user, login_required, logout_user, current_user
 from weddingRegistry.models import User
 from weddingRegistry import db
@@ -22,8 +22,10 @@ def index():
         if form.validate_on_submit():
             email = form.email.data
             password = form.password.data
-
-            user_submited = User.query.filter_by(email=email).first()
+            try:
+                user_submited = User.query.filter_by(email=email).first()
+            except Exception as e:
+                abort(500,e)
 
 
             if user_submited is None:
@@ -159,3 +161,8 @@ def login():
 def not_auth():
 
     return render_template('error_pages/403.html')
+
+@core.errorhandler(500)
+def internal_error(error):
+    print(error)
+    return render_template('error_pages/500.html')
