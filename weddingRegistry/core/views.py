@@ -51,7 +51,7 @@ def index():
 @core.route('/auth', methods=['GET'])
 @login_required
 def auth():
-    if current_user.is_RSVP == 1:
+    if current_user.is_RSVP == True:
         return redirect(url_for('core.user_confirmed'))
     else:
         form = UserSignUpForm()
@@ -75,10 +75,15 @@ def confirm():
     if request.method == "POST":
         guests = request.form.getlist("guests")
 
-        user = User.query.filter_by(email=current_user.email).first()
+        try:
+            user = User.query.filter_by(email=current_user.email).first()
+        except Exception as e:
+            abort(500,e)
+
+
         if user:
             user.guests_names = str(guests)
-            user.is_RSVP = 1
+            user.is_RSVP = True
             user.date_RSVP = datetime.datetime.now()
 
             db.session.commit()
@@ -164,5 +169,9 @@ def not_auth():
 
 @core.errorhandler(500)
 def internal_error(error):
-    print(error)
+    admin = os.environ.get('ADMINS')
+    admin = admin.split(",")
+    admin = admin[0][2:-1]
+    user = current_user.email
+    send_email(admin, "Error en la plataforma", render_template('template_error.html', error=error, user=user))
     return render_template('error_pages/500.html')

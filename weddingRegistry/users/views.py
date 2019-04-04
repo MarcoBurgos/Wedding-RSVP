@@ -17,9 +17,12 @@ users = Blueprint('users',__name__)
 @login_required
 def admin():
     if current_user.is_authenticated and current_user.email in os.environ.get('ADMINS'):
-        users = User.query.order_by(User.id.asc()).all()
-        confirmed_users = User.query.filter_by(is_RSVP=True).order_by(User.id.asc()).all()
-        pending_users = User.query.filter_by(is_RSVP=False).order_by(User.id.asc()).all()
+        try:
+            users = User.query.order_by(User.id.asc()).all()
+            confirmed_users = User.query.filter_by(is_RSVPi=True).order_by(User.id.asc()).all()
+            pending_users = User.query.filter(User.is_RSVP.isnot(True)).order_by(User.id.asc()).all()
+        except Exception as e:
+            abort(500,e)
 
         return render_template('dashboard.html', users=users, name=current_user.name, pendings=pending_users, confirms=confirmed_users)
     else:
@@ -39,7 +42,7 @@ def add_guest():
                        phone_number = form.phone_number.data,
                        guests = form.guests.data,
                        guests_names = form.guests_names.data,
-                       is_RSVP = 0,
+                       is_RSVP = False,
                        date_RSVP = None)
         db.session.add(user)
         db.session.commit()
@@ -127,8 +130,11 @@ def background_process():
 
     email = request.form['email']
 
+    try:
+        user = User.query.filter_by(email=form.email.data).first()
+    except Exception as e:
+        abort(500,e)
 
-    user = User.query.filter_by(email=form.email.data).first()
 
     if user and not user.password_hash:
         pass_string = ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(8))
@@ -152,7 +158,12 @@ def background_process():
 @login_required
 def reminders():
     if current_user.is_authenticated and current_user.email in os.environ.get('ADMINS'):
-        pending_users = User.query.filter_by(is_RSVP=0).order_by(User.id.asc()).all()
+        try:
+            pending_users = User.query.filter(User.is_RSVP.isnot(True)).order_by(User.id.asc()).all()
+        except Exception as e:
+            abort(500,e)
+
+        print(len(pending_users))
 
         return render_template('send_reminders.html', pendings=pending_users, amount_pendings=len(pending_users))
     else:
@@ -163,11 +174,27 @@ def reminders():
 @login_required
 def reminders_bgprocess():
     if current_user.is_authenticated and current_user.email in os.environ.get('ADMINS'):
-        pending_users = User.query.filter_by(is_RSVP=0).order_by(User.id.asc()).all()
+        try:
+            pending_users = User.query.filter(User.is_RSVP.isnot(True)).order_by(User.id.asc()).all()
+        except Exception as e:
+            abort(500,e)
 
-        mail_sent = 0
-        for user in pending_users:
-            send_email(user.email, "Recordatorio confirmación para Boda Angie & Marco", render_template('template_example.html'))
-            mail_sent += 1
 
-        return jsonify(total_mails=True)
+
+        try:
+            for user in pending_users:
+                send_email(user.email, "Recordatorio confirmación para Boda Angie & Marco", render_template('remainder_mail_template.html'))
+
+
+            return jsonify(total_mails=True)
+        except Exception as e:
+            return jsonify(total_mails=False)
+
+@users.errorhandler(500)
+def internal_error(error):
+    admin = os.environ.get('ADMINS')
+    admin = admin.split(",")
+    admin = admin[0][2:-1]
+    user = current_user.email
+    send_email(admin, "Error en la plataforma", render_template('template_error.html', error=error, user=user))
+    return render_template('error_pages/500.html')

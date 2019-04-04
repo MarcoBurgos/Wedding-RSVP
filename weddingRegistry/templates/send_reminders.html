@@ -94,8 +94,8 @@
           </div>
           <div class="card-body">
             <h5 class="card-title">Panel de Control</h5>
-            <p class="card-text">Hola, {{ name }}! Bienvenido/a a tu panel de control</p>
-            <p class="card-text">Hay {{ amount_of_pendings }} invitados registrados que aún no confirman su asistencia</p>
+            <p class="card-text">Bienvenido/a a tu panel de control</p>
+            <p class="card-text">Hay {{ amount_pendings }} invitados registrados que aún no confirman su asistencia</p>
             <a href="#" class="btn btn-primary" style="margin-right: 20px; margin-bottom: 20px" onclick="togglePending(this)">Ver invitados pendientes</a>
             <a href="{{ url_for('users.admin') }}" class="btn btn-success" style="margin-right: 20px; margin-bottom: 20px">Volver al Panel de Control</a>
             <a href="{{ url_for('core.index') }}" class="btn btn-info" style="margin-right: 20px; margin-bottom: 20px">Volver al home</a>
