@@ -9,6 +9,7 @@ from weddingRegistry.core.forms import UserSignUpForm
 from weddingRegistry.send_mail import send_email
 import random, string
 from weddingRegistry import app
+import time
 
 users = Blueprint('users',__name__)
 
@@ -56,7 +57,6 @@ def add_guest():
 @users.route('/<int:user_id>/delete', methods=['GET', 'POST'])
 @login_required
 def delete_user(user_id):
-    print(f"id del usario a deletear {user_id}")
     user = User.query.get_or_404(user_id)
 
     if current_user.is_authenticated and current_user.email in os.environ.get('ADMINS'):
@@ -128,10 +128,10 @@ def background_process():
 
     form = addUserForm()
 
-    email = request.form['email']
+    email = request.form['email'].lower()
 
     try:
-        user = User.query.filter_by(email=form.email.data).first()
+        user = User.query.filter_by(email=email).first()
     except Exception as e:
         abort(500,e)
 
@@ -163,8 +163,6 @@ def reminders():
         except Exception as e:
             abort(500,e)
 
-        print(len(pending_users))
-
         return render_template('send_reminders.html', pendings=pending_users, amount_pendings=len(pending_users))
     else:
         return redirect(url_for('core.not_auth'))
@@ -179,14 +177,13 @@ def reminders_bgprocess():
         except Exception as e:
             abort(500,e)
 
-
-
         try:
             for user in pending_users:
-                send_email(user.email, "Recordatorio confirmación para Boda Angie & Marco", render_template('remainder_mail_template.html'))
-
+                print(user.email)
+                send_email(user.email, "Recordatorio confirmación para Boda Angie & Marco", render_template('reminder_mail_template.html'))
 
             return jsonify(total_mails=True)
+
         except Exception as e:
             return jsonify(total_mails=False)
 

@@ -36,11 +36,13 @@
           url: url,
           data: {},
           success: function(data) {
+            console.log(data.total_mails)
             if (data.total_mails === true) {
               req_success = true;
             } else {
               req_success = false;
             }
+              console.log(req_success)
             if (req_success === true) {
               setTimeout(function() {
                 $("#reminder_button").attr("data-state", "success");
