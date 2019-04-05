@@ -44,7 +44,8 @@ def add_guest():
                        guests = form.guests.data,
                        guests_names = form.guests_names.data,
                        is_RSVP = False,
-                       date_RSVP = None)
+                       date_RSVP = None,
+                       update_times=0)
         db.session.add(user)
         db.session.commit()
         flash(f"Invitado registrado {user.email}")
@@ -179,7 +180,6 @@ def reminders_bgprocess():
 
         try:
             for user in pending_users:
-                print(user.email)
                 send_email(user.email, "Recordatorio confirmación para Boda Angie & Marco", render_template('reminder_mail_template.html'))
 
             return jsonify(total_mails=True)

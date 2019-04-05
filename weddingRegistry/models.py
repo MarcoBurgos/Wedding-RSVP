@@ -15,18 +15,26 @@ class User(db.Model, UserMixin):
     phone_number = db.Column(db.String(10), nullable=False)
     guests = db.Column(db.Integer, nullable=False)
     guests_names = db.Column(db.String(128),nullable=False)
+    guests_confirmed = db.Column(db.String(128))
+    total_guests = db.Column(db.Integer)
     is_RSVP = db.Column(db.Boolean)
     date_RSVP = db.Column(db.DateTime)
+    update_date_RSVP = db.Column(db.DateTime)
+    update_times = db.Column(db.Integer)
 
-    def __init__(self, name, email, password, phone_number, guests, guests_names,is_RSVP, date_RSVP):
+    def __init__(self, name, email, password, phone_number, guests, guests_names, guests_confirmed, total_guests, is_RSVP, date_RSVP, update_date_RSVP, update_times):
         self.name = name
         self.email = email
         self.password_hash = password
         self.phone_number = phone_number
         self.guests = guests
         self.guests_names = guests_names
+        self.guests_confirmed = guests_confirmed
+        self.total_guests = total_guests
         self.is_RSVP = is_RSVP
         self.date_RSVP = date_RSVP
+        self.update_date_RSVP = update_date_RSVP
+        self.update_times = update_times
 
     def check_password(self, passw):
         return check_password_hash(self.password_hash,passw)

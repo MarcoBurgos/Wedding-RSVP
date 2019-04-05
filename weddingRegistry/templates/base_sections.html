@@ -44,10 +44,11 @@
 							</li>
 							<li><a href="{{ url_for('core.how_to_get_there')}}">¿Cómo llegar?</a></li>
 							<li><a href="{{ url_for('core.registry')}}">Mesa de regalos</a></li>
+							<li><a href="{{ url_for('core.auth')}}">Editar mi confirmación</a></li>
 							<li><a href="{{ url_for('core.faq')}}">FAQ</a></li>
 							<li><a href="{{ url_for('core.logout')}}">Cerrar sesión</a></li>
 							{% if current_user.email in admins %}
-							<li><a href="{{ url_for('users.admin')}}">Panel de Control</a></li>
+							<li><a href="{{ url_for('users.admin')}}">Admin</a></li>
 							{% endif %}
 						</ul>
 					</nav>

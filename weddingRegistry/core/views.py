@@ -6,6 +6,7 @@ from weddingRegistry.fetch_playlist import get_tracks
 from weddingRegistry.core.forms import UserSignUpForm
 import datetime
 import os
+import re
 
 core = Blueprint('core',__name__)
 
@@ -14,7 +15,7 @@ def index():
 
     if current_user.is_authenticated:
 
-        return redirect(url_for('core.auth'))
+        return redirect(url_for('core.user_confirmed'))
 
     else:
         form = UserSignUpForm()
@@ -37,7 +38,10 @@ def index():
                 if (user_submited.check_password(password)):
                     login_user(user_submited)
 
-                    return redirect(url_for('core.auth'))
+                    if(current_user.is_RSVP==1):
+                        return redirect(url_for('core.user_confirmed'))
+                    else:
+                        return redirect(url_for('core.auth'))
 
                 else:
                     flash(f"Contraseña equivocada")
@@ -48,22 +52,20 @@ def index():
     return render_template('index.html', form=form)
 
 
-@core.route('/auth', methods=['GET'])
+@core.route('/auth:confirmar-invitados', methods=['GET'])
 @login_required
 def auth():
-    if current_user.is_RSVP == True:
-        return redirect(url_for('core.user_confirmed'))
-    else:
-        form = UserSignUpForm()
-        guests = current_user.guests_names.split(",")
-        name = current_user.name
-        tickets = current_user.guests
 
-        if form.validate_on_submit():
+    form = UserSignUpForm()
+    guests = current_user.guests_names.split(",")
+    name = current_user.name
+    tickets = current_user.guests
 
-            return redirect(url_for('core.confirm'))
+    if form.validate_on_submit():
 
-        return render_template('auth.html', form=form, guests=guests, name=name, tickets=tickets)
+        return redirect(url_for('core.confirm'))
+
+    return render_template('auth.html', form=form, guests=guests, name=name, tickets=tickets)
 
 
 
@@ -82,12 +84,21 @@ def confirm():
 
 
         if user:
-            user.guests_names = str(guests)
-            user.is_RSVP = True
-            user.date_RSVP = datetime.datetime.now()
+            user.total_guests = len(guests)
+            guests = ",".join(guests)
+            guests = re.sub("'", "", str(guests))
+            user.guests_confirmed = guests
+
+            if current_user.is_RSVP ==  True:
+                user.update_date_RSVP = datetime.datetime.now()
+                edit = current_user.update_times
+                edit += 1
+                user.update_times = edit
+            else:
+                user.is_RSVP = True
+                user.date_RSVP = datetime.datetime.now()
 
             db.session.commit()
-
 
     return redirect(url_for('core.user_confirmed'))
 
