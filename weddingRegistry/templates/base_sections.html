@@ -24,12 +24,11 @@
 						<header>
 							<h1 style="font-family: 'Playball', cursive;"><a href="{{ url_for('core.index')}}" id="logo">Nuestra Boda</a></h1>
 							<hr />
-							<h2 style="font-family: 'Playball', cursive; color:white;">Angie <i style="transform: translateY(10px);font-size: .8em; color: #E45F74;" class="icon icon-heart"></i> Marco </h2>
+							<h2 style="font-family: 'Playball', cursive; color:white;">Angie <i style="transform: translateY(10px);font-size: 1em; color: #E45F74;" class="icon icon-heart"></i> Marco </h2>
 							<h4 style="font-family: 'Playball', cursive; color:white;"> 17 de noviembre 2019</h4>
 						</header>
 					</div>
 
-					<!-- Nav -->
 					<!-- Nav -->
 					{% if current_user.is_authenticated %}
 					<nav style="background: rgba(0, 0, 0, 0.1); margin-top: 10px" id="nav">
@@ -39,14 +38,14 @@
 								<a href="#">Hoteles</a>
 								<ul>
 									<li><a href="{{ url_for('core.quinta_san_carlos')}}">Quinta San Carlos</a></li>
-									<li><a href="{{ url_for('core.others')}}">Otras opciones</a></li>
+									<li><a href="{{ url_for('core.others')}}">Otras Opciones</a></li>
 								</ul>
 							</li>
-							<li><a href="{{ url_for('core.how_to_get_there')}}">¿Cómo llegar?</a></li>
-							<li><a href="{{ url_for('core.registry')}}">Mesa de regalos</a></li>
-							<li><a href="{{ url_for('core.auth')}}">Editar mi confirmación</a></li>
+							<li><a href="{{ url_for('core.how_to_get_there')}}">¿Cómo Llegar?</a></li>
+							<li><a href="{{ url_for('core.registry')}}">Mesa de Regalos</a></li>
+							<li><a href="{{ url_for('core.auth')}}">Editar Mi Confirmación</a></li>
 							<li><a href="{{ url_for('core.faq')}}">FAQ</a></li>
-							<li><a href="{{ url_for('core.logout')}}">Cerrar sesión</a></li>
+							<li><a href="{{ url_for('core.logout')}}">Cerrar Sesión</a></li>
 							{% if current_user.email in admins %}
 							<li><a href="{{ url_for('users.admin')}}">Admin</a></li>
 							{% endif %}

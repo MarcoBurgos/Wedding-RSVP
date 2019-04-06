@@ -43,6 +43,7 @@
 									Marca la casilla para confirmar
 								</div>
 							</div>
+							{% if guests  %}
 							{% for guest in guests %}
 							<div class="row-table2 ">
 								<div style="text-align:center" class="cell-table2 " data-title="Name">
@@ -53,6 +54,7 @@
 								</div>
 							</div>
 							{% endfor %}
+							{% endif %}
 							{% if guests_not  %}
 							{% for guestn in guests_not %}
 							<div class="row-table2 ">
@@ -67,7 +69,10 @@
 							{% endif %}
 						</div>
 					</div>
-
+					{% if not guests %}
+					<p style="color:red; font-size:16px; line-height:20px; margin-top:10px; text-align:center;"> Tu confirmación está vacía, eso quiere decir que anteriormente no marcaste ningún nombre.
+						¿Cambiaste de parecer y asistirán? <br>Marca los nombres de los invitados que sí asistirán.</p>
+					{% endif %}
 					<ul>
 						{% for error in form.errors %}
 						<li style="color:red"> {{ error }} </li>

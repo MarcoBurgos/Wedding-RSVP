@@ -4,12 +4,13 @@ from flask_mail import Mail
 from weddingRegistry import db
 from flask_login import login_required, current_user
 from weddingRegistry.models import User, generate_password_hash
-from weddingRegistry.users.forms import addUserForm
+from weddingRegistry.users.forms import addUserForm, editUserForm
 from weddingRegistry.core.forms import UserSignUpForm
 from weddingRegistry.send_mail import send_email
 import random, string
 from weddingRegistry import app
 import time
+from datetime import datetime
 
 users = Blueprint('users',__name__)
 
@@ -44,10 +45,10 @@ def add_guest():
                        guests = form.guests.data,
                        guests_names = form.guests_names.data,
                        guests_confirmed = None,
-                       total_guests = None,
+                       total_guests = 0,
                        is_RSVP = False,
                        date_RSVP = None,
-                       update_date_RSVP = None, 
+                       update_date_RSVP = None,
                        update_times = 0)
         db.session.add(user)
         db.session.commit()
@@ -85,32 +86,64 @@ def update_user(user_id):
 
     if current_user.is_authenticated and current_user.email in os.environ.get('ADMINS'):
         if user.email not in os.environ.get('ADMINS'):
-            form = addUserForm()
+            form = editUserForm()
 
             if form.validate_on_submit():
 
                 user.name = form.name.data
                 user.email = form.email.data
+
+                if form.is_active.data is None or len(form.is_active.data)<1:
+                    user.password_hash = None
+
                 user.phone_number = form.phone_number.data
-                user.guests = form.guests.data
+                user.guests = form.number_of_tickets.data
                 user.guests_names = form.guests_names.data
 
+                if form.guests_confirmed.data is None or len(form.guests_confirmed.data)<1:
+                    user.guests_confirmed = None
+                else:
+                    user.guests_confirmed = form.guests_confirmed.data
+
+
+                user.total_guests = form.total_guests.data
+                user.is_RSVP = form.is_RSVP.data
+
+                if form.date_RSVP.data is None or len(form.date_RSVP.data)<1:
+                    user.date_RSVP = None
+                else:
+                    user.date_RSVP = datetime.strptime(form.date_RSVP.data,'%Y-%m-%d %H:%M:%S.%f')
+
+
+                if form.update_date_RSVP.data is None or len(form.update_date_RSVP.data)<1 :
+                    user.update_date_RSVP = None
+                else:
+                    user.update_date_RSVP = datetime.strptime(form.update_date_RSVP.data,'%Y-%m-%d %H:%M:%S.%f')
+
+                user.update_times = form.update_times.data
 
                 db.session.commit()
-                flash(f"Editaste invitado id: {user.id}, {user.name}")
+                flash(f"Actualizaste al invitado id: {user.id}, {user.name}")
 
                 return redirect(url_for('users.admin'))
 
             elif request.method == 'GET':
                 form.name.data = user.name
                 form.email.data = user.email
+                form.is_active.data = user.password_hash
                 form.phone_number.data = user.phone_number
-                form.guests.data = user.guests
+                form.number_of_tickets.data = user.guests
                 form.guests_names.data = user.guests_names
+                form.guests_confirmed.data = user.guests_confirmed
+                form.total_guests.data = user.total_guests
+                form.is_RSVP.data = user.is_RSVP
+                form.date_RSVP.data = user.date_RSVP
+                form.update_date_RSVP.data = user.update_date_RSVP
+                form.update_times.data = user.update_times
 
-            return render_template('add_guest.html', user=user, form=form)
+            return render_template('edit_guest.html', user=user, form=form)
         else:
-            flash(f"Nice try! No puedes eliminar a los Administradores, sucker!")
+            flash(f"Nice try! No puedes editar a los Administradores, sucker!")
             return redirect(url_for('users.admin'))
 
     else:

@@ -60,22 +60,28 @@ def auth():
     name = current_user.name
     tickets = current_user.guests
 
-    if current_user.guests_confirmed is None:
-        guests = current_user.guests_names.split(",")
-        guests_not = None
+    is_update = current_user.is_RSVP is True
+
+    if is_update:
+        if current_user.guests_confirmed is None:
+            guests_confirmed = None
+            guests_not_confirmed = current_user.guests_names.split(",")
+
+        else:
+            guests_confirmed = current_user.guests_confirmed.split(",")
+            guests_not_confirmed = current_user.guests_names.split(",")
+            guests_not_confirmed = set(guests_not_confirmed) - set(guests_confirmed)
     else:
-        guests = current_user.guests_confirmed.split(",")
-        guests_not = current_user.guests_names.split(",")
-        guests_not = set(guests_not) - set(guests)
+        guests_confirmed = current_user.guests_names.split(",")
+        guests_not_confirmed = None
 
-
-
-
+    print(f"Guests confirmed {guests_confirmed}")
+    print(f"Guests not confirmed {guests_not_confirmed}")
     if form.validate_on_submit():
 
         return redirect(url_for('core.confirm'))
 
-    return render_template('auth.html', form=form, guests=guests, guests_not=guests_not, name=name, tickets=tickets)
+    return render_template('auth.html', form=form, guests=guests_confirmed, guests_not=guests_not_confirmed, name=name, tickets=tickets)
 
 
 
@@ -95,9 +101,12 @@ def confirm():
 
         if user:
             user.total_guests = len(guests)
-            guests = ",".join(guests)
-            guests = re.sub("'", "", str(guests))
-            user.guests_confirmed = guests
+            if len(guests) == 0:
+                user.guests_confirmed = None
+            else:
+                guests = ",".join(guests)
+                guests = re.sub("[']", "", str(guests))
+                user.guests_confirmed = guests
 
             if current_user.is_RSVP ==  True:
                 user.update_date_RSVP = datetime.datetime.now()
