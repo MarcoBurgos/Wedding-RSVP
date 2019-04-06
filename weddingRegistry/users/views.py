@@ -43,9 +43,12 @@ def add_guest():
                        phone_number = form.phone_number.data,
                        guests = form.guests.data,
                        guests_names = form.guests_names.data,
+                       guests_confirmed = None,
+                       total_guests = None,
                        is_RSVP = False,
                        date_RSVP = None,
-                       update_times=0)
+                       update_date_RSVP = None, 
+                       update_times = 0)
         db.session.add(user)
         db.session.commit()
         flash(f"Invitado registrado {user.email}")
