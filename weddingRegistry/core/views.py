@@ -57,15 +57,25 @@ def index():
 def auth():
 
     form = UserSignUpForm()
-    guests = current_user.guests_names.split(",")
     name = current_user.name
     tickets = current_user.guests
+
+    if current_user.guests_confirmed is None:
+        guests = current_user.guests_names.split(",")
+        guests_not = None
+    else:
+        guests = current_user.guests_confirmed.split(",")
+        guests_not = current_user.guests_names.split(",")
+        guests_not = set(guests_not) - set(guests)
+
+
+
 
     if form.validate_on_submit():
 
         return redirect(url_for('core.confirm'))
 
-    return render_template('auth.html', form=form, guests=guests, name=name, tickets=tickets)
+    return render_template('auth.html', form=form, guests=guests, guests_not=guests_not, name=name, tickets=tickets)
 
 
 

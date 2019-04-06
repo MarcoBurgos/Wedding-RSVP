@@ -48,11 +48,23 @@
 								<div style="text-align:center" class="cell-table2 " data-title="Name">
 									<td><label  class="form-label-confirmation" for="id_{{guest}}">{{guest}}</label></td>
 								</div>
-								<div style="text-align:center" class="cell-table2 " data-title="Age">
+								<div style="text-align:center" class="cell-table2 " data-title="Status">
 									<td><input type="checkbox" id="id_{{guest}}" name="guests" checked="yes" value="{{guest}}"></td>
 								</div>
 							</div>
 							{% endfor %}
+							{% if guests_not  %}
+							{% for guestn in guests_not %}
+							<div class="row-table2 ">
+								<div style="text-align:center" class="cell-table2 " data-title="Name">
+									<td><label  class="form-label-confirmation" for="id_{{guestn}}">{{guestn}}</label></td>
+								</div>
+								<div style="text-align:center" class="cell-table2 " data-title="Status">
+									<td><input type="checkbox" id="id_{{guestn}}" name="guests" value="{{guestn}}"></td>
+								</div>
+							</div>
+							{% endfor %}
+							{% endif %}
 						</div>
 					</div>
 
