@@ -1,8 +1,8 @@
-"""initial migration
+"""fixed tickets
 
-Revision ID: e80b07170d7c
-Revises: 
-Create Date: 2019-04-06 23:59:03.042218
+Revision ID: a9995c85f38d
+Revises: 03ac61abeb2f
+Create Date: 2019-04-06 21:42:27.840377
 
 """
 from alembic import op
@@ -10,8 +10,8 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'e80b07170d7c'
-down_revision = None
+revision = 'a9995c85f38d'
+down_revision = '03ac61abeb2f'
 branch_labels = None
 depends_on = None
 
@@ -22,7 +22,7 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('name', sa.String(length=64), nullable=False),
     sa.Column('email', sa.String(length=64), nullable=True),
-    sa.Column('password_hash', sa.String(length=256), nullable=True),
+    sa.Column('password_hash', sa.String(length=128), nullable=True),
     sa.Column('phone_number', sa.String(length=10), nullable=False),
     sa.Column('guests', sa.Integer(), nullable=False),
     sa.Column('guests_names', sa.String(length=128), nullable=False),
