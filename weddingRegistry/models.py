@@ -11,7 +11,7 @@ class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(64),nullable=False )
     email = db.Column(db.String(64),unique=True,index=True)
-    password_hash = db.Column(db.String(128))
+    password_hash = db.Column(db.String(256))
     phone_number = db.Column(db.String(10), nullable=False)
     guests = db.Column(db.Integer, nullable=False)
     guests_names = db.Column(db.String(128),nullable=False)
