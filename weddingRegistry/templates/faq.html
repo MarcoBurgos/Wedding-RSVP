@@ -65,6 +65,12 @@
 									<p>
 										No, es una celebración para mayores de edad.
 									</p>
+									<p class="question-faq">
+										¿Tienen un hashtag?
+                  </p>
+									<p>
+										Sí: #a<span><i  class="fa fa-heart" aria-hidden="true" style="color:#df7366"></i></span>m.
+									</p>
 									<br>
 									<header>
                     <h3>Sobre el hotel</h3>
@@ -229,16 +235,16 @@
 											<a href="{{ url_for('core.quinta_san_carlos')}}" class="image fit"><img src="{{ url_for('static', filename='images/hotel.jpg')}}" alt="" /></a>
 										</div>
 										<div class="col-8">
-											<h4>Hotel sede</h4>
+											<a href="{{ url_for('core.quinta_san_carlos')}}"><h4>Hotel sede</h4></a>
 											<p>
 												Conoce el recinto que albergará la boda.
 											</p>
 										</div>
-                    <div class="col-4">
+										<div class="col-4">
 											<a href="{{ url_for('core.how_to_get_there')}}" class="image fit"><img src="{{ url_for('static', filename='images/getthere.jpg')}}" alt="" /></a>
 										</div>
 										<div class="col-8">
-											<h4>¿Cómo llegar?</h4>
+											<a href="{{ url_for('core.how_to_get_there')}}"><h4>¿Cómo llegar?</h4></a>
 											<p>
 												Te dejamos indicaciones para llegar en tiempo a la boda.
 											</p>
@@ -247,25 +253,25 @@
 											<a href="{{ url_for('core.others')}}" class="image fit"><img src="{{ url_for('static', filename='images/others.jpg')}}" alt="" /></a>
 										</div>
 										<div class="col-8">
-											<h4>Otras opciones de hospedaje</h4>
+											<a href="{{ url_for('core.others')}}"><h4>Otras opciones de hospedaje</h4></a>
 											<p>
 												Explora otras ofertas de alojamiento en el pueblo.
 											</p>
 										</div>
-                    <div class="col-4">
+										<div class="col-4">
 											<a href="{{ url_for('core.registry')}}" class="image fit"><img src="{{ url_for('static', filename='images/gift.jpg')}}" alt="" /></a>
 										</div>
 										<div class="col-8">
-											<h4>Mesa de regalos</h4>
+											<a href="{{ url_for('core.registry')}}"><h4>Mesa de regalos</h4></a>
 											<p>
 												Explora las opciones en la mesa que hemos establecido en Amazon.
 											</p>
 										</div>
-                    <div class="col-4">
+										<div class="col-4">
 											<a href="{{ url_for('core.flights')}}" class="image fit"><img src="{{ url_for('static', filename='images/plane.jpg')}}" alt="" /></a>
 										</div>
 										<div class="col-8">
-											<h4>¿Vuelas a la boda?</h4>
+											<a href="{{ url_for('core.flights')}}"><h4>¿Vuelas a la boda?</h4></a>
 											<p>
 												Revisa estas herramientas para encontrar el mejor vuelo.
 											</p>
@@ -274,7 +280,7 @@
 											<a href="{{ url_for('core.playlist')}}" class="image fit"><img src="{{ url_for('static', filename='images/music.jpg')}}" alt="" /></a>
 										</div>
 										<div class="col-8">
-											<h4>¡Que la música no pare!</h4>
+											<a href="{{ url_for('core.playlist')}}"><h4>¡Que la música no pare!</h4></a>
 											<p>
 												Sugiérenos canciones para que suenen en la fiesta.
 											</p>

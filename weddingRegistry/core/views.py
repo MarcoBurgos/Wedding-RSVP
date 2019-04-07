@@ -75,8 +75,6 @@ def auth():
         guests_confirmed = current_user.guests_names.split(",")
         guests_not_confirmed = None
 
-    print(f"Guests confirmed {guests_confirmed}")
-    print(f"Guests not confirmed {guests_not_confirmed}")
     if form.validate_on_submit():
 
         return redirect(url_for('core.confirm'))

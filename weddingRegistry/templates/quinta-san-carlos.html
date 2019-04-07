@@ -39,13 +39,14 @@
 										</p>
 										<p>
 											Si gustas acompañarnos a la boda y deseas hospedarte en Quinta San Carlos, te recomendamos reserves tu habitación con tiempo,
-											marca al número <strong>+52(387) 763 50 23</strong> y diles que vas a la Boda de Angie & Marco para hacer válida la promoción.
+											marca al número <strong>+52(387) 763 50 23</strong> y da el código Angie&ampMarco2019 y solicita una habitación para el 17 de noviembre,
+											te pedirán una tarjeta de crédito como referencia, no te harán ningún cobro hasta el momento del checkout.
 										</p>
 										<p>
 											La tarifa es con base en ocupación doble, algunos cuartos tienen una mayor capacidad, pregunta al hotel por esos; por persona extra
 											cobran 500 pesos y Quinta San Carlos también pondrá a disposición camerinos con dos camas individuales o una king con un costo de mil pesos,
 											para habilitar esta opción, tres personas, por lo menos, tiene que solicitarla. Estos camerinos cuentan con baños compartidos, uno para hombres y otra mujeres.
-											Nuestro objetivo es que la mayoría de los invitados se queden a disfrutar la fiesta y que nadie tenga que cortarla para manejar en carretera.
+											<br>Nuestro objetivo es que la mayoría de los invitados se queden a disfrutar la fiesta y que nadie tenga que cortarla para manejar en carretera.
 											Por favor, si tomas ¡no manejes! Mejor hospédate en Quinta San Carlos y festejemos hasta la madrugada.
 										</p>
 										<header>
@@ -53,8 +54,8 @@
 										</header>
 										<p>
 											Debido a la alta demanda en esas fechas, un día antes hay otra boda, te pedimos, como cortesía a esa pareja, que no reserves habitación para el sábado
-											o el viernes, para que ellos puedan utilizarlas para sus invitados, en lugar checa las <a href="#">otras opciones de hospedaje</a> que hemos investigado para sábado o viernes,
-											para los que gusten acompañarnos desde días antes..
+											o el viernes, para que ellos puedan utilizarlas para sus invitados, en lugar checa las <a href="{{ url_for('core.others')}}">otras opciones de hospedaje</a> que hemos investigado para sábado o viernes,
+											para los que gusten acompañarnos desde días antes.
 										</p>
 									</section>
 									<section>
@@ -64,8 +65,10 @@
 										<ul>
 											<li><strong>Ubicación: </strong>Calle Pino Suárez 1A, San Pedro Tesistán, Jocotepec. </li>
 											<li><strong>Reservaciones: </strong>+52(387) 763 50 23</li>
-											<li><strong>Check in: </strong> 3:00 PM</li>
-											<li><strong>Check out: </strong> 12:00 PM</li>
+											<li><strong>Check in: </strong>3:00 PM</li>
+											<li><strong>Check out: </strong>12:00 PM</li>
+											<li><strong>Tarifas: </strong>Desde $1,900, vista al jardín, hasta $1,000, camerinos móviles</li>
+											<li><strong>Código de promoción: </strong>Angie&ampMarco2019</li>
 											<li><strong>Calificación: </strong> 4/5 TripAdvisor</li>
 										</ul>
 									</section>
@@ -97,7 +100,7 @@
 											<a href="{{ url_for('core.how_to_get_there')}}" class="image fit"><img src="{{ url_for('static', filename='images/getthere.jpg')}}" alt="" /></a>
 										</div>
 										<div class="col-8">
-											<h4>¿Cómo llegar?</h4>
+											<a href="{{ url_for('core.how_to_get_there')}}"><h4>¿Cómo llegar?</h4></a>
 											<p>
 												Te dejamos indicaciones para llegar en tiempo a la boda.
 											</p>
@@ -106,7 +109,7 @@
 											<a href="{{ url_for('core.others')}}" class="image fit"><img src="{{ url_for('static', filename='images/others.jpg')}}" alt="" /></a>
 										</div>
 										<div class="col-8">
-											<h4>Otras opciones de hospedaje</h4>
+											<a href="{{ url_for('core.others')}}"><h4>Otras opciones de hospedaje</h4></a>
 											<p>
 												Explora otras ofertas de alojamiento en el pueblo.
 											</p>
@@ -115,7 +118,7 @@
 											<a href="{{ url_for('core.registry')}}" class="image fit"><img src="{{ url_for('static', filename='images/gift.jpg')}}" alt="" /></a>
 										</div>
 										<div class="col-8">
-											<h4>Mesa de regalos</h4>
+											<a href="{{ url_for('core.registry')}}"><h4>Mesa de regalos</h4></a>
 											<p>
 												Explora las opciones en la mesa que hemos establecido en Amazon.
 											</p>
@@ -124,7 +127,7 @@
 											<a href="{{ url_for('core.flights')}}" class="image fit"><img src="{{ url_for('static', filename='images/plane.jpg')}}" alt="" /></a>
 										</div>
 										<div class="col-8">
-											<h4>¿Vuelas a la boda?</h4>
+											<a href="{{ url_for('core.flights')}}"><h4>¿Vuelas a la boda?</h4></a>
 											<p>
 												Revisa estas herramientas para encontrar el mejor vuelo.
 											</p>
@@ -133,7 +136,7 @@
 											<a href="{{ url_for('core.playlist')}}" class="image fit"><img src="{{ url_for('static', filename='images/music.jpg')}}" alt="" /></a>
 										</div>
 										<div class="col-8">
-											<h4>¡Que la música no pare!</h4>
+											<a href="{{ url_for('core.playlist')}}"><h4>¡Que la música no pare!</h4></a>
 											<p>
 												Sugiérenos canciones para que suenen en la fiesta.
 											</p>
@@ -142,7 +145,7 @@
 											<a href="{{ url_for('core.faq')}}" class="image fit"><img src="{{ url_for('static', filename='images/pic02.jpg')}}" alt="" /></a>
 										</div>
 										<div class="col-8">
-											<h4>FAQ</h4>
+											<a href="{{ url_for('core.faq')}}"><h4>FAQ</h4></a>
 											<p>
 												Encuentra respuestas a tus dudas sobre la boda.
 											</p>
