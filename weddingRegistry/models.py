@@ -41,7 +41,3 @@ class User(db.Model, UserMixin):
 
     def __repr__(self):
         return f"User {self.email}"
-
-
-
-CREATE TABLE public.user ( id SERIAL, name VARCHAR(64) NOT NULL, email VARCHAR(64), password_hash VARCHAR(256), phone_number VARCHAR(10) NOT NULL, guests INTEGER NOT NULL, guests_names VARCHAR(128) NOT NULL, guests_confirmed VARCHAR(128), total_guests INTEGER, "is_RSVP" BOOLEAN, "date_RSVP" TIMESTAMP, "update_date_RSVP" TIMESTAMP, update_times INTEGER, PRIMARY KEY (id));
