@@ -11,8 +11,8 @@ class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(64),nullable=False )
     email = db.Column(db.String(64),unique=True,index=True)
-    password_hash = db.Column(db.String(256))
-    phone_number = db.Column(db.String(10), nullable=False)
+    password_hash = db.Column(db.String(128))
+    phone_number = db.Column(db.String(64), nullable=False)
     guests = db.Column(db.Integer, nullable=False)
     guests_names = db.Column(db.String(128),nullable=False)
     guests_confirmed = db.Column(db.String(128))
@@ -41,3 +41,7 @@ class User(db.Model, UserMixin):
 
     def __repr__(self):
         return f"User {self.email}"
+
+
+
+CREATE TABLE public.user ( id SERIAL, name VARCHAR(64) NOT NULL, email VARCHAR(64), password_hash VARCHAR(256), phone_number VARCHAR(10) NOT NULL, guests INTEGER NOT NULL, guests_names VARCHAR(128) NOT NULL, guests_confirmed VARCHAR(128), total_guests INTEGER, "is_RSVP" BOOLEAN, "date_RSVP" TIMESTAMP, "update_date_RSVP" TIMESTAMP, update_times INTEGER, PRIMARY KEY (id));
