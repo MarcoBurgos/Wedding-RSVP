@@ -4,7 +4,7 @@ from flask_migrate import Migrate, MigrateCommand
 
 from weddingRegistry import app, db
 
-MIGRATION_DIR = os.path.join('models', 'migrations')
+MIGRATION_DIR = os.path.join('weddingRegistry', 'migrations')
 
 app.config.from_object(os.environ['APP_SETTINGS'])
 
