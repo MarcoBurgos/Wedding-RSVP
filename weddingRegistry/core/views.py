@@ -107,13 +107,13 @@ def confirm():
                 user.guests_confirmed = guests
 
             if current_user.is_RSVP ==  True:
-                user.update_date_RSVP = datetime.now() - timedelta(hours=4, minutes=00)
+                user.update_date_RSVP = (datetime.now()) - (timedelta(hours=4, minutes=00))
                 edit = current_user.update_times
                 edit += 1
                 user.update_times = edit
             else:
                 user.is_RSVP = True
-                user.date_RSVP = datetime.now() - timedelta(hours=4, minutes=00)
+                user.date_RSVP = (datetime.now()) - (timedelta(hours=4, minutes=00))
 
             db.session.commit()
 
