@@ -21,7 +21,7 @@ def admin():
     if current_user.is_authenticated and current_user.email in os.environ.get('ADMINS'):
         try:
             users = User.query.order_by(User.id.asc()).all()
-            confirmed_users = User.query.filter_by(is_RSVP=True).order_by(User.id.asc()).all()
+            confirmed_users = User.query.filter_by(is_RSVP=True).order_by(User.date_RSVP.desc()).all()
             pending_users = User.query.filter(User.is_RSVP.isnot(True)).order_by(User.id.asc()).all()
         except Exception as e:
             abort(500,e)
