@@ -44,7 +44,6 @@ var Countdown = {
     var that    = this,
         $days_1 = this.$.days.eq(0),
         $days_2 = this.$.days.eq(1),
-        $days_3 = this.$.days.eq(2),
         $hour_1 = this.$.hours.eq(0),
         $hour_2 = this.$.hours.eq(1),
         $min_1  = this.$.minutes.eq(0),
@@ -89,7 +88,7 @@ var Countdown = {
             var minutes_mine = Math.floor((distance % (hour)) / (minute));
             var seconds_mine = Math.floor((distance % (minute)) / second);
 
-            that.checkDay(days_mine, $days_1, $days_2, $days_3);
+            that.checkDay(days_mine, $days_1, $days_2);
 
             that.checkHour(hours_mine, $hour_1, $hour_2);
 
@@ -166,21 +165,18 @@ var Countdown = {
     }
   },
 
-  checkDay: function(value, $el_1, $el_2, $el_3 ) {
+  checkDay: function(value, $el_1, $el_2) {
 
     var val_1       = value.toString().charAt(0),
         val_2       = value.toString().charAt(1),
-        val_3       = value.toString().charAt(2),
         fig_1_value = $el_1.find('.top').html(),
         fig_2_value = $el_2.find('.top').html();
-        fig_3_value = $el_3.find('.top').html();
 
     if(value >= 10) {
 
         // Animate only if the figure has changed
         if(fig_1_value !== val_1) this.animateFigure($el_1, val_1);
         if(fig_2_value !== val_2) this.animateFigure($el_2, val_2);
-        if(fig_3_value !== val_3) this.animateFigure($el_3, val_3);
     }
     else {
 
