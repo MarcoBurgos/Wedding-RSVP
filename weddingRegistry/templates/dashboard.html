@@ -175,7 +175,7 @@
           <td>{{ confirm.name }}</td>
           <td>{{ confirm.guests }}</td>
           <td>{{ confirm.guests_names }}</td>
-          <td>{{ confirm.date_RSVP }}</td>
+          <td>{{ confirm.date_RSVP.strftime('%d/%B %H:%M:%S') }}</td>
         </tr>
         {% endfor %}
       </tbody>
