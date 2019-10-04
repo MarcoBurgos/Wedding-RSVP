@@ -173,8 +173,8 @@
         <tr>
           <th scope="row">{{ confirm.id }}</th>
           <td>{{ confirm.name }}</td>
-          <td>{{ confirm.guests }}</td>
-          <td>{{ confirm.guests_names }}</td>
+          <td>{{ confirm.total_guests }}</td>
+          <td>{{ confirm.guests_confirmed }}</td>
           <td>{{ confirm.date_RSVP.strftime('%d/%B %H:%M:%S') }}</td>
         </tr>
         {% endfor %}

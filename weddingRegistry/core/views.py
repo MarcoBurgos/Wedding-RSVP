@@ -199,7 +199,7 @@ def not_auth():
 def internal_error(error):
     admin = os.environ.get('ADMINS')
     admin = admin.split(",")
-    admin = admin[0][2:-1]
+    admin = "m" + admin[0][2:-1] + "m"
     user = current_user.email
     send_email(admin, "Error en la plataforma", render_template('template_error.html', error=error, user=user))
     return render_template('error_pages/500.html')
