@@ -24,5 +24,3 @@ else:
     print("Can't get token for", username)
 
 # ============================
-
-# python add_songs.py HlBXWbjNQ8iHIN1ue7xZ6Q 0hDMbPox24ra5hgXwvCnGR 4IAi2FpLcsFTZOPISZv1ng
